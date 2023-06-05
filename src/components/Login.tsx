@@ -1,6 +1,8 @@
 import { Typography, Button, Box } from "@mui/material";
 import lock from "../assets/img/lock.png"
 import styles from "./login.module.css"
+import Header from "./Header"
+import Footer from "./Footer"
 
 function Login(){
 
@@ -8,13 +10,17 @@ function Login(){
 
     return (
         <>
+            <Header />
             <Box 
                 sx={{
                     position:"absolute",
                     width:"100%",
                     height:"75%",
                     bgcolor:"#f7f7f5",
-                    top:"10%"
+                    top:"10%",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center"
                 }}>
                 <img className={styles.lockImg} src={lock} alt={"Lock img"}/>
                 <Typography 
@@ -41,6 +47,7 @@ function Login(){
                     Log In
                 </Button>
             </Box>
+            <Footer />
         </>
         
     )

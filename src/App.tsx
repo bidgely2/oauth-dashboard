@@ -12,9 +12,7 @@ interface AppProps {
 function App(props: AppProps) {
   return (
     <BrowserRouter>
-      <div className="App">
-        <AppRoutes />
-      </div>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
