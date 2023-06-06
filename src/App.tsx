@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 
 import { RunContextApp } from './framework/RCApp';
+import AppRoutes from "./routes/AppRoutes"
 
 interface AppProps {
   rc : RunContextApp
@@ -9,9 +11,9 @@ interface AppProps {
 
 function App(props: AppProps) {
   return (
-    <div className="App">
-      Oauth-Dashboard
-    </div>
+    <BrowserRouter>
+      <AppRoutes />
+    </BrowserRouter>
   );
 }
 
