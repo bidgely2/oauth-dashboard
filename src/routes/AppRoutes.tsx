@@ -3,6 +3,7 @@ import Root from "../components/Root"
 import Dashboard from "../components/Dashboard";
 import RouteGaurd from "./RouteGaurd"
 import Login from "../components/Login";
+import NotFound from "../components/NotFound"
 
 function AppRoutes(){
 
@@ -16,6 +17,8 @@ function AppRoutes(){
                 <Route element={<RouteGaurd />}>
                     <Route path="/dashboard" element={<Dashboard />}/>
                 </Route>
+
+                <Route path="*" element={<NotFound />}/>
             </Routes>
         </>
     )

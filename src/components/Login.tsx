@@ -6,8 +6,6 @@ import Footer from "./Footer"
 
 function Login(){
 
-    const LoggedIn = false;
-
     return (
         <>
             <Header />

@@ -1,14 +1,13 @@
 import { Navigate } from "react-router-dom";
-import Login from "./Login";
 
 function Root(){
-
     const isLoggedIn = false;
 
     return(
-        {isLoggedIn}
-        ?<Navigate to="/dashboard" replace />
-        :<Navigate to="login" replace />
+        <>
+            {isLoggedIn?<Navigate to="/dashboard" replace={true}/>:<Navigate to="/login" replace={true} />}
+            
+        </>
     )
 }
 
