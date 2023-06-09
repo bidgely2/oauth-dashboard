@@ -5,7 +5,9 @@ function Root(){
 
     return(
         <>
-            {isLoggedIn?<Navigate to="/dashboard" replace={true}/>:<Navigate to="/login" replace={true} />}
+            {isLoggedIn
+            ?<Navigate to="/dashboard" replace={true} />
+            :<Navigate to="/login" replace={true} />}
             
         </>
     )

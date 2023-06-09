@@ -1,8 +1,8 @@
 import { Typography, Button, Box } from "@mui/material";
-import lock from "../assets/img/lock.png"
-import styles from "./login.module.css"
-import Header from "./Header"
-import Footer from "./Footer"
+import lock from "../../assets/img/bidgely.png"
+import styles from "../layouts/login.module.css"
+import Header from "../layouts/Header"
+import Footer from "../layouts/Footer"
 
 function Login(){
 
@@ -13,16 +13,16 @@ function Login(){
                 sx={{
                     position:"absolute",
                     width:"100%",
-                    height:"75%",
                     bgcolor:"#f7f7f5",
-                    top:"10%",
+                    top:"60px",
+                    bottom:"80px",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center"
                 }}>
                 <img className={styles.lockImg} src={lock} alt={"Lock img"}/>
                 <Typography 
-                    fontSize={20}>
+                    fontSize={20} margin={"10px"}>
                     Login to Your Oauth Dashboard
                 </Typography>
                 <Typography 

@@ -1,12 +1,12 @@
 import {AppBar, Typography} from "@mui/material"
-import logo from "../assets/img/bidgely.png";
+import logo from "../../assets/img/bidgely.png";
 import styles from "./login.module.css"
 
 function Header(){
     return (
         <AppBar 
             sx={{
-                height: "10%",
+                height: "60px",
                 color: "black",
                 bgcolor:"white",
                 display:"flex",
