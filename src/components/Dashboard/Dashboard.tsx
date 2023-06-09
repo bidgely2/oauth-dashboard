@@ -1,13 +1,15 @@
 import { Box, Button, Typography } from "@mui/material";
 import AppBox from "./AppBox";
 import {data} from "../../__mock__/apis/AppInfo"
+import { useState } from "react";
+import CreateApp from "./CreateApp"
 
 function Dashboard(){
 
-    function Popup(){
-        const left = (window.screen.width/2)-(390);
-        const top = (window.screen.height/2)-(390);
-        window.open("/createApp", "createApp", "WIDTH=500,HEIGHT=500,scrollbars=no, menubar=no,resizable=yes,directories=no,location=no, left="+left+",top="+top); 
+    const [open, setOpen] = useState(false);
+
+    function handlePopup(){
+        setOpen(true); 
     }
 
     return (
@@ -24,9 +26,10 @@ function Dashboard(){
                     alignItems:"center",
                 }}>
                 <Typography variant="h6" sx={{ml:"10px"}} >Hello Utility</Typography>
-                <Button variant="contained" sx={{width:"150px", ml:"auto", mr:"10px"}} onClick={Popup} >Create App</Button>
+                <Button variant="contained" sx={{width:"150px", ml:"auto", mr:"10px"}} onClick={handlePopup} >Create App</Button>
             </Box>
             <AppBox data={data}/>
+            <CreateApp open={open} setOpen={setOpen} />
         </>
     )
 }

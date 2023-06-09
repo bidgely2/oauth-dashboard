@@ -1,5 +1,5 @@
 import { Typography, Button, Box } from "@mui/material";
-import lock from "../../assets/img/bidgely.png"
+import lock from "../../assets/img/lock.png"
 import styles from "../layouts/login.module.css"
 import Header from "../layouts/Header"
 import Footer from "../layouts/Footer"

@@ -13,5 +13,4 @@ export const data : Appdata[] =
             name: "ow;an",
             type: "qweuh"
         }
-
     ]

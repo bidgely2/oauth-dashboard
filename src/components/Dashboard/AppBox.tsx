@@ -20,7 +20,7 @@ function AppBox(props:AppBoxprops){
             display:"flex",
             flexDirection:"row",
             flexWrap:"wrap",
-            overflowY:"scroll"
+            overflowY:"auto"
         }}>{Apps}</Box>
     )
 }

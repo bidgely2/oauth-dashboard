@@ -1,55 +1,64 @@
-import { AppBar, Box, Button, TextField, Typography } from "@mui/material";
-import { Navigate } from "react-router-dom";
+import { Toolbar, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, Box, Button } from "@mui/material";
 
-function CreateApp(){
-    const loggedIn = true;
+interface PopupProps{
+    open: boolean,
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+function CreateApp(props:PopupProps){
     return(
-        <>
-        {loggedIn?
-        <Box sx={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-            <AppBar sx={{
-                bgcolor:"#068DA9",
-                width:"80%",
-                height:"60px",
-                left:"10%",
-                top:"10px",
-                display:"flex",
-                flexDirection:"row",
-                justifyContent:"center",
-                alignItems:"center",
-                borderRadius:"5px"
-            }}>
-                <Typography variant="h5">Create App</Typography>
-            </AppBar>
-            <Box sx={{
-                position:"absolute",
-                top:"80px",
-                display:"flex",
-                flexDirection:"column",
-                alignItems:"center"
-            }}>
-            <Typography variant="body2" color="#5c5c5a" sx={{mb:"10px"}}>Provide some description about the app</Typography>
-                <Box sx={{
-                    display:"grid",
-                    gridTemplateColumns:"auto auto",
-                    columnGap:"20px",
-                    rowGap:"20px",
-                    justifyContent:"space-evenly",
-                    alignItems:"center"
+        <Dialog 
+            open={props.open}
+            onClose={()=>props.setOpen(!props.open)}>
+            <Box 
+                sx={{
+                    display:"flex", 
+                    flexDirection:"column", 
+                    alignItems:"center",
+                    bgcolor:"white",
+                    width:"400px",
+                    height:"400px"
                 }}>
-                    <Typography variant="h6">App Name</Typography>
-                    <TextField variant="outlined" label="App Form" />
-                    <Typography variant="h6">App Type</Typography>
-                    <TextField variant="outlined" label="App Type" />
-                </Box>
-                <Box sx={{mt:"20px", width:"80%", display:"flex", flexDirection:"row", justifyContent:"space-evenly"}}>
-                    <Button variant="contained" sx={{bgcolor:"#537FE7"}}>Create</Button>
-                    <Button variant="contained" sx={{bgcolor:"#537FE7"}}>Cancel</Button>
-                </Box>
+                <DialogTitle sx={{display:"flex",        // Title
+                            flexDirection:"row",
+                            justifyContent:"center"}}>
+                    <Toolbar
+                        sx={{
+                            width:"300px",
+                            bgcolor:"#19A7CE",
+                            color:"white",
+                            borderRadius:"5px",
+                            display:"flex",
+                            flexDirection:"row",
+                            justifyContent:"center"
+                        }}>
+                        <Typography variant="h5">Create App</Typography>
+                    </Toolbar>
+                </DialogTitle>
+                <DialogContent sx={{padding:"0px"}}>     {/*Content*/}
+                    <Box sx={{
+                        display:"grid",
+                        gridTemplateColumns:"auto auto",
+                        columnGap:"20px",
+                        rowGap:"20px",
+                        padding:'10px',
+                        alignItems:"center",
+                        mt:"20px"
+                    }}>
+                        <Typography variant="h6">App Name</Typography>
+                        <TextField variant="outlined" label="App Form" />
+                        <Typography variant="h6">App Type</Typography>
+                        <TextField variant="outlined" label="App Type" />
+                    </Box>
+                </DialogContent>
+                <DialogActions>                         {/*Buttons*/}
+                    <Box sx={{mb:"40px", display:"flex", flexDirection:"row", justifyContent:"space-around"}}>
+                        <Button variant="contained" sx={{bgcolor:"#537FE7", mr:"20px", width:"100px"}}>Create</Button>
+                        <Button variant="contained" sx={{bgcolor:"#537FE7", ml:"20px", width:"100px"}}>Cancel</Button>
+                    </Box>
+                </DialogActions>
             </Box>
-        </Box>
-        :<Navigate to="/login" replace={true} />}
-        </>
+        </Dialog>
     )
 }
 
