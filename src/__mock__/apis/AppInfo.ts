@@ -3,14 +3,14 @@ export interface Appdata{
     type: String
 }
 
-export const data : Appdata[] =
+export const Apps : Appdata[] =
     [
         {
-            name: "skdhbf",
-            type: "ladf"
+            name: "App1",
+            type: "type1"
         },
         {
-            name: "ow;an",
-            type: "qweuh"
+            name: "App2",
+            type: "type2"
         }
     ]

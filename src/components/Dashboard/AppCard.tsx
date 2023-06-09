@@ -9,13 +9,12 @@ function AppCard(props:AppCardProps){
     return(
         <Card sx={{
             margin:"10px",
-            
-            width:"100px",
-            height:"100px"
+            width:"110px",
+            height:"110px"
         }}>
             <CardContent>
-                <Typography>{props.data.name}</Typography>
-                <Typography>{props.data.type}</Typography>
+                <Typography sx={{fontWeight:"550"}} variant="h6">{props.data.name}</Typography>
+                <Typography variant="body1">{props.data.type}</Typography>
             </CardContent>
         </Card>
     )

@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import AppBox from "./AppBox";
-import {data} from "../../__mock__/apis/AppInfo"
+import {Apps} from "../../__mock__/apis/AppInfo"
 import { useState } from "react";
 import CreateApp from "./CreateApp"
 
@@ -28,7 +28,7 @@ function Dashboard(){
                 <Typography variant="h6" sx={{ml:"10px"}} >Hello Utility</Typography>
                 <Button variant="contained" sx={{width:"150px", ml:"auto", mr:"10px"}} onClick={handlePopup} >Create App</Button>
             </Box>
-            <AppBox data={data}/>
+            <AppBox data={Apps}/>
             <CreateApp open={open} setOpen={setOpen} />
         </>
     )
