@@ -12,7 +12,7 @@ function AppBox(props:AppBoxprops){
 
     return (
         <Box sx={{
-            bgcolor:"#f7f7f5",
+            bgcolor:"#edede8",
             position:"absolute",
             width:"100vw",
             top:"130px",

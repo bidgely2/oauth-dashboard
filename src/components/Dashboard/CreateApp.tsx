@@ -12,7 +12,8 @@ interface PopupProps {
 interface ToastMsg {
     open: boolean,
     message: AlertColor,
-    content: String
+    content: String,
+    time: number
 }
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
@@ -26,20 +27,20 @@ const CreateApp = (props: PopupProps) => {
 
 
     const [input, setInput] = useState<Appdata>({ name: "", type: "" });   //FormInputs
-    const [Toast, setToast] = useState<ToastMsg>({ open: false, message: "success", content: "" });  //ToastMsg
+    const [Toast, setToast] = useState<ToastMsg>({ open: false, message: "success", content: "", time: 3000 });  //ToastMsg
 
     const ClickCreate = () => {
         let present: Appdata | undefined = Apps.find((data) => { return data.name === input.name ? true : false })
         let failure: boolean = (input.type === "") || (input.name === "")
 
         if (failure) {
-            setToast({ open: true, message: "error", content: "Please give input" })
+            setToast({ open: true, message: "error", content: "Please provide input", time: 10000 })
         } else if (present !== undefined) {
-            setToast({ open: true, message: "warning", content: "App already exists" })
+            setToast({ open: true, message: "warning", content: "The given App already exists", time: 10000 })
         } else {
             Apps.push(input);
-            setToast({ open: true, message: "success", content: "Success" })
-            setTimeout(() => { ClickCancel() }, 1000);
+            setToast({ open: true, message: "success", content: "Successfully created the app", time: 5000 })
+            setTimeout(() => { ClickCancel() }, 5000);
         }
     }
 
@@ -55,7 +56,7 @@ const CreateApp = (props: PopupProps) => {
     }
 
     const ToastClose = () => {
-        setToast({ ...Toast, open: false })
+        setToast({ ...Toast, open: false, time: 0 })
     }
 
     return (
@@ -82,17 +83,18 @@ const CreateApp = (props: PopupProps) => {
                     alignItems: "center"
                 }}>
                     <Box sx={{
+                        width: "300px",
                         display: "grid",
-                        gridTemplateColumns: "auto auto",
+                        gridTemplateColumns: "auto",
                         columnGap: "20px",
                         rowGap: "20px",
                         padding: '10px',
                         alignItems: "center",
                     }}>
-                        <Typography variant="h6" >App Name</Typography>
-                        <TextField variant="outlined" label="App Form" name="name" onChange={handleInput} />
-                        <Typography variant="h6" >App Type</Typography>
-                        <TextField variant="outlined" label="App Type" name="type" onChange={handleInput} />
+                        {/* <Typography variant="h6" >App Name</Typography> */}
+                        <TextField variant="outlined" label="App Form" name="name" fullWidth onChange={handleInput} />
+                        {/* <Typography variant="h6" >App Type</Typography> */}
+                        <TextField variant="outlined" label="App Type" name="type" fullWidth onChange={handleInput} />
                     </Box>
                 </DialogContent>
                 <DialogActions>
@@ -102,7 +104,7 @@ const CreateApp = (props: PopupProps) => {
                     </Box>
                 </DialogActions>
             </Box>
-            <Snackbar open={Toast.open} autoHideDuration={1000} onClose={ToastClose}>
+            <Snackbar open={Toast.open} autoHideDuration={Toast.time} onClose={ToastClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                 <Alert severity={Toast.message} sx={{ width: '100%' }}>
                     {Toast.content}
                 </Alert>
