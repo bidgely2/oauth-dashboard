@@ -2,7 +2,7 @@ import {AppBar, Typography} from "@mui/material"
 import logo from "../../assets/img/bidgely.png";
 import styles from "./login.module.css"
 
-function Header(){
+const Header = ()=>{
     return (
         <AppBar 
             sx={{

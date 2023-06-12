@@ -6,10 +6,10 @@ import { RunContextApp } from './framework/RCApp';
 import AppRoutes from "./routes/AppRoutes"
 
 interface AppProps {
-  rc : RunContextApp
+  rc: RunContextApp
 }
 
-function App(props: AppProps) {
+const App = (props: AppProps) => {
   return (
     <BrowserRouter>
       <AppRoutes />

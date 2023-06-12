@@ -1,54 +1,54 @@
 import { Typography, Button, Box } from "@mui/material";
-import lock from "../../assets/img/lock.png"
-import styles from "../layouts/login.module.css"
-import Header from "../layouts/Header"
-import Footer from "../layouts/Footer"
+import lock from "../../assets/img/lock.png";
+import styles from "../layouts/login.module.css";
+import Header from "../layouts/Header";
+import Footer from "../layouts/Footer";
 
-function Login(){
-
+const Login = () => {
     return (
         <>
             <Header />
-            <Box 
+            <Box
                 sx={{
-                    position:"absolute",
-                    width:"100%",
-                    bgcolor:"#f7f7f5",
-                    top:"60px",
-                    bottom:"80px",
+                    position: "absolute",
+                    width: "100%",
+                    bgcolor: "#f7f7f5",
+                    top: "60px",
+                    bottom: "80px",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "center"
-                }}>
-                <img className={styles.lockImg} src={lock} alt={"Lock img"}/>
-                <Typography 
-                    fontSize={20} margin={"10px"}>
+                    alignItems: "center",
+                }}
+            >
+                <img className={styles.lockImg} src={lock} alt={"Lock img"} />
+                <Typography fontSize={20} margin={"10px"}>
                     Login to Your Oauth Dashboard
                 </Typography>
-                <Typography 
+                <Typography
                     fontSize={13}
-                    fontWeight={100} 
+                    fontWeight={100}
                     letterSpacing={1.5}
                     color={"#5c5c5a"}
                     mt={2}
-                    mb={5}>
+                    mb={5}
+                >
                     Once you login yours apps will be available
                 </Typography>
-                <Button 
-                    variant="contained" 
+                <Button
+                    variant="contained"
                     sx={{
-                        backgroundColor:"#1467D5",
-                        color:"white",
-                        height:"40px",
-                        width:"120px"
-                    }}>
+                        backgroundColor: "#1467D5",
+                        color: "white",
+                        height: "40px",
+                        width: "120px",
+                    }}
+                >
                     Log In
                 </Button>
             </Box>
             <Footer />
         </>
-        
-    )
-}
+    );
+};
 
 export default Login;

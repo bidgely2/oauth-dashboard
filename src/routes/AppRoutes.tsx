@@ -5,7 +5,7 @@ import Login from "../components/root/Login";
 import NotFound from "../components/root/NotFound"
 import Dashboard from "../components/Dashboard/Dashboard";
 
-function AppRoutes(){
+const AppRoutes = ()=>{
 
     return (
         <>

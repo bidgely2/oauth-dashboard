@@ -1,7 +1,7 @@
 import Applayout from "../layouts/AppLayout";
 import {Navigate, Outlet} from "react-router-dom"
 
-function RouteGaurd(){
+const RouteGaurd = ()=>{
     const userLoggedIn = true;
     return(
         <>

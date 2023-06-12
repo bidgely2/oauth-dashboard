@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 
-function Root(){
+const Root = ()=>{
     const isLoggedIn = false;
 
     return(
