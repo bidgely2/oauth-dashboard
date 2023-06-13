@@ -4,21 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { InitConfig, 
-  RunContextApp, 
+import {
+  InitConfig,
+  RunContextApp,
   RunState,
   RUN_MODE
-}                               from "./framework/RCApp";
-import { LOG_LEVEL }            from "./framework/RCLogger";
+} from "./framework/RCApp";
+import { LOG_LEVEL } from "./framework/RCLogger";
 import { AppFlavour } from './configs/AppFlavours';
 
 const appFlavour = AppFlavour.getFlavour();
 const runMode = appFlavour.environment;
 const logLevel = appFlavour.environment === RUN_MODE.PROD ? LOG_LEVEL.NONE : LOG_LEVEL.DEBUG
 
-const ic  = new InitConfig(runMode, logLevel, true)
-const rs  = new RunState()
-const rc  = new RunContextApp(ic, rs)
+const ic = new InitConfig(runMode, logLevel, true)
+const rs = new RunState()
+const rc = new RunContextApp(ic, rs)
 rc.init()
 
 
@@ -27,7 +28,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App rc={rc}/>
+    <App rc={rc} />
   </React.StrictMode>
 );
 

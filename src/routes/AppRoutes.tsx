@@ -1,11 +1,11 @@
 import {Routes, Route} from "react-router-dom"
-import Root from "../components/Root"
-import Dashboard from "../components/Dashboard";
+import Root from "../components/root/LoginRoot"
 import RouteGaurd from "./RouteGaurd"
-import Login from "../components/Login";
-import NotFound from "../components/NotFound"
+import Login from "../components/root/Login";
+import NotFound from "../components/root/NotFound"
+import Dashboard from "../components/Dashboard/Dashboard";
 
-function AppRoutes(){
+const AppRoutes = ()=>{
 
     return (
         <>
