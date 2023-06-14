@@ -20,7 +20,7 @@ const Events =() =>{
                 // bgcolor: "#D2E9E9",
                 overflow:"auto"
             }}>
-            <Typography variant="h5" sx={{mr:"auto", mt:"20px",ml:"10px"}}> App/Credentials Information</Typography>
+            <Typography variant="h5" sx={{mr:"auto", mt:"20px",ml:"10px", mb:"10px"}}> App/Credentials Information</Typography>
             <ClientDetails />
             <EncryptionDetails />
             <AppDomains />

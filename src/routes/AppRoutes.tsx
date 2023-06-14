@@ -17,7 +17,7 @@ const AppRoutes = ()=>{
 
                 <Route element={<RouteGaurd />}>
                     <Route path="/dashboard" element={<Dashboard />}/>
-                    <Route path="/events" element={<Events />} />
+                    <Route path="/editApp/:id" element={<Events />} />
                 </Route>
 
                 <Route path="*" element={<NotFound />}/>

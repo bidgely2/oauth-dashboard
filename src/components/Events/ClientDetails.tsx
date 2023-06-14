@@ -8,11 +8,8 @@ const ClientDetails = () => {
                 height: "100vh",
                 width: "100vw",
                 margin:"10px 0",
-                // bgcolor:"pink"
-                border:"2px #c9c9d1",
-                borderStyle:"solid",
-                borderRadius:"3px",
-                p:"10px 0"
+                p:"10px 0",
+                boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
             }}>
             <Typography variant="h6" sx={{ ml: "20px",mr:"auto" }}>Client Detail</Typography>
             <Box sx={{display:"flex", flexDirection:"column", width:"100%", gap:"10px"}}>
