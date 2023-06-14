@@ -5,8 +5,12 @@ const RouteGaurd = ()=>{
     const userLoggedIn = true;
     return(
         <>
-            {userLoggedIn?<Applayout />:<Navigate to="/login" replace={true}/>}
-            <Outlet />
+            {userLoggedIn
+            ?<Applayout>
+                <Outlet />
+            </Applayout>
+            :<Navigate to="/login" replace={true}/>}
+            
         </>
     )
 }

@@ -7,11 +7,12 @@ const Footer = () =>{
                 width:"100%",
                 height: "80px",
                 position: "absolute",
-                bottom: "0px",
+                bottom: "0",
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "center",
                 alignItems: "center",
+                // bgcolor:"pink"
             }}>
             <Typography variant="body1">@2023, Bidgely Inc.</Typography>
         </Box>

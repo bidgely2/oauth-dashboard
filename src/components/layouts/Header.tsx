@@ -1,9 +1,9 @@
 import {AppBar, Typography} from "@mui/material"
 import logo from "../../assets/img/bidgely.png";
 import styles from "./login.module.css"
-import { AccountCircle } from "@mui/icons-material";
 import Menu from "../Dashboard/Menu"
 import { useState } from "react";
+import utilityLogo from "../../assets/img/Reliance logo.png"
 
 const Header = ()=>{
 
@@ -22,7 +22,7 @@ const Header = ()=>{
             <img className={styles.headerLogo} src={logo} alt="Bidgely Inc."/>
             <Typography variant="h6">Bidgely Oauth Console</Typography>
             {LoggedIn
-                ?<><AccountCircle fontSize="large" sx={{color:"#19A7CE", ml:"auto",mr:"5px"}} />
+                ?<><img className={styles.utilityLogo} src={utilityLogo}/>
                 <Menu LoggedIn={LoggedIn} setLoggedIn = {setLoggedIn} />
                 </>
                 :<></>}

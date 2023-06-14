@@ -1,5 +1,5 @@
 import { Box, Typography, TextField } from "@mui/material";
-import { ContentCopyOutlined as Copy } from '@mui/icons-material';
+import { ContentCopyOutlined as Copy, CachedOutlined as Regenrate} from '@mui/icons-material';
 
 export interface InputProps {
     title: string,
@@ -22,7 +22,9 @@ export const InputBox = (props:InputProps) =>{
             }}>
             <Typography variant="body1" flexWrap="wrap" sx={{gridColumn:"1/2"}}>{props.title}</Typography>
             <TextField variant="outlined" placeholder={props.title} sx={{gridColumn:"2/4"}}></TextField>
-            {props.copy===undefined && <Copy fontSize="small" color="primary" sx={{gridColumn:"4/5"}}/>}
+            {props.copy===undefined
+                ?<Copy fontSize="small" color="primary" sx={{gridColumn:"4/5"}}/>
+                :<Regenrate fontSize="small" color="primary" sx={{gridColumn:"4/5"}}/>}
         </Box>
     )
 }
