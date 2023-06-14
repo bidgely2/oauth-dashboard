@@ -4,6 +4,7 @@ import RouteGaurd from "./RouteGaurd"
 import Login from "../components/root/Login";
 import NotFound from "../components/root/NotFound"
 import Dashboard from "../components/Dashboard/Dashboard";
+import Events from "../components/Events/Events"
 
 const AppRoutes = ()=>{
 
@@ -16,6 +17,7 @@ const AppRoutes = ()=>{
 
                 <Route element={<RouteGaurd />}>
                     <Route path="/dashboard" element={<Dashboard />}/>
+                    <Route path="/events" element={<Events />} />
                 </Route>
 
                 <Route path="*" element={<NotFound />}/>
