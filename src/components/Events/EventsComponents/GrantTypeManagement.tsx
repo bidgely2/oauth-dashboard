@@ -1,17 +1,12 @@
 import { Box, Typography } from "@mui/material";
+import { EditBox } from "../../templates/EditBox";
 
 const GrantTypeManagement =() =>{
     return(
-        <Box 
-            sx={{
-                width:"100vw",
-                margin:"10px 0",
-                p:"10px 0",
-                boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-            }}>
+        <EditBox>
             <Typography variant="h6" sx={{ml:"20px",mb:"10px"}}>Oauth Grant Type Management</Typography>
 
-        </Box>
+        </EditBox>
     )
 }
 

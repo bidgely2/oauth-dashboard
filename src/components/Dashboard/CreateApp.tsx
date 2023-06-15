@@ -3,6 +3,7 @@ import { Apps, Appdata } from "../../__mock__/apis/AppInfo"
 import { useState } from "react";
 import React from "react";
 import MuiAlert, { AlertColor } from "@mui/material/Alert"
+import {Close} from '@mui/icons-material';
 
 interface PopupProps {
     open: boolean,
@@ -59,6 +60,10 @@ const CreateApp = (props: PopupProps) => {
         setToast({ ...Toast, open: false, time: 0 })
     }
 
+    const CloseClick = () => {
+        ClickCancel();
+    }
+
     return (
         <Dialog
             open={props.open}
@@ -70,10 +75,14 @@ const CreateApp = (props: PopupProps) => {
                     alignItems: "center",
                     bgcolor: "white",
                     width: "400px",
-                    height: "380px"
+                    height: "380px",
+                    position:"relative"
                 }}>
-                <DialogTitle sx={{ mr: "auto" }}>
-                    <Typography variant="h4" sx={{ fontWeight: "550" }} >Create App</Typography>
+                <DialogTitle sx={{ mr: "auto"}}>
+                    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap:"140px" }}>
+                        <Typography variant="h4" sx={{ fontWeight: "550"}} >Create App</Typography>
+                        <Close color="disabled" sx={{":hover":{color:"gray"}, ":active":{fontSize:"20px"}}} onClick={CloseClick}/>
+                    </Box>
                     <Typography variant="subtitle2" sx={{ mt: "10px", mb: "0px", ml: "5px" }}>Provide some description about the app</Typography>
                 </DialogTitle>
                 <DialogContent sx={{
