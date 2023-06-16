@@ -6,7 +6,7 @@ export interface Appdata{
 export const Apps : Appdata[] =
     [
         {
-            name: "App1",
+            name: "Application1231",
             type: "type1"
         },
         {

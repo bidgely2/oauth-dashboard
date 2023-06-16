@@ -3,12 +3,18 @@ import { ContentCopyOutlined as Copy, CachedOutlined as Regenrate} from '@mui/ic
 
 export interface InputProps {
     title: string,
+    placeholder: string,
+    readOnly?: boolean | undefined
     wide? :string | number,
     margin? : string | undefined,
     copy?: boolean | undefined
 }
 
 export const InputBox = (props:InputProps) =>{
+
+    const CopyClick=()=>{
+        navigator.clipboard.writeText(props.placeholder)
+    }
 
     return(
         <Box 
@@ -21,10 +27,23 @@ export const InputBox = (props:InputProps) =>{
                 margin: props.margin
             }}>
             <Typography variant="body1" flexWrap="wrap" sx={{gridColumn:"1/2"}}>{props.title}</Typography>
-            <TextField variant="outlined" placeholder={props.title} sx={{gridColumn:"2/4"}}></TextField>
-            {props.copy===undefined
-                ?<Copy fontSize="small" color="primary" sx={{gridColumn:"4/5"}}/>
-                :<Regenrate fontSize="small" color="primary" sx={{gridColumn:"4/5"}}/>}
+            <TextField 
+                variant="outlined" 
+                placeholder={props.placeholder} 
+                sx={{gridColumn:"2/4"}}
+                InputProps={{
+                    readOnly: props.readOnly,
+                }}>
+            </TextField>
+            {
+                props.copy===undefined
+                ?<Copy 
+                    fontSize="small" 
+                    color="primary" 
+                    sx={{gridColumn:"4/5", opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"18px"}}} 
+                    onClick={CopyClick}/>
+                :<Regenrate fontSize="small" color="primary" sx={{gridColumn:"4/5"}}/>
+            }
         </Box>
     )
 }
