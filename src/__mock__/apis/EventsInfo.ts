@@ -17,14 +17,21 @@ export const Oauthcredentials: EventSections ={
         RefreshToken:"asdjkl",
         ExpiryTime:"43200"
     },
-    GrantManagement: "",
     EncryptDetail: {
         EncryptionKey:"12njbds8b",
         iVVector:"qwertty"
     },
     AppDomain: {
-        AppDomain:["https://abc.com"],
-        RedirectURI:"https://abc.com/oauth"
+        AppDomain:["https://abc.com"]
+    },
+    GrantManagement: {
+        PasswordGrant:{
+            username:"abcde",
+            password:"12345",
+        },
+        AuthGrant:{
+            AppDomain:["https://xyz.com"]
+        }
     }
 }
 
