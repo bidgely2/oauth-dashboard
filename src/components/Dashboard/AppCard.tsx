@@ -38,7 +38,7 @@ const AppCard = (props: AppCardProps) => {
                 }} 
                 onClick={EditClick}/>
             <CardContent sx={{mr:"10px"}}>
-                <Typography sx={{ fontWeight: "550", m:"0 auto 0 auto"}} variant="h6">
+                <Typography sx={{ fontWeight: "600", m:"0 auto 0 auto"}} variant="h6">
                     {props.data.name}
                 </Typography>
                 <Typography variant="body1">{props.data.type}</Typography>

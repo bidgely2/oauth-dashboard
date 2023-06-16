@@ -4,40 +4,46 @@ import { EditBox } from "../../templates/EditBox";
 import { useState } from "react";
 
 interface TextInput{
-    AppDomain: string,
     redirectURI: string
 }
 
-const AppDomains = () => {
+interface AppDomainProps{
+    AppDomain: any
+}
 
-    const [text,setText] = useState<TextInput>({AppDomain:"",redirectURI:""});
+const AppDomains = ({AppDomain}:AppDomainProps) => {
+
+    const [text,setText] = useState<TextInput>({redirectURI:""});
 
     const CopyClick=(e:any)=>{
-        navigator.clipboard.writeText(e.target);
+        navigator.clipboard.writeText(text.redirectURI);
     }
 
     const DelClick =()=>{
-        setText({AppDomain:"",redirectURI:""})
+        setText({redirectURI:""})
     }
 
     const SetInput =(e:any)=>{
-        setText({...text,[e.target.name]:e.target.value});
+        setText({redirectURI: e.target.value});
     }
 
     const SaveURI =()=>{
-        setText({AppDomain:text.redirectURI,redirectURI:""})
+        console.log(AppDomain.AppDomain);
+        AppDomain.AppDomain.push(text.redirectURI);
+        setText({redirectURI:""})
     }
 
     return (
         <EditBox>
-            <Typography variant="h6" sx={{ ml: "20px", mb: "10px" }}> Your App Domains</Typography>
+            <Typography variant="h6" sx={{ ml: "20px", mb: "10px", fontFamily:"'Jost', sans-serif" }}> Your App Domains</Typography>
             <Box sx={{ disply: "grid", gridTemplateColumns: "auto", ml: "100px" }}>
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "10px" }}>
                     <TextField 
-                        label="Your App Doamins-1" 
+                        // label="Your App Doamins-1" 
                         onChange={SetInput} 
-                        name="AppDomain" 
-                        value={text.AppDomain} 
+                        name="AppDomain"  
+                        placeholder={AppDomain.AppDomain}
+                        InputProps={{readOnly:true}}
                         sx={{ width: "300px" }} />
                     <Copy 
                         fontSize="small" 
