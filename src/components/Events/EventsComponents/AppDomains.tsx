@@ -41,7 +41,7 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "10px" }}>
                     <TextField 
                         // label="Your App Doamins-1"  
-                        placeholder={AppDomain.AppDomain}
+                        value={AppDomain.AppDomain}
                         InputProps={{readOnly:true}}
                         sx={{ width: "300px" }} />
                     <Copy 

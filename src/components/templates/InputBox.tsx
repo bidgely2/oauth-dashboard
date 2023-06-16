@@ -3,6 +3,7 @@ import { ContentCopyOutlined as Copy, CachedOutlined as Regenrate} from '@mui/ic
 
 export interface InputProps {
     title: string,
+    hide?: boolean | undefined,
     placeholder: string,
     readOnly?: boolean | undefined
     wide? :string | number,
@@ -28,8 +29,9 @@ export const InputBox = (props:InputProps) =>{
             }}>
             <Typography variant="body1" flexWrap="wrap" sx={{gridColumn:"1/2"}}>{props.title}</Typography>
             <TextField 
+                type={props.hide!==true?"text":"password"}
                 variant="outlined" 
-                placeholder={props.placeholder} 
+                value={props.placeholder} 
                 sx={{gridColumn:"2/4"}}
                 InputProps={{
                     readOnly: props.readOnly,

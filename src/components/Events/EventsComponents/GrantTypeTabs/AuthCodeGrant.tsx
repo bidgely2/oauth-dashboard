@@ -48,7 +48,7 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "10px" }}>
                     <TextField 
                         // label="Your App Doamins-1" 
-                        placeholder={AppDomain}
+                        value={AppDomain}
                         InputProps={{readOnly:true}}
                         sx={{ width: "300px" }} />
                     <Copy 

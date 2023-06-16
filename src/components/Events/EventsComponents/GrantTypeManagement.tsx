@@ -32,9 +32,9 @@ const GrantTypeManagement =({GrantManagement}:GrantTypeManagementProps) =>{
         <EditBox>
             <Typography variant="h6" sx={{ml:"20px",mb:"10px", fontFamily:"'Jost', sans-serif"}}>Oauth Grant Type Management</Typography>
             <Box sx={{ml:"100px"}}>
-                <Button name="PswdGrant" onClick={ClickTab} sx={{width:"110px", textTransform: "none", bgcolor:"#ECF9FF", ":hover":{bgcolor:"#F9F3F3"}, ":focus":{bgcolor:"#DDDDDD"}}}>Password Grant</Button>
-                <Button name="AuthGrant" onClick={ClickTab} sx={{width:"110px", textTransform: "none", bgcolor:"#ECF9FF", ":hover":{bgcolor:"#F9F3F3"}, ":focus":{bgcolor:"#DDDDDD"}}}>AuthCode Grant</Button>
-                <Button name="ClientCredentials" onClick={ClickTab} sx={{width:"110px", textTransform: "none", bgcolor:"#ECF9FF", ":hover":{bgcolor:"#F9F3F3"}, ":focus":{bgcolor:"#DDDDDD"}}}>Client Credentials</Button>
+                <Button name="PswdGrant" onClick={ClickTab} sx={{width:"110px", textTransform: "none",border:"1px #97C4B8",borderStyle:"solid", bgcolor:"#F8E8EE", ":hover":{bgcolor:"#fcfcfc"}, ":focus":{bgcolor:"#fcfcfc"}}}>Password Grant</Button>
+                <Button name="AuthGrant" onClick={ClickTab} sx={{width:"110px", textTransform: "none",border:"1px #97C4B8",borderStyle:"solid", bgcolor:"#F8E8EE", ":hover":{bgcolor:"#fcfcfc"}, ":focus":{bgcolor:"#fcfcfc"}}}>AuthCode Grant</Button>
+                <Button name="ClientCredentials" onClick={ClickTab} sx={{width:"110px", textTransform: "none",border:"1px #97C4B8",borderStyle:"solid", bgcolor:"#F8E8EE", ":hover":{bgcolor:"#fcfcfc"}, ":focus":{bgcolor:"#fcfcfc"}}}>Client Credentials</Button>
                 {Tab}
             </Box>
         </EditBox>
