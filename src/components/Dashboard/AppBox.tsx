@@ -14,13 +14,13 @@ function AppBox(props:AppBoxprops){
         <Box sx={{
             bgcolor:"#edede8",
             position:"absolute",
-            width:"100vw",
+            width:"100%",
             top:"130px",
             bottom:"80px",
             display:"flex",
             flexDirection:"row",
             flexWrap:"wrap",
-            overflowY:"auto"
+            overflowY:"auto",
         }}>{Apps}</Box>
     )
 }

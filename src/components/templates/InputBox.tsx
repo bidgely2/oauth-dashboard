@@ -27,7 +27,7 @@ export const InputBox = (props:InputProps) =>{
                 width:props.wide,
                 margin: props.margin
             }}>
-            <Typography variant="body1" flexWrap="wrap" sx={{gridColumn:"1/2"}}>{props.title}</Typography>
+            <Typography variant="body1" flexWrap="wrap" sx={{gridColumn:"1/2", fontSize:"20px"}}>{props.title}</Typography>
             <TextField 
                 type={props.hide!==true?"text":"password"}
                 variant="outlined" 

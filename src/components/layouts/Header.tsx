@@ -10,17 +10,16 @@ const Header = ()=>{
     const [LoggedIn, setLoggedIn] = useState<boolean>(true);
 
     return (
-        <AppBar 
-            sx={{
-                height: "60px",
-                color: "black",
-                bgcolor:"white",
-                display:"flex",
-                flexDirection:"row",
-                alignItems:"center"
-            }}>
+        <AppBar sx={{
+            height: "70px",
+            color: "black",
+            bgcolor:"white",
+            display:"flex",
+            flexDirection:"row",
+            alignItems:"center"
+        }}>
             <img className={styles.headerLogo} src={logo} alt="Bidgely Inc."/>
-            <Typography variant="h6">Bidgely Oauth Console</Typography>
+            <Typography variant="h6" sx={{fontSize:"25px",fontFamily: "'Mukta', sans-serif"}}>Bidgely Oauth Console</Typography>
             {LoggedIn
                 ?<><img className={styles.utilityLogo} src={utilityLogo}/>
                 <Menu LoggedIn={LoggedIn} setLoggedIn = {setLoggedIn} />

@@ -1,8 +1,8 @@
 import { Typography, Button, Box } from "@mui/material";
-import lock from "../../assets/img/lock.png";
-import styles from "../layouts/login.module.css";
-import Header from "../layouts/Header";
-import Footer from "../layouts/Footer";
+import lock from "../../../assets/img/lock.png";
+import Header from "../../layouts/Header";
+import Footer from "../../layouts/Footer";
+import styles from './Loginbody.module.css'
 
 const Login = () => {
     return (
@@ -18,6 +18,7 @@ const Login = () => {
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
+                    justifyContent:'center'
                 }}
             >
                 <img className={styles.lockImg} src={lock} alt={"Lock img"} />

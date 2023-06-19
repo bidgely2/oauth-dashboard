@@ -11,7 +11,7 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
     return (
         <EditBox>
             <Box sx={{display: "flex", flexDirection: "row", alignItems:"center", mb:"20px"}} >
-                <Typography variant="h6" sx={{ ml: "20px",mr:"30px", fontFamily:"'Jost', sans-serif" }}>Encryption Details</Typography>
+                <Typography variant="h6" sx={{ ml: "30px",mr:"30px", fontFamily:"'Jost', sans-serif", fontSize:"25px", color:"#4F4557"  }}>Encryption Details</Typography>
                 <Regenrate 
                     fontSize="small" 
                     color="primary" 

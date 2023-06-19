@@ -36,7 +36,7 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
 
     return (
         <EditBox>
-            <Typography variant="h6" sx={{ ml: "20px", mb: "10px", fontFamily:"'Jost', sans-serif" }}> Your App Domains</Typography>
+            <Typography variant="h6" sx={{ ml: "30px", mb: "10px", fontFamily:"'Jost', sans-serif", fontSize:"25px", color:"#4F4557" }}> Your App Domains</Typography>
             <Box sx={{ disply: "grid", gridTemplateColumns: "auto", ml: "100px" }}>
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "10px" }}>
                     <TextField 

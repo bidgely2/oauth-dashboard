@@ -19,7 +19,7 @@ const AppCard = (props: AppCardProps) => {
     return (
         <Card
             sx={{
-                margin: "10px",
+                margin: "10px 10px 10px 20px",
                 minWidth:"110px",
                 height:"110px",
                 position:"relative",
