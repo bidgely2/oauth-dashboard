@@ -15,7 +15,7 @@ function AppBox(props:AppBoxprops){
             bgcolor:"#edede8",
             position:"absolute",
             width:"100%",
-            top:"130px",
+            top:"140px",
             bottom:"80px",
             display:"flex",
             flexDirection:"row",

@@ -11,9 +11,10 @@ const Login = () => {
             <Box
                 sx={{
                     position: "absolute",
-                    width: "100%",
+                    // minHeight:"100vh",
+                    width: "100vw",
                     bgcolor: "#f7f7f5",
-                    top: "60px",
+                    top: "70px",
                     bottom: "80px",
                     display: "flex",
                     flexDirection: "column",

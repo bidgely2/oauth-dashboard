@@ -10,7 +10,7 @@ export const EditBox =({children}:BoxProps) =>{
         <Box
             sx={{
                 width: "100vw",
-                margin: "10px 0",
+                margin: "20px 0",
                 p: "15px 0",
                 bgcolor:"white",
                 boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"

@@ -19,7 +19,7 @@ const Dashboard = () => {
                     height: "70px",
                     bgcolor: "#edede8",
                     position: "absolute",
-                    top: "60px",
+                    top: "70px",
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",

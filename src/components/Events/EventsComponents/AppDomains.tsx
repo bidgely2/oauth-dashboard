@@ -2,6 +2,8 @@ import { Box, TextField, Typography, Button } from "@mui/material";
 import { ContentCopyOutlined as Copy, DeleteOutlined as Delete } from '@mui/icons-material';
 import { EditBox } from "../../templates/EditBox";
 import { useState } from "react";
+import ToastMessage from "../../templates/ToastMessage";
+import PopupWarning from "../../templates/PopupWarning";
 
 interface TextInput{
     Appdomain:string[],
@@ -15,22 +17,45 @@ interface AppDomainProps{
 const AppDomains = ({AppDomain}:AppDomainProps) => {
 
     const [text,setText] = useState<TextInput>({Appdomain:[""],redirectURI:""});
+    const [ToastOpen,setToast] = useState(false);
+    const [del, setDel] = useState(0);  // 0-noPopup nodelete, 1-openPopup, 2-delete nopopup
 
     const CopyClick=(e:any)=>{
         navigator.clipboard.writeText(text.redirectURI);
     }
 
     const DelClick =()=>{
-        setText({Appdomain:[""],redirectURI:""})
+        setDel(1);
+        if(del===2){
+            setText({Appdomain:[""],redirectURI:""});
+            setDel(0);
+        }
     }
 
     const SetInput =(e:any)=>{
         setText({...text, [e.target.name]: e.target.value});
     }
 
+    const isValidUrl = (urlString: string) =>{
+        var inputElement = document.createElement('input');
+        inputElement.type = 'url';
+        inputElement.value = urlString;
+  
+        if (!inputElement.checkValidity()) {
+          return false;
+        } else {
+          return true;
+        }
+      } 
+
     const SaveURI =()=>{
-        console.log(AppDomain.AppDomain);
-        AppDomain.AppDomain.push(text.redirectURI);
+        // console.log(AppDomain.AppDomain);
+        if(isValidUrl(text.redirectURI)){
+            AppDomain.AppDomain.push(text.redirectURI);
+        }
+        else{
+            setToast(true);
+        }
         setText({Appdomain:[""],redirectURI:""})
     }
 
@@ -68,6 +93,15 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
                         sx={{ position: "absolute", left: "300px" }}>Save uri</Button>
                 </Box>
             </Box>
+            <ToastMessage 
+                open={ToastOpen} 
+                time={5000} 
+                ToastClose={()=>{setToast(false)}} 
+                msgType={"warning"} 
+                content={"Invalid URI Input"}
+                vertical='bottom'
+                horizontal='left'/>
+            <PopupWarning open={del} setOpen={setDel} message="The App Domain will be deleted permanently"/>
         </EditBox>
     )
 }

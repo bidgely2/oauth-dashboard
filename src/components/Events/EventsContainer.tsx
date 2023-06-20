@@ -18,7 +18,7 @@ const Events = () => {
     }
 
     return (
-        <Box sx={{ width: "100vw",p: "70px 20px 80px 20px", m:"20px 0", bgcolor:"#f7f7f5"}}>
+        <Box sx={{ width: "100vw", p: "70px 20px 80px 20px", mt:"20px", bgcolor:"#f7f7f5"}}>
             <Box sx={{display:"flex",flexDirection:"row", alignItems:"center", mb:"20px",ml:"20px"}}>
                 <Typography variant="h5" sx={{fontFamily:"'Noto Sans SC', sans-serif", color:"#4F4557"}}> App/Credentials Information</Typography>
                 <Button variant="contained" sx={{ml:"auto",mr:"30px"}} onClick={BackClick}>Back</Button>  
