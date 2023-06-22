@@ -5,7 +5,6 @@ import ToastMessage from "./ToastMessage";
 
 export interface InputProps {
     title: string,
-    url?: boolean | undefined,
     hide?: boolean | undefined,
     placeholder: string,
     readOnly?: boolean | undefined

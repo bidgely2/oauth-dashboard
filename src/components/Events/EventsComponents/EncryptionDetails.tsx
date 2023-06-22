@@ -11,17 +11,18 @@ interface EncryptDetailProps{
 
 const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
     
-    const [Regenerate,setRegenerate] = useState(0);
+    const [Regenerate, setRegenerate] = useState({open:false,clickedYes:false});  // 0-noPopup nodelete, 1-openPopup, 2-delete nopopup
+
     
     const ClickRegenerate =()=>{
-        setRegenerate(1);
-        if(Regenerate==2){
-            // then code to regenerate
-            // and
-            setRegenerate(0);
-        }
+        setRegenerate({open:true,clickedYes:false});
     }
-
+    if(Regenerate.clickedYes){
+        // then code to regenerate
+        // and
+        setRegenerate({open:false,clickedYes:false});
+    }
+    
     return (
         <EditBox>
             <Box sx={{display: "flex", flexDirection: "row", alignItems:"center", mb:"20px"}} >

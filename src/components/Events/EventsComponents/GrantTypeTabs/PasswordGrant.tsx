@@ -25,7 +25,7 @@ const PasswordGrant =({username,password}:PasswordGrantProps) =>{
                 borderRadius:"5px",
                 borderStyle:"solid"}}>
             <Box sx={{display:"flex", flexDirection:"row",alignItems:"center",mb:"40px",ml:"20px"}}>
-                <Typography variant="h6">Password Credential Grant Data</Typography>
+                <Typography variant="h6" sx={{fontFamily:"Noto Sans SC"}}>Password Credential Grant Data</Typography>
                 <Button variant="contained" size="small" onClick={ViewClick} sx={{ml:"60px"}}>View/Hide</Button>
             </Box>
             <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "10px",ml:"20px", mr: "auto" }}>

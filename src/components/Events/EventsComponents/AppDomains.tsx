@@ -1,41 +1,54 @@
-import { Box, TextField, Typography, Button } from "@mui/material";
+import { Box, TextField, Typography, Button, AlertColor } from "@mui/material";
 import { ContentCopyOutlined as Copy, DeleteOutlined as Delete } from '@mui/icons-material';
 import { EditBox } from "../../templates/EditBox";
 import { useState } from "react";
 import ToastMessage from "../../templates/ToastMessage";
 import PopupWarning from "../../templates/PopupWarning";
 
-interface TextInput{
-    Appdomain:string[],
-    redirectURI: string
-}
-
 interface AppDomainProps{
     AppDomain: any
 }
 
+interface ToastMsg{
+    open: boolean,
+    msgType: AlertColor,
+    content: string,
+    time: number
+}
+
 const AppDomains = ({AppDomain}:AppDomainProps) => {
 
-    const [text,setText] = useState<TextInput>({Appdomain:[""],redirectURI:""});
-    const [ToastOpen,setToast] = useState(false);
-    const [del, setDel] = useState(0);  // 0-noPopup nodelete, 1-openPopup, 2-delete nopopup
+    const [redirectURI,setURI] = useState("");
+    const [Toast,setToast] = useState<ToastMsg>({open:false,msgType:"success",content:"",time:0});
+    const [del, setDel] = useState({open:false,clickedYes:false});  // 0-noPopup nodelete, 1-openPopup, 2-delete nopopup
 
     const CopyClick=(e:any)=>{
-        navigator.clipboard.writeText(text.redirectURI);
+        navigator.clipboard.writeText(redirectURI);
+        setToast({open:true,msgType:"success",content:"Successfullt copied the domain",time:3000})
     }
 
     const DelClick =()=>{
-        setDel(1);
-        if(del===2){
-            setText({Appdomain:[""],redirectURI:""});
-            setDel(0);
-        }
+        setDel({open:true,clickedYes:false});
     }
+
+    if(del.clickedYes){
+        setURI("");
+        setToast({open:true,msgType:"success",content:"Domain deleted successfully",time:3000})
+        setDel({open:false,clickedYes:false});
+        // console.log(AppDomain.AppDomain)
+        AppDomain.AppDomain.pop();
+    }
+    console.log(AppDomain.AppDomain)
 
     const SetInput =(e:any)=>{
-        setText({...text, [e.target.name]: e.target.value});
+        setURI(e.target.value);
     }
 
+    
+    const CloseToast =()=>{
+        setToast({open:false,msgType:"success",content:"",time:0});
+    }
+    
     const isValidUrl = (urlString: string) =>{
         var inputElement = document.createElement('input');
         inputElement.type = 'url';
@@ -47,16 +60,15 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
           return true;
         }
       } 
-
     const SaveURI =()=>{
         // console.log(AppDomain.AppDomain);
-        if(isValidUrl(text.redirectURI)){
-            AppDomain.AppDomain.push(text.redirectURI);
+        if(isValidUrl(redirectURI)){
+            AppDomain.AppDomain.push(redirectURI);
         }
         else{
-            setToast(true);
+            setToast({open:true,msgType:"warning",content:"Invalid URI input",time:5000})
         }
-        setText({Appdomain:[""],redirectURI:""})
+        setURI("")
     }
 
     return (
@@ -85,7 +97,7 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
                         label="Add a redirect uri" 
                         onChange={SetInput} 
                         name="redirectURI" 
-                        value={text.redirectURI} 
+                        value={redirectURI} 
                         sx={{ width: "300px" }} />
                     <Button
                         variant="contained" 
@@ -94,11 +106,11 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
                 </Box>
             </Box>
             <ToastMessage 
-                open={ToastOpen} 
-                time={5000} 
-                ToastClose={()=>{setToast(false)}} 
-                msgType={"warning"} 
-                content={"Invalid URI Input"}
+                open={Toast.open} 
+                time={Toast.time} 
+                ToastClose={CloseToast} 
+                msgType={Toast.msgType} 
+                content={Toast.content}
                 vertical='bottom'
                 horizontal='left'/>
             <PopupWarning open={del} setOpen={setDel} message="The App Domain will be deleted permanently"/>

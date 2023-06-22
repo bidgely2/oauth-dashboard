@@ -1,28 +1,31 @@
 import { Box, Button, Dialog, DialogActions, DialogTitle, Typography } from "@mui/material"
 
 interface PopupProps {
-    open: number,
-    setOpen: React.Dispatch<React.SetStateAction<number>>,
+    open: {open:boolean,clickedYes:boolean}
+    setOpen: React.Dispatch<React.SetStateAction<{
+        open: boolean;
+        clickedYes: boolean;
+    }>>,
     message: string,
 }
 
-const PopupWarning =(props:PopupProps)=>{
+const PopupWarning =({open,setOpen,message}:PopupProps)=>{
 
     const ClickYes =()=>{
-        props.setOpen(2);
+        setOpen({open:false,clickedYes:true});
     } 
 
     const ClickNo =()=>{
-        props.setOpen(0);
+        setOpen({open:false,clickedYes:false});
     }
 
     return(
         <Dialog
-            open={props.open===1}
-            onClose={()=>{props.setOpen(0)}}
+            open={open.open}
+            onClose={ClickNo}
         >
             <DialogTitle>
-                <Typography variant="h6">{props.message}</Typography>
+                <Typography variant="h5" sx={{fontFamily:"'Mukta', sans-serif"}}>{message}</Typography>
             </DialogTitle>
             <DialogActions
                 sx={{
