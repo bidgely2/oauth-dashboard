@@ -19,18 +19,18 @@ const Dashboard = () => {
                     height: "70px",
                     bgcolor: "#edede8",
                     position: "absolute",
-                    top: "60px",
+                    top: "70px",
                     display: "flex",
                     flexDirection: "row",
                     alignItems: "center",
                 }}
             >
-                <Typography variant="h6" sx={{ ml: "10px" }}>
+                <Typography variant="h5" sx={{ ml: "20px" }}>
                     Hello Utility
                 </Typography>
                 <Button
                     variant="contained"
-                    sx={{ width: "150px", ml: "auto", mr: "10px" }}
+                    sx={{ width: "150px", ml: "auto", mr: "20px" }}
                     onClick={handlePopup}
                 >
                     Create App

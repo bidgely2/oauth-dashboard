@@ -1,4 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500&family=Jost:wght@500&family=Noto+Sans+SC:wght@700&family=Roboto&family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;500&family=Jost:wght@500&family=Mukta:wght@500&family=Noto+Sans+SC:wght@700&family=Roboto&family=Roboto+Mono&display=swap');
+
+/* font-family: 'Fira Sans', sans-serif;
+font-family: 'Jost', sans-serif;
+font-family: 'Mukta', sans-serif;
+font-family: 'Noto Sans SC', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Roboto Mono', monospace; */
 
 .App {
   text-align: center;

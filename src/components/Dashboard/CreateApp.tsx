@@ -1,46 +1,34 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, Box, Button, Snackbar, AlertProps } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, Box, Button} from "@mui/material";
 import { Apps, Appdata } from "../../__mock__/apis/AppInfo"
 import { useState } from "react";
 import React from "react";
-import MuiAlert, { AlertColor } from "@mui/material/Alert"
 import {Close} from '@mui/icons-material';
+import ToastMessage from "../templates/ToastMessage";
+import { ToastMsg } from "../templates/InputBox";
+
 
 interface PopupProps {
     open: boolean,
     setOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-interface ToastMsg {
-    open: boolean,
-    message: AlertColor,
-    content: String,
-    time: number
-}
-
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-    props,
-    ref,
-) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
 const CreateApp = (props: PopupProps) => {
 
 
     const [input, setInput] = useState<Appdata>({ name: "", type: "" });   //FormInputs
-    const [Toast, setToast] = useState<ToastMsg>({ open: false, message: "success", content: "", time: 3000 });  //ToastMsg
+    const [Toast, setToast] = useState<ToastMsg>({ open: false, msgType: "success", content: "", time: 3000 });  //ToastMsg
 
     const ClickCreate = () => {
         let present: Appdata | undefined = Apps.find((data) => { return data.name === input.name ? true : false })
         let failure: boolean = (input.type === "") || (input.name === "")
 
         if (failure) {
-            setToast({ open: true, message: "error", content: "Please provide input", time: 10000 })
+            setToast({ open: true, msgType: "error", content: "Please provide input", time: 10000 })
         } else if (present !== undefined) {
-            setToast({ open: true, message: "warning", content: "The given App already exists", time: 10000 })
+            setToast({ open: true, msgType: "warning", content: "The given App already exists", time: 10000 })
         } else {
             Apps.push(input);
-            setToast({ open: true, message: "success", content: "Successfully created the app", time: 5000 })
+            setToast({ open: true, msgType: "success", content: "Successfully created the app", time: 5000 })
             setTimeout(() => { ClickCancel() }, 5000);
         }
     }
@@ -113,11 +101,14 @@ const CreateApp = (props: PopupProps) => {
                     </Box>
                 </DialogActions>
             </Box>
-            <Snackbar open={Toast.open} autoHideDuration={Toast.time} onClose={ToastClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                <Alert severity={Toast.message} sx={{ width: '100%' }}>
-                    {Toast.content}
-                </Alert>
-            </Snackbar>
+            <ToastMessage 
+                open={Toast.open} 
+                time={Toast.time} 
+                ToastClose={ToastClose} 
+                msgType={Toast.msgType} 
+                content={Toast.content}
+                vertical='top'
+                horizontal='right'/>
         </Dialog>
     )
 }

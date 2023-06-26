@@ -1,12 +1,11 @@
-import { Box, TextField, Typography, Button, AlertColor } from "@mui/material";
+import { AlertColor, Box, Button, TextField, Typography } from "@mui/material";
 import { ContentCopyOutlined as Copy, DeleteOutlined as Delete } from '@mui/icons-material';
-import { EditBox } from "../../templates/EditBox";
 import { useState } from "react";
-import ToastMessage from "../../templates/ToastMessage";
-import PopupWarning from "../../templates/PopupWarning";
+import ToastMessage from "../../../templates/ToastMessage";
+import PopupWarning from "../../../templates/PopupWarning";
 
-interface AppDomainProps{
-    AppDomain: any
+interface AuthGrantProps{
+    AppDomain:any
 }
 
 interface ToastMsg{
@@ -16,7 +15,7 @@ interface ToastMsg{
     time: number
 }
 
-const AppDomains = ({AppDomain}:AppDomainProps) => {
+const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
 
     const [redirectURI,setURI] = useState("");
     const [Toast,setToast] = useState<ToastMsg>({open:false,msgType:"success",content:"",time:0});
@@ -30,55 +29,43 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
     const DelClick =()=>{
         setDel({open:true,clickedYes:false});
     }
-
     if(del.clickedYes){
+        
         setURI("");
         setToast({open:true,msgType:"success",content:"Domain deleted successfully",time:3000})
         setDel({open:false,clickedYes:false});
-        // console.log(AppDomain.AppDomain)
-        AppDomain.AppDomain.pop();
     }
-    console.log(AppDomain.AppDomain)
 
     const SetInput =(e:any)=>{
         setURI(e.target.value);
     }
 
-    
-    const CloseToast =()=>{
-        setToast({open:false,msgType:"success",content:"",time:0});
-    }
-    
-    const isValidUrl = (urlString: string) =>{
-        var inputElement = document.createElement('input');
-        inputElement.type = 'url';
-        inputElement.value = urlString;
-  
-        if (!inputElement.checkValidity()) {
-          return false;
-        } else {
-          return true;
-        }
-      } 
     const SaveURI =()=>{
-        // console.log(AppDomain.AppDomain);
-        if(isValidUrl(redirectURI)){
-            AppDomain.AppDomain.push(redirectURI);
-        }
-        else{
-            setToast({open:true,msgType:"warning",content:"Invalid URI input",time:5000})
-        }
+        // console.log(AppDomain);
+        AppDomain.push(redirectURI);
         setURI("")
     }
 
-    return (
-        <EditBox>
-            <Typography variant="h6" sx={{ ml: "30px", mb: "10px", fontFamily:"'Jost', sans-serif", fontSize:"25px", color:"#4F4557" }}> Your App Domains</Typography>
-            <Box sx={{ disply: "grid", gridTemplateColumns: "auto", ml: "100px" }}>
+    const CloseToast =()=>{
+        setToast({open:false,msgType:"success",content:"",time:0});
+    }
+
+    return(
+        <Box 
+            sx={{
+                p:"20px 0",
+                maxWidth:"540px",
+                height:"250px",
+                border:"1px black",
+                borderRadius:"5px",
+                borderStyle:"solid"}}>
+           <Typography variant="body2" sx={{ml:"20px", mb:"10px", fontFamily:"'Roboto', monospace"}}>Enable Auth Code by specifying atleast one uri</Typography>
+           <Typography variant="h6" sx={{ml:"20px",mb:"20px", fontFamily:"Noto Sans SC"}}>Redirect URI Management</Typography>
+           <Box sx={{ disply: "grid", gridTemplateColumns: "auto", ml: "20px" }}>
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "10px" }}>
                     <TextField 
-                        // label="Your App Doamins-1"  
-                        value={AppDomain.AppDomain}
+                        // label="Your App Doamins-1" 
+                        value={AppDomain}
                         InputProps={{readOnly:true}}
                         sx={{ width: "300px" }} />
                     <Copy 
@@ -114,8 +101,8 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
                 vertical='bottom'
                 horizontal='left'/>
             <PopupWarning open={del} setOpen={setDel} message="The App Domain will be deleted permanently"/>
-        </EditBox>
+        </Box>
     )
 }
 
-export default AppDomains;
+export default AuthCodeGrant;

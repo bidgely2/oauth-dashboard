@@ -9,10 +9,11 @@ export const EditBox =({children}:BoxProps) =>{
     return(
         <Box
             sx={{
-                width: "100vw",
-                margin: "10px 0",
+                width: "calc(100vw-40px)",
+                margin: "20px 0",
                 p: "15px 0",
-                boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+                bgcolor:"white",
+                boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
             }}>
                 {children}
         </Box>

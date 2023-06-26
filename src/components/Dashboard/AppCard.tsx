@@ -1,7 +1,12 @@
 import { Card, Typography, CardContent } from "@mui/material";
 import { Appdata } from "../../__mock__/apis/AppInfo";
 // import {EditOutlined as Edit} from '@mui/icons-material';
-import {MoreVert as Edit} from '@mui/icons-material';
+// import {EditNote as Edit} from "@mui/icons-material";
+// import {MoreVert as Edit} from '@mui/icons-material';
+// import {AppRegistrationTwoTone as Edit} from '@mui/icons-material';
+// import {DriveFileRenameOutlineTwoTone as Edit} from '@mui/icons-material';
+// import {EditTwoTone as Edit} from '@mui/icons-material';
+import {LaunchTwoTone as Edit} from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
 
 interface AppCardProps {
@@ -19,7 +24,7 @@ const AppCard = (props: AppCardProps) => {
     return (
         <Card
             sx={{
-                margin: "10px",
+                margin: "10px 10px 10px 20px",
                 minWidth:"110px",
                 height:"110px",
                 position:"relative",

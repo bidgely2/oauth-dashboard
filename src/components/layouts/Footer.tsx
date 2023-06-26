@@ -4,7 +4,7 @@ const Footer = () =>{
     return (
         <Box 
             sx={{
-                width:"100%",
+                width:"100vw",
                 height: "80px",
                 position: "absolute",
                 bottom: "0",
@@ -12,7 +12,7 @@ const Footer = () =>{
                 flexDirection: "row",
                 justifyContent: "center",
                 alignItems: "center",
-                // bgcolor:"pink"
+                bgcolor:"white"
             }}>
             <Typography variant="body1">@2023, Bidgely Inc.</Typography>
         </Box>

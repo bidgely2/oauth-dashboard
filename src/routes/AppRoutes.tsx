@@ -1,7 +1,7 @@
 import {Routes, Route} from "react-router-dom"
 import Root from "../components/root/LoginRoot"
 import RouteGaurd from "./RouteGaurd"
-import Login from "../components/root/Login";
+import Login from "../components/root/LoginComponent/Login";
 import NotFound from "../components/root/NotFound"
 import Dashboard from "../components/Dashboard/Dashboard";
 import Events from "../components/Events/EventsContainer"
