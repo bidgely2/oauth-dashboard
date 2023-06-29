@@ -155,5 +155,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "chai": "^4.3.7"
   }
 }

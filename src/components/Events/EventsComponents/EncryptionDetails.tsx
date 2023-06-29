@@ -4,6 +4,7 @@ import { EditBox } from "../../templates/EditBox";
 import { CachedOutlined as Regenrate} from '@mui/icons-material';
 import { useState } from "react";
 import PopupWarning from "../../templates/PopupWarning";
+import axios from "../../../__mock__/apis/OauthMocks/EventsAPIs";
 
 interface EncryptDetailProps{
     EncryptDetail: any
@@ -19,7 +20,8 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
     }
     if(Regenerate.clickedYes){
         // then code to regenerate
-        // and
+        axios.post("/api/v2.0/encryption/key",{ClientId:1234})
+             .then((res)=>{console.log(res.data)})
         setRegenerate({open:false,clickedYes:false});
     }
     

@@ -1,3 +1,6 @@
+// This inputbox contains a title for the input Box, an input box and an icon
+// and toast msg for the icon on click
+
 import { Box, Typography, TextField, AlertColor } from "@mui/material";
 import { ContentCopyOutlined as Copy, CachedOutlined as Regenrate} from '@mui/icons-material';
 import { useState } from "react";

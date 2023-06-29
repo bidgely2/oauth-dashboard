@@ -1,6 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
 import AppBox from "./AppBox";
-import { Apps } from "../../__mock__/apis/AppInfo";
 import { useState } from "react";
 import CreateApp from "./CreateApp";
 
@@ -36,7 +35,7 @@ const Dashboard = () => {
                     Create App
                 </Button>
             </Box>
-            <AppBox data={Apps} />
+            <AppBox/>
             <CreateApp open={open} setOpen={setOpen} />
         </>
     );

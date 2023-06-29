@@ -89,7 +89,7 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                     <Button
                         variant="contained" 
                         onClick={SaveURI}
-                        sx={{ position: "absolute", left: "300px" }}>Save uri</Button>
+                        sx={{ position: "absolute", left: "320px" }}>Save uri</Button>
                 </Box>
             </Box>
             <ToastMessage 

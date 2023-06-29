@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import axios from "./EventsAPIs";
+
 export interface EventSections{
     ClientDetail: any,
     KeyManagement: any,
@@ -6,7 +9,7 @@ export interface EventSections{
     AppDomain: any
 }
 
-export const Oauthcredentials: EventSections ={
+export const client0 = {
     ClientDetail: {
         ClientId:"1234",
         ClientSecret:"hcb7e3xv",
@@ -33,5 +36,19 @@ export const Oauthcredentials: EventSections ={
             AppDomain:["https://xyz.com"]
         }
     }
+}
+
+export function useGetClientData(){
+    const [DATA,setDATA] = useState<EventSections>(client0);
+
+    useEffect(() => {
+        const getDATA = async () => {
+            const res = await axios.get("/api/clients/");
+            setDATA(res.data);
+        };
+        getDATA();
+        },[]);
+
+    return DATA;
 }
 

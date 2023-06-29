@@ -1,5 +1,5 @@
 import { Card, Typography, CardContent } from "@mui/material";
-import { Appdata } from "../../__mock__/apis/AppInfo";
+import { Appdata } from "../../__mock__/apis/OauthMocks/AppInfo";
 // import {EditOutlined as Edit} from '@mui/icons-material';
 // import {EditNote as Edit} from "@mui/icons-material";
 // import {MoreVert as Edit} from '@mui/icons-material';

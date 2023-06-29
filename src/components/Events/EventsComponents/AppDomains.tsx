@@ -4,6 +4,7 @@ import { EditBox } from "../../templates/EditBox";
 import { useState } from "react";
 import ToastMessage from "../../templates/ToastMessage";
 import PopupWarning from "../../templates/PopupWarning";
+import axios from "../../../__mock__/apis/OauthMocks/EventsAPIs";
 
 interface AppDomainProps{
     AppDomain: any
@@ -36,9 +37,11 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
         setToast({open:true,msgType:"success",content:"Domain deleted successfully",time:3000})
         setDel({open:false,clickedYes:false});
         // console.log(AppDomain.AppDomain)
+        axios.delete("/api/v2.0/whitelist-origin",{params:{ClientId:1234}})
+            .then((res)=>{console.log(res.data)})
         AppDomain.AppDomain.pop();
     }
-    console.log(AppDomain.AppDomain)
+    // console.log(AppDomain.AppDomain)
 
     const SetInput =(e:any)=>{
         setURI(e.target.value);
@@ -62,8 +65,10 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
       } 
     const SaveURI =()=>{
         // console.log(AppDomain.AppDomain);
-        if(isValidUrl(redirectURI)){
+        if(isValidUrl(redirectURI) && redirectURI.length!==0){
             AppDomain.AppDomain.push(redirectURI);
+            axios.post("/api/v2.0/whitelist-origin",{ClientId:1234})
+                .then((res)=>{console.log(res.data)});
         }
         else{
             setToast({open:true,msgType:"warning",content:"Invalid URI input",time:5000})
@@ -102,7 +107,7 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
                     <Button
                         variant="contained" 
                         onClick={SaveURI}
-                        sx={{ position: "absolute", left: "300px" }}>Save uri</Button>
+                        sx={{ position: "absolute", left: "320px" }}>Save uri</Button>
                 </Box>
             </Box>
             <ToastMessage 

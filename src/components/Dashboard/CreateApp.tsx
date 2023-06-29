@@ -1,11 +1,11 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, Box, Button} from "@mui/material";
-import { Apps, Appdata } from "../../__mock__/apis/AppInfo"
+import { Appdata, useGetAppData } from "../../__mock__/apis/OauthMocks/AppInfo"
 import { useState } from "react";
 import React from "react";
 import {Close} from '@mui/icons-material';
 import ToastMessage from "../templates/ToastMessage";
 import { ToastMsg } from "../templates/InputBox";
-
+import axios from "../../__mock__/apis/OauthMocks/EventsAPIs";
 
 interface PopupProps {
     open: boolean,
@@ -14,12 +14,13 @@ interface PopupProps {
 
 const CreateApp = (props: PopupProps) => {
 
-
     const [input, setInput] = useState<Appdata>({ name: "", type: "" });   //FormInputs
     const [Toast, setToast] = useState<ToastMsg>({ open: false, msgType: "success", content: "", time: 3000 });  //ToastMsg
 
+    const DATA = useGetAppData();
+
     const ClickCreate = () => {
-        let present: Appdata | undefined = Apps.find((data) => { return data.name === input.name ? true : false })
+        let present: Appdata | undefined = DATA.find((data) => { return data.name === input.name ? true : false })
         let failure: boolean = (input.type === "") || (input.name === "")
 
         if (failure) {
@@ -27,7 +28,9 @@ const CreateApp = (props: PopupProps) => {
         } else if (present !== undefined) {
             setToast({ open: true, msgType: "warning", content: "The given App already exists", time: 10000 })
         } else {
-            Apps.push(input);
+            DATA.push(input);
+            axios.post("/api/apps",{name:input.name, type:input.type})
+                .then((res)=>{console.log(res.data)});
             setToast({ open: true, msgType: "success", content: "Successfully created the app", time: 5000 })
             setTimeout(() => { ClickCancel() }, 5000);
         }
@@ -69,7 +72,7 @@ const CreateApp = (props: PopupProps) => {
                 <DialogTitle sx={{ mr: "auto"}}>
                     <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap:"140px" }}>
                         <Typography variant="h4" sx={{ fontWeight: "550"}} >Create App</Typography>
-                        <Close color="disabled" sx={{":hover":{color:"gray"}, ":active":{fontSize:"20px"}}} onClick={CloseClick}/>
+                        <Close color="disabled" sx={{":hover":{color:"gray"}, ":active":{fontSize:"22px"}}} onClick={CloseClick}/>
                     </Box>
                     <Typography variant="subtitle2" sx={{ mt: "10px", mb: "0px", ml: "5px" }}>Provide some description about the app</Typography>
                 </DialogTitle>
