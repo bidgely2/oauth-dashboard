@@ -5,6 +5,7 @@ import { CachedOutlined as Regenrate} from '@mui/icons-material';
 import { useState } from "react";
 import PopupWarning from "../../templates/PopupWarning";
 import axios from "../../../__mock__/apis/OauthMocks/EventsAPIs";
+import ToastMessage from "../../templates/ToastMessage";
 
 interface EncryptDetailProps{
     EncryptDetail: any
@@ -13,13 +14,14 @@ interface EncryptDetailProps{
 const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
     
     const [Regenerate, setRegenerate] = useState({open:false,clickedYes:false});  // 0-noPopup nodelete, 1-openPopup, 2-delete nopopup
-
+    const [ToastOpen,setToast] = useState(false);
     
     const ClickRegenerate =()=>{
         setRegenerate({open:true,clickedYes:false});
     }
     if(Regenerate.clickedYes){
         // then code to regenerate
+        setToast(true);
         axios.post("/api/v2.0/encryption/key",{ClientId:1234})
              .then((res)=>{console.log(res.data)})
         setRegenerate({open:false,clickedYes:false});
@@ -45,6 +47,14 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
                 <InputBox title="iV Vector" wide="400px" readOnly={true} placeholder={EncryptDetail.iVVector}/>
             </Box>
             <PopupWarning open={Regenerate} setOpen={setRegenerate} message="Do you want to regenerate the keys"/>
+            <ToastMessage 
+                open={ToastOpen} 
+                time={5000} 
+                ToastClose={()=>{setToast(false)}} 
+                msgType={"success"} 
+                content={"Successfully regenerated the keys"}
+                vertical='bottom'
+                horizontal='right'/>
         </EditBox>
     )
 }

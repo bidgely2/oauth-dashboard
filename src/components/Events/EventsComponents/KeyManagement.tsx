@@ -5,6 +5,7 @@ import {CachedOutlined as Regenrate} from "@mui/icons-material"
 import axios from "../../../__mock__/apis/OauthMocks/EventsAPIs";
 import { useState } from "react";
 import PopupWarning from "../../templates/PopupWarning";
+import ToastMessage from "../../templates/ToastMessage";
 
 interface KeyManagementProps{
     KeyManagement:any
@@ -13,13 +14,14 @@ interface KeyManagementProps{
 const KeyManagement =({KeyManagement}:KeyManagementProps) =>{
 
     const [Regenerate, setRegenerate] = useState({open:false,clickedYes:false}); 
-
+    const [ToastOpen,setToast] = useState(false);
     
     const ClickRegenerate =()=>{
         setRegenerate({open:true,clickedYes:false});
     }
     if(Regenerate.clickedYes){
         // then code to regenerate
+        setToast(true);
         axios.post("/api/v2.0/key/token",{ClientId:1234})
             .then((res)=>{console.log(res.data)})
         setRegenerate({open:false,clickedYes:false});
@@ -72,6 +74,14 @@ const KeyManagement =({KeyManagement}:KeyManagementProps) =>{
                 </Box>
             </Box>
             <PopupWarning open={Regenerate} setOpen={setRegenerate} message="Do you want to regenerate the tokens"/>
+            <ToastMessage 
+                open={ToastOpen} 
+                time={5000} 
+                ToastClose={()=>{setToast(false)}} 
+                msgType={"success"} 
+                content={"Successfully regenerated the tokens"}
+                vertical='bottom'
+                horizontal='right'/>
         </EditBox>
     )
 }
