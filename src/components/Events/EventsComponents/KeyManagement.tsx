@@ -2,16 +2,18 @@ import { InputBox } from "../../templates/InputBox";
 import { Box, TextField, Typography } from "@mui/material";
 import { EditBox } from "../../templates/EditBox";
 import {CachedOutlined as Regenrate} from "@mui/icons-material"
-import axios from "../../../__mock__/apis/OauthMocks/EventsAPIs";
 import { useState } from "react";
 import PopupWarning from "../../templates/PopupWarning";
 import ToastMessage from "../../templates/ToastMessage";
+import { useGlobalContext } from "../../../context/GlobalContext";
 
 interface KeyManagementProps{
     KeyManagement:any
 }
 
 const KeyManagement =({KeyManagement}:KeyManagementProps) =>{
+
+    const {rc} = useGlobalContext();
 
     const [Regenerate, setRegenerate] = useState({open:false,clickedYes:false}); 
     const [ToastOpen,setToast] = useState(false);
@@ -22,7 +24,7 @@ const KeyManagement =({KeyManagement}:KeyManagementProps) =>{
     if(Regenerate.clickedYes){
         // then code to regenerate
         setToast(true);
-        axios.post("/api/v2.0/key/token",{ClientId:1234})
+        rc.apiClient.post("/api/v2.0/key/token/post",{requestId:123})
             .then((res)=>{console.log(res.data)})
         setRegenerate({open:false,clickedYes:false});
     }

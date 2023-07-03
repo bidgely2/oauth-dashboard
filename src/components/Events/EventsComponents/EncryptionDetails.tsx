@@ -4,16 +4,18 @@ import { EditBox } from "../../templates/EditBox";
 import { CachedOutlined as Regenrate} from '@mui/icons-material';
 import { useState } from "react";
 import PopupWarning from "../../templates/PopupWarning";
-import axios from "../../../__mock__/apis/OauthMocks/EventsAPIs";
 import ToastMessage from "../../templates/ToastMessage";
+import { useGlobalContext } from "../../../context/GlobalContext";
 
 interface EncryptDetailProps{
     EncryptDetail: any
 }
 
 const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
+
+    const {rc} = useGlobalContext();
     
-    const [Regenerate, setRegenerate] = useState({open:false,clickedYes:false});  // 0-noPopup nodelete, 1-openPopup, 2-delete nopopup
+    const [Regenerate, setRegenerate] = useState({open:false,clickedYes:false}); 
     const [ToastOpen,setToast] = useState(false);
     
     const ClickRegenerate =()=>{
@@ -22,8 +24,8 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
     if(Regenerate.clickedYes){
         // then code to regenerate
         setToast(true);
-        axios.post("/api/v2.0/encryption/key",{ClientId:1234})
-             .then((res)=>{console.log(res.data)})
+        rc.apiClient.post("/api/v2.0/encryption/key/post",{requestId:123})
+            .then(res=>console.log(res.data))
         setRegenerate({open:false,clickedYes:false});
     }
     

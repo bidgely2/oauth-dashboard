@@ -1,20 +1,22 @@
 import { Typography, Button } from "@mui/material";
 import { EditBox } from "../../templates/EditBox";
-import { EventSections } from "../../../__mock__/apis/OauthMocks/EventsInfo";
-import axios from "../../../__mock__/apis/OauthMocks/EventsAPIs";
+import { EventsInterface } from "../../../__mock__/apis/OauthMocks/EventsInfo";
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../../../context/GlobalContext";
 
 interface DeleteCredentialProps{
-    props:EventSections
+    props:EventsInterface
 }
 
 
 const DeleteCredentials =({props}:DeleteCredentialProps) =>{
 
+    const {rc} = useGlobalContext();
+
     const navigate = useNavigate();
 
     const ClickDelete = ()=>{
-        axios.delete("/api/v2.0/oauth-app",{params:{ClientId:1234}})
+        rc.apiClient.delete("/api/v2.0/oauth-app/delete",{params:{requestId:123}})
              .then((res)=>{console.log(res.data)});
         navigate("/dashboard");
     }

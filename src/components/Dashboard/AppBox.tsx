@@ -1,11 +1,12 @@
 import { Box } from "@mui/material";
 import AppCard from "./AppCard";
-import { useGetAppData } from "../../__mock__/apis/OauthMocks/AppInfo";
+import { useGetAppData,AppsInterface } from "../../__mock__/apis/OauthMocks/AppInfo";
 
 function AppBox(){
 
-    const DATA = useGetAppData();
-    const Apps = DATA.map((data)=><AppCard data={data}/>)
+    const DATA: AppsInterface[] = useGetAppData();
+    // console.log(DATA);
+    const Apps = DATA && DATA.map((data)=><AppCard data={data}/>)
 
     return (
         <Box sx={{

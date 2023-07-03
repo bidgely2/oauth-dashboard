@@ -5,6 +5,7 @@ import { useState } from "react";
 import ToastMessage from "../../templates/ToastMessage";
 import PopupWarning from "../../templates/PopupWarning";
 import axios from "../../../__mock__/apis/OauthMocks/EventsAPIs";
+import { useGlobalContext } from "../../../context/GlobalContext";
 
 interface AppDomainProps{
     AppDomain: any
@@ -18,6 +19,8 @@ interface ToastMsg{
 }
 
 const AppDomains = ({AppDomain}:AppDomainProps) => {
+
+    const {rc} = useGlobalContext();
 
     const [redirectURI,setURI] = useState("");
     const [Toast,setToast] = useState<ToastMsg>({open:false,msgType:"success",content:"",time:0});
@@ -37,7 +40,7 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
         setToast({open:true,msgType:"success",content:"Domain deleted successfully",time:3000})
         setDel({open:false,clickedYes:false});
         // console.log(AppDomain.AppDomain)
-        axios.delete("/api/v2.0/whitelist-origin",{params:{ClientId:1234}})
+        rc.apiClient.delete("/api/v2.0/whitelist-origin/delete",{params:{requestId:123}})
             .then((res)=>{console.log(res.data)})
         AppDomain.AppDomain.pop();
     }
@@ -67,7 +70,7 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
         // console.log(AppDomain.AppDomain);
         if(isValidUrl(redirectURI) && redirectURI.length!==0){
             AppDomain.AppDomain.push(redirectURI);
-            axios.post("/api/v2.0/whitelist-origin",{ClientId:1234})
+            rc.apiClient.post("/api/v2.0/whitelist-origin/post",{requestId:123})
                 .then((res)=>{console.log(res.data)});
         }
         else{

@@ -22,9 +22,6 @@ const rs = new RunState()
 const rc = new RunContextApp(ic, rs)
 rc.init()
 
-if (!('indexedDB' in window)) {
-  console.log("This browser doesn't support IndexedDB");
-}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

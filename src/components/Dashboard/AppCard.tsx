@@ -1,5 +1,5 @@
 import { Card, Typography, CardContent } from "@mui/material";
-import { Appdata } from "../../__mock__/apis/OauthMocks/AppInfo";
+import { AppsInterface } from "../../__mock__/apis/OauthMocks/AppInfo";
 // import {EditOutlined as Edit} from '@mui/icons-material';
 // import {EditNote as Edit} from "@mui/icons-material";
 // import {MoreVert as Edit} from '@mui/icons-material';
@@ -10,7 +10,7 @@ import {LaunchTwoTone as Edit} from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
 
 interface AppCardProps {
-    data: Appdata;
+    data: AppsInterface;
 }
 
 const AppCard = (props: AppCardProps) => {
