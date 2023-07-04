@@ -12,7 +12,6 @@ export const EVENT_MANAGEMENT_MOCK_APIS = {
         return mockAdapter.onGet("/api/apps/get",config).reply((config)=>{
           const data = config.params;
           if(data.requestId===123){
-            // console.log(config.params);
               return [200,APPDATA]
           }
           else{
@@ -26,7 +25,6 @@ export const EVENT_MANAGEMENT_MOCK_APIS = {
         return mockAdapter.onGet("/api/clients/get", config).reply((config)=>{
           const data = config.params;
           if(data.requestId===123){
-            // console.log(config.params);
               return [200,CLIENTDATA]
           }
           else{
@@ -39,7 +37,6 @@ export const EVENT_MANAGEMENT_MOCK_APIS = {
     "/api/apps/post": ( rc: RunContextApp, mockAdapter: AxiosMockAdapter, config?: AxiosRequestConfig) => {
         return mockAdapter.onPost("/api/apps/post", config).reply((config)=>{
           const data = JSON.parse(config.data);
-          // console.log(data.requestId);
           if(data.requestId===123){
             return [200,APPDATA];
           }
@@ -67,7 +64,6 @@ export const EVENT_MANAGEMENT_MOCK_APIS = {
         return mockAdapter.onPost("/api/v2.0/encryption/key/post",config).reply((config)=>{
           const data = JSON.parse(config.data);
           if(data.requestId===123){
-            // console.log(CLIENTDATA.payload[0].EncryptDetail);
               return [200,CLIENTDATA.payload[0].EncryptDetail]
           }
           else{

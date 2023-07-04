@@ -4,7 +4,6 @@ import { EditBox } from "../../templates/EditBox";
 import { useState } from "react";
 import ToastMessage from "../../templates/ToastMessage";
 import PopupWarning from "../../templates/PopupWarning";
-import axios from "../../../__mock__/apis/OauthMocks/EventsAPIs";
 import { useGlobalContext } from "../../../context/GlobalContext";
 
 interface AppDomainProps{
@@ -39,12 +38,10 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
         setURI("");
         setToast({open:true,msgType:"success",content:"Domain deleted successfully",time:3000})
         setDel({open:false,clickedYes:false});
-        // console.log(AppDomain.AppDomain)
         rc.apiClient.delete("/api/v2.0/whitelist-origin/delete",{params:{requestId:123}})
             .then((res)=>{console.log(res.data)})
         AppDomain.AppDomain.pop();
     }
-    // console.log(AppDomain.AppDomain)
 
     const SetInput =(e:any)=>{
         setURI(e.target.value);
