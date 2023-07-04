@@ -23,7 +23,7 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
 
     const [redirectURI,setURI] = useState("");
     const [Toast,setToast] = useState<ToastMsg>({open:false,msgType:"success",content:"",time:0});
-    const [del, setDel] = useState({open:false,clickedYes:false});  // 0-noPopup nodelete, 1-openPopup, 2-delete nopopup
+    const [del, setDel] = useState({open:false,clickedYes:false});  
 
     const CopyClick=(e:any)=>{
         navigator.clipboard.writeText(redirectURI);
