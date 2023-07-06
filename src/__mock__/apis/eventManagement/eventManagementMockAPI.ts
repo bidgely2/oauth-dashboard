@@ -2,7 +2,7 @@ import { RunContextApp } from "../../../framework/RCApp";
 import AxiosMockAdapter from "axios-mock-adapter";
 import { APPDATA } from "../OauthMocks/AppInfo";
 import { AxiosRequestConfig } from "axios";
-import { CLIENTDATA } from "../OauthMocks/EventsInfo";
+import { CLIENTDATA } from "../OauthMocks/ClientsInfo";
 
 export const EVENT_MANAGEMENT_MOCK_APIS = {
 

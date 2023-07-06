@@ -36,9 +36,9 @@ export const CLIENTDATA =
         payload: [
             {
                 ClientDetail: {
-                    ClientId:"1234",
+                    ClientId:"PacifiCorp",
                     ClientSecret:"hcb7e3xv",
-                    APIEndpoint:"/oauth"
+                    APIEndpoint:"https://btocdevapi.bidgely.com/"
                 },
                 KeyManagement: {
                     AccessToken:"d32fg4h3j",
@@ -54,8 +54,8 @@ export const CLIENTDATA =
                 },
                 GrantManagement: {
                     PasswordGrant:{
-                        username:"abcde",
-                        password:"12345",
+                        username:"Reliance corp.",
+                        password:"123456789",
                     },
                     AuthGrant:{
                         AppDomain:["https://xyz.com"]
@@ -64,9 +64,9 @@ export const CLIENTDATA =
             },
             {
                 ClientDetail: {
-                    ClientId:"5678",
+                    ClientId:"PacfiCorp",
                     ClientSecret:"askdbhf",
-                    APIEndpoint:"/oauth"
+                    APIEndpoint:"https://btocdevapi.bidgely.com/"
                 },
                 KeyManagement: {
                     AccessToken:"aiwbf",
@@ -82,7 +82,7 @@ export const CLIENTDATA =
                 },
                 GrantManagement: {
                     PasswordGrant:{
-                        username:"abcde",
+                        username:"PacifiCorp.",
                         password:"12345",
                     },
                     AuthGrant:{
@@ -93,7 +93,7 @@ export const CLIENTDATA =
         ]
     }
 
-    export function useGetClientData(){
+    export function useGetClientData(id :number){
 
         const {rc} = useGlobalContext();
         
@@ -106,7 +106,16 @@ export const CLIENTDATA =
             };
             getDATA();
           },[]);
-          // console.log(DATA);
-          return DATA;
+
+        //   console.log(DATA);
+
+        //   const client:EventsInterface = DATA[id];
+        //   console.log(DATA);
+        //   console.log(client);
+        // console.log(DATA);
+        // const client = DATA.at(id) as EventsInterface;
+        // return client;
+        // return DATA.filter((client : EventsInterface,index:number)=>{return client?(index===id):null})
+        return CLIENTDATA.payload;
       }
 

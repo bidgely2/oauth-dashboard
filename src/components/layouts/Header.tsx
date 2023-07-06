@@ -3,7 +3,7 @@ import logo from "../../assets/img/bidgely.png";
 import styles from "./login.module.css"
 import Menu from "../Dashboard/Menu"
 import { useState } from "react";
-import utilityLogo from "../../assets/img/Reliance logo.png"
+import utilityLogo from "../../assets/img/PacifiCorp.jpg"
 
 const Header = ()=>{
 
@@ -19,7 +19,7 @@ const Header = ()=>{
             alignItems:"center"
         }}>
             <img className={styles.headerLogo} src={logo} alt="Bidgely Inc."/>
-            <Typography variant="h6" sx={{fontSize:"25px",fontFamily: "'Mukta', sans-serif"}}>Bidgely Oauth Console</Typography>
+            <Typography sx={{fontFamily: "'Noto Sans SC', sans-serif", fontSize: "21px"}}>Bidgely Oauth Console</Typography>
             {LoggedIn
                 ?<><img className={styles.utilityLogo} src={utilityLogo}/>
                 <Menu LoggedIn={LoggedIn} setLoggedIn = {setLoggedIn} />

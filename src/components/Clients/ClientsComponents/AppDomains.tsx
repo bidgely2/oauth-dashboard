@@ -5,6 +5,7 @@ import { useState } from "react";
 import ToastMessage from "../../templates/ToastMessage";
 import PopupWarning from "../../templates/PopupWarning";
 import { useGlobalContext } from "../../../context/GlobalContext";
+import styles from "./Client.module.css"
 
 interface AppDomainProps{
     AppDomain: any
@@ -78,14 +79,14 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
 
     return (
         <EditBox>
-            <Typography variant="h6" sx={{ ml: "30px", mb: "10px", fontFamily:"'Jost', sans-serif", fontSize:"25px", color:"#4F4557" }}> Your App Domains</Typography>
+            <Typography className={styles.title}> Your App Domains</Typography>
             <Box sx={{ disply: "grid", gridTemplateColumns: "auto", ml: "100px" }}>
-                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "10px" }}>
+                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "20px" }}>
                     <TextField 
                         // label="Your App Doamins-1"  
                         value={AppDomain.AppDomain}
                         InputProps={{readOnly:true}}
-                        sx={{ width: "300px" }} />
+                        sx={{ width: "400px", typography:"subtitle4" }} />
                     <Copy 
                         fontSize="small" 
                         color="primary" 
@@ -97,17 +98,18 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
                         onClick={DelClick}
                         sx={{opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"18px"}}}/>
                 </Box>
-                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                <Box sx={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
                     <TextField 
-                        label="Add a redirect uri" 
+                        label="Add an app domain" 
                         onChange={SetInput} 
                         name="redirectURI" 
                         value={redirectURI} 
-                        sx={{ width: "300px" }} />
+                        autoComplete="off"
+                        sx={{ width: "400px" }} />
                     <Button
                         variant="contained" 
                         onClick={SaveURI}
-                        sx={{ position: "absolute", left: "320px" }}>Save uri</Button>
+                        sx={{ position: "absolute", left: "450px", fontSize:"17px",height:"40px", width:"80px", textTransform:"none" }}>Save</Button>
                 </Box>
             </Box>
             <ToastMessage 

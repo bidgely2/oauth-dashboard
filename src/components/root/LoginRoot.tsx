@@ -1,11 +1,13 @@
+import { useGlobalContext } from "../../context/GlobalContext";
 import { Navigate } from "react-router-dom";
 
 const Root = ()=>{
-    const isLoggedIn = false;
+
+    const {loggedIn} = useGlobalContext();
 
     return(
         <>
-            {isLoggedIn
+            {loggedIn
             ?<Navigate to="/dashboard" replace={true} />
             :<Navigate to="/login" replace={true} />}
             

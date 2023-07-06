@@ -6,6 +6,7 @@ import { useState } from "react";
 import PopupWarning from "../../templates/PopupWarning";
 import ToastMessage from "../../templates/ToastMessage";
 import { useGlobalContext } from "../../../context/GlobalContext";
+import styles from "./Client.module.css"
 
 interface KeyManagementProps{
     KeyManagement:any
@@ -31,44 +32,52 @@ const KeyManagement =({KeyManagement}:KeyManagementProps) =>{
 
     return(
         <EditBox>
-            <Typography variant="h6" sx={{ml:"30px",mb:"10px", fontFamily:"'Jost', sans-serif", fontSize:"25px", color:"#4F4557" }}>Key Management</Typography>
-            <Typography variant="subtitle2" sx={{ml:"40px",mb:"15px"}}>Use this Section to generate access token, refresh token and expiry time</Typography>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+            <Typography className={styles.title}>Token Management</Typography>
+            <Typography sx={{ml:"30px",mb:"20px", typography:"body2"}}>Use this Section to generate access token, refresh token and expiry time</Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "15px"}}>
                 <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "10px", margin: "0 0 10px 100px" }}>
                     <InputBox 
                         title="Access token" 
-                        wide="400px" 
-                        readOnly={true} 
+                        wide="500px" 
                         placeholder={KeyManagement.AccessToken}/>
                     <InputBox 
                         title="Refresh token" 
-                        wide="400px" 
-                        readOnly={true} 
+                        wide="500px" 
                         placeholder={KeyManagement.RefreshToken}/>
                 </Box>
                 <Box 
                     sx={{
                         display:"grid",
-                        gridTemplateColumns:"repeat(4,1fr)",
+                        gridTemplateColumns:"repeat(7,1fr)",
                         alignItems:"center",
-                        gap:"10px",
-                        width:"400px",
+                        gap:"15px",
+                        width:"500px",
                         ml:"100px"
                     }}>
-                    <Typography variant="body1" flexWrap="wrap" sx={{gridColumn:"1/2", fontSize:"20px"}}>Expiry Time</Typography>
-                    <TextField 
-                        variant="outlined" 
-                        value={KeyManagement.ExpiryTime} 
-                        sx={{gridColumn:"2/4"}}
-                        InputProps={{
-                            readOnly: true,
+                    <Typography variant="body1" flexWrap="wrap" sx={{gridColumn:"1/3", fontSize:"18px", typography:"body1",textAlign:"end"}}>Expiry Time</Typography>
+                    <Box
+                        sx={{
+                            backgroundColor:"#E3F4F4",
+                            color:"#567189",
+                            borderRadius:"5px",
+                            gridColumn:"3/7",
+                            height:"50px",
+                            display:"flex",
+                            flexDirection:"row",
+                            alignItems:"center",
+                            userSelect:"none",
+                            pl:"20px",
+                            fontWeight:"550",
+                            border:"1px #D8D8D8 solid",
+                            // justifyContent:"center",
                         }}>
-                    </TextField>
+                        <span>{KeyManagement.ExpiryTime}</span>
+                    </Box>
                     <Regenrate 
                         fontSize="small" 
                         color="primary" 
                         sx={{
-                            gridColumn:"4/5", 
+                            gridColumn:"7/8", 
                             opacity:"60%",
                             ":hover":{opacity:"100%"}, 
                             ":active":{fontSize:"18px"}}}

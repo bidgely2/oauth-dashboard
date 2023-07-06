@@ -3,8 +3,20 @@ import lock from "../../../assets/img/lock.png";
 import Header from "../../layouts/Header";
 import Footer from "../../layouts/Footer";
 import styles from './Loginbody.module.css'
+import { useGlobalContext } from "../../../context/GlobalContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+    // const {loggedIn,setLoggedIn} = useGlobalContext();
+
+    const navigate = useNavigate();
+
+    const LoginClick = ()=>{
+        // setLoggedIn(!loggedIn)
+        navigate("/dashboard");
+    }
+
     return (
         <>
             <Header />
@@ -14,7 +26,7 @@ const Login = () => {
                     // mt:"70px",
                     // minHeight:"100vh",
                     width: "100vw",
-                    bgcolor: "#f7f7f5",
+                    bgcolor: "#edede8",
                     top: "70px",
                     bottom: "80px",
                     display: "flex",
@@ -45,6 +57,7 @@ const Login = () => {
                         height: "40px",
                         width: "120px",
                     }}
+                    onClick={LoginClick}
                 >
                     Log In
                 </Button>

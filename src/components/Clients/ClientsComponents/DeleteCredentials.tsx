@@ -1,10 +1,11 @@
 import { Typography, Button } from "@mui/material";
 import { EditBox } from "../../templates/EditBox";
-import { EventsInterface } from "../../../__mock__/apis/OauthMocks/EventsInfo";
+import { EventsInterface } from "../../../__mock__/apis/OauthMocks/ClientsInfo";
 import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../../context/GlobalContext";
 import PopupWarning from "../../templates/PopupWarning";
 import { useState } from "react";
+import styles from "./Client.module.css"
 
 interface DeleteCredentialProps{
     props:EventsInterface
@@ -30,9 +31,9 @@ const DeleteCredentials =({props}:DeleteCredentialProps) =>{
 
     return(
         <EditBox>
-            <Typography variant="h6" sx={{ml:"30px",mb:"10px", fontFamily:"'Jost', sans-serif", fontSize:"25px", color:"#4F4557" }}>Delete Credentials</Typography>
-            <Typography variant="subtitle2" sx={{ml:"40px",mb:"15px"}}>All the data related to app will be deleted permanently</Typography>
-            <Button variant="contained" color="warning" sx={{ml:"40px",mb:"10px"}} onClick={ClickDelete}>Delete Application</Button>
+            <Typography className={styles.title}>Delete Credentials</Typography>
+            <Typography sx={{ml:"30px",mb:"15px", typography:"body2"}}>All the data related to app will be deleted permanently</Typography>
+            <Button variant="contained" color="warning" sx={{ml:"30px",mb:"10px"}} onClick={ClickDelete}>Delete Application</Button>
             <PopupWarning open={del} setOpen={setDel} message="The App will be deleted permanently" />
         </EditBox>
     )

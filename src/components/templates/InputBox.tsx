@@ -10,7 +10,6 @@ export interface InputProps {
     title: string,
     hide?: boolean | undefined,
     placeholder: string,
-    readOnly?: boolean | undefined
     wide? :string | number,
     margin? : string | undefined,
     copy?: boolean | undefined
@@ -36,30 +35,43 @@ export const InputBox = (props:InputProps) =>{
         <Box 
             sx={{
                 display:"grid",
-                gridTemplateColumns:"repeat(4,1fr)",
+                gridTemplateColumns:"repeat(7,1fr)",
                 alignItems:"center",
-                gap:"10px",
+                gap:"15px",
                 width:props.wide,
                 margin: props.margin
             }}>
-            <Typography variant="body1" flexWrap="wrap" sx={{gridColumn:"1/2", fontSize:"20px"}}>{props.title}</Typography>
-            <TextField 
-                type={props.hide!==true?"text":"password"}
-                variant="outlined" 
-                value={props.placeholder} 
-                sx={{gridColumn:"2/4"}}
-                InputProps={{
-                    readOnly: props.readOnly,
+            <Typography variant="h6" flexWrap="wrap" sx={{gridColumn:"1/3",fontSize:"18px",typography:"body1", textAlign:"end"}}>{props.title}</Typography>
+            <Box
+                sx={{
+                    backgroundColor:"#E3F4F4",
+                    color:"#567189",
+                    borderRadius:"5px",
+                    gridColumn:"3/7",
+                    height:"50px",
+                    display:"flex",
+                    flexDirection:"row",
+                    alignItems:"center",
+                    userSelect:"none",
+                    pl:"20px",
+                    justifyContent:"stretch",
+                    fontWeight:"550",
+                    border:"1px #D8D8D8 solid",
+                    // justifyContent:"center",
                 }}>
-            </TextField>
+                {   (props.hide!==true)
+                    ?<span>{props.placeholder}</span>
+                    :<span>******</span>
+                }
+            </Box>
             {
                 props.copy===undefined
                 ?<Copy 
                     fontSize="small" 
                     color="primary" 
-                    sx={{gridColumn:"4/5", opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"18px"}}} 
+                    sx={{gridColumn:"7/8", opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"18px"}}} 
                     onClick={CopyClick}/>
-                :<Regenrate fontSize="small" color="primary" sx={{gridColumn:"4/5", opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"18px"}}}/>
+                :<Regenrate fontSize="small" color="primary" sx={{gridColumn:"7/8", opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"18px"}}}/>
             }
             <ToastMessage 
                 open={ToastOpen} 

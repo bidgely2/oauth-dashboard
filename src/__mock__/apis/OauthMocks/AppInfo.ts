@@ -11,12 +11,12 @@ export const APPDATA = {
   payload:
     [
       {
-        name: "Application1231",
-        type: "type1"
+        name: "PacifiCorp",
+        type: "widgets"
       },
       {
-        name: "App2",
-        type: "type2"
+        name: "PacifiCorp2",
+        type: "others"
       }
     ]
 }
