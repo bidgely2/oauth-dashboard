@@ -5,7 +5,7 @@ import { useState } from "react";
 import ToastMessage from "../../templates/ToastMessage";
 import PopupWarning from "../../templates/PopupWarning";
 import { useGlobalContext } from "../../../context/GlobalContext";
-import styles from "./client.module.css"
+import {Title} from "./title/title"
 
 interface AppDomainProps{
     AppDomain: any
@@ -79,7 +79,7 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
 
     return (
         <EditBox>
-            <Typography className={styles.title}> Your App Domains</Typography>
+            <Title > Your App Domains</Title>
             <Box sx={{ disply: "grid", gridTemplateColumns: "auto", ml: "100px" }}>
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "20px" }}>
                     <TextField 

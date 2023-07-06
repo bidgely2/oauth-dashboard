@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../../context/GlobalContext";
 import PopupWarning from "../../templates/PopupWarning";
 import { useState } from "react";
-import styles from "./client.module.css"
+import {Title} from "./title/title"
 
 interface DeleteCredentialProps{
     props:EventsInterface
@@ -31,7 +31,7 @@ const DeleteCredentials =({props}:DeleteCredentialProps) =>{
 
     return(
         <EditBox>
-            <Typography className={styles.title}>Delete Credentials</Typography>
+            <Title >Delete Credentials</Title>
             <Typography sx={{ml:"30px",mb:"15px", typography:"body2"}}>All the data related to app will be deleted permanently</Typography>
             <Button variant="contained" color="warning" sx={{ml:"30px",mb:"10px"}} onClick={ClickDelete}>Delete Application</Button>
             <PopupWarning open={del} setOpen={setDel} message="The App will be deleted permanently" />

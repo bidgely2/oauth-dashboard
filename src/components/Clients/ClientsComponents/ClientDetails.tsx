@@ -3,7 +3,7 @@ import { InputBox } from "../../templates/InputBox";
 import { EditBox } from "../../templates/EditBox";
 import {Visibility as Eye, VisibilityOff as ClosedEye} from '@mui/icons-material';
 import { useState } from "react";
-import styles from "./client.module.css"
+import {Title} from "./title/title"
 
 interface ClientDetailProps{
     ClientDetail:any
@@ -19,7 +19,7 @@ const ClientDetails = ({ClientDetail}:ClientDetailProps) => {
 
     return (
         <EditBox>
-            <Typography className={styles.title}>Client Detail</Typography>
+            <Title>Client Detail</Title>
             <Box sx={{ display: "grid", gridTemplateColumns:"auto", gap: "10px" }}>
                 <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "10px", margin: "0 0 10px 100px" }}>
                     <InputBox title="ClientId" wide="500px" placeholder={ClientDetail.ClientId}/>

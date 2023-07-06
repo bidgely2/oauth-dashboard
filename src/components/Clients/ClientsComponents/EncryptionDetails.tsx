@@ -6,7 +6,7 @@ import { useState } from "react";
 import PopupWarning from "../../templates/PopupWarning";
 import ToastMessage from "../../templates/ToastMessage";
 import { useGlobalContext } from "../../../context/GlobalContext";
-import styles from "./client.module.css"
+import {Title} from "./title/title"
 
 interface EncryptDetailProps{
     EncryptDetail: any
@@ -33,7 +33,7 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
     return (
         <EditBox>
             <Box sx={{display: "flex", flexDirection: "row", alignItems:"center", mb:"20px"}} >
-                <Typography className={styles.title}>Encryption Details</Typography>
+                <Title >Encryption Details</Title>
                 <Regenrate 
                     fontSize="small" 
                     color="primary" 

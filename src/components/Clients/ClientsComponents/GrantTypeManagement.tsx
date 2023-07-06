@@ -3,7 +3,7 @@ import { EditBox } from "../../templates/EditBox";
 import PasswordGrant from "./GrantTypeTabs/PasswordGrant";
 import AuthCodeGrant from "./GrantTypeTabs/AuthCodeGrant";
 import { useState } from "react";
-import styles from "./client.module.css"
+import {Title} from "./title/title"
 
 interface GrantTypeManagementProps{
     GrantManagement:any
@@ -30,7 +30,7 @@ const GrantTypeManagement =({GrantManagement}:GrantTypeManagementProps) =>{
 
     return(
         <EditBox >
-            <Typography className={styles.title}>Oauth Grant Type Management</Typography>
+            <Title >Oauth Grant Type Management</Title>
             <Box sx={{ml:"100px"}}>
                 <Button name="PswdGrant" onClick={ClickTab} sx={{width:"110px", textTransform: "none",border:"1px #97C4B8",borderStyle:"solid", bgcolor:"#FFFFFF", ":hover":{bgcolor:"#EFF5F5"}, ":focus":{bgcolor:"#FFFFFF"}}}>Password Grant</Button>
                 <Button name="AuthGrant" onClick={ClickTab} sx={{width:"110px", textTransform: "none",border:"1px #97C4B8",borderStyle:"solid", bgcolor:"#FAF7F0", ":hover":{bgcolor:"#EFF5F5"}, ":focus":{bgcolor:"#FFFFFF"}}}>AuthCode Grant</Button>

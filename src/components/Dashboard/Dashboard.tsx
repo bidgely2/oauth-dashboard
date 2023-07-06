@@ -24,7 +24,7 @@ const Dashboard = () => {
                     alignItems: "center",
                 }}
             >
-                <Typography sx={{ ml: "40px", mt:"20px",fontFamily:"'Noto Sans SC', sans-serif", typography:"subtitle1", letterSpacing:"1px"}}>
+                <Typography sx={{ ml: "40px", mt:"20px",fontFamily:"'Noto Sans SC', sans-serif", typography:"title5", letterSpacing:"1px"}}>
                     Hello Utility
                 </Typography>
                 <Button

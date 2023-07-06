@@ -6,7 +6,7 @@ import { useState } from "react";
 import PopupWarning from "../../templates/PopupWarning";
 import ToastMessage from "../../templates/ToastMessage";
 import { useGlobalContext } from "../../../context/GlobalContext";
-import styles from "./client.module.css"
+import {Title} from "./title/title"
 
 interface KeyManagementProps{
     KeyManagement:any
@@ -32,7 +32,7 @@ const KeyManagement =({KeyManagement}:KeyManagementProps) =>{
 
     return(
         <EditBox>
-            <Typography className={styles.title}>Token Management</Typography>
+            <Title>Token Management</Title>
             <Typography sx={{ml:"30px",mb:"20px", typography:"body2"}}>Use this Section to generate access token, refresh token and expiry time</Typography>
             <Box sx={{ display: "flex", flexDirection: "column", gap: "15px"}}>
                 <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "10px", margin: "0 0 10px 100px" }}>
