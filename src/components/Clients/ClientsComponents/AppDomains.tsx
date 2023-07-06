@@ -5,7 +5,7 @@ import { useState } from "react";
 import ToastMessage from "../../templates/ToastMessage";
 import PopupWarning from "../../templates/PopupWarning";
 import { useGlobalContext } from "../../../context/GlobalContext";
-import styles from "./Client.module.css"
+import styles from "./client.module.css"
 
 interface AppDomainProps{
     AppDomain: any

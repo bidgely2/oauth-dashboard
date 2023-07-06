@@ -6,7 +6,7 @@ import { useState } from "react";
 import PopupWarning from "../../templates/PopupWarning";
 import ToastMessage from "../../templates/ToastMessage";
 import { useGlobalContext } from "../../../context/GlobalContext";
-import styles from "./Client.module.css"
+import styles from "./client.module.css"
 
 interface KeyManagementProps{
     KeyManagement:any

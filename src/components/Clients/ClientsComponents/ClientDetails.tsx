@@ -3,7 +3,7 @@ import { InputBox } from "../../templates/InputBox";
 import { EditBox } from "../../templates/EditBox";
 import {Visibility as Eye, VisibilityOff as ClosedEye} from '@mui/icons-material';
 import { useState } from "react";
-import styles from "./Client.module.css"
+import styles from "./client.module.css"
 
 interface ClientDetailProps{
     ClientDetail:any

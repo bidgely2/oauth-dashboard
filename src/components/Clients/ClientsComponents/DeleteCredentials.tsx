@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../../../context/GlobalContext";
 import PopupWarning from "../../templates/PopupWarning";
 import { useState } from "react";
-import styles from "./Client.module.css"
+import styles from "./client.module.css"
 
 interface DeleteCredentialProps{
     props:EventsInterface

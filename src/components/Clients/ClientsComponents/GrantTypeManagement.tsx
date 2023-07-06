@@ -3,7 +3,7 @@ import { EditBox } from "../../templates/EditBox";
 import PasswordGrant from "./GrantTypeTabs/PasswordGrant";
 import AuthCodeGrant from "./GrantTypeTabs/AuthCodeGrant";
 import { useState } from "react";
-import styles from "./Client.module.css"
+import styles from "./client.module.css"
 
 interface GrantTypeManagementProps{
     GrantManagement:any
