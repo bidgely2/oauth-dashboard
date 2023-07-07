@@ -78,7 +78,7 @@ export class RunContextApp {
     this.utils = new BglUtility(this)
     this.dateUtils = new DateUtils(this)
     this.uiRouter = new UiRouter(this)
-    this.apiClient = new ApiClient(this, `https://${serverUrl}`, false)
+    this.apiClient = new ApiClient(this, `https://${serverUrl}`, true)
     this.events = new EventSystem(this)
     this.theme = new ThemeManager(this)
   }

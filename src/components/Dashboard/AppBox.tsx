@@ -1,26 +1,29 @@
 import { Box } from "@mui/material";
-import {Appdata} from "../../__mock__/apis/AppInfo"
 import AppCard from "./AppCard";
+import { useGetAppData,AppsInterface } from "../../__mock__/apis/OauthMocks/AppInfo";
 
-interface AppBoxprops{
-    data: Appdata[]
-}
+function AppBox(){
 
-function AppBox(props:AppBoxprops){
-
-    const Apps = props.data.map((data)=><AppCard data={data}/>)
+    const DATA: AppsInterface[] = useGetAppData();
+    // console.log(DATA);
+    const Apps = DATA && DATA.map((data,index)=><AppCard data={data} id={index}/>)
 
     return (
         <Box sx={{
             bgcolor:"#edede8",
             position:"absolute",
-            width:"100%",
+            width:"100vw",
             top:"140px",
             bottom:"80px",
             display:"flex",
             flexDirection:"row",
             flexWrap:"wrap",
             overflowY:"auto",
+            columnGap:"20px",
+            rowGap:"20px",
+            p:"20px 30px 0 30px",
+
+            boxSizing:"border-box"
         }}>{Apps}</Box>
     )
 }

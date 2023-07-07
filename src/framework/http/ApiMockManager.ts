@@ -15,7 +15,7 @@ export class ApiMockManager {
   }
 
   async get(url : string, config ?: AxiosRequestConfig) {
-    mockApis[url](this.rc, this.mockAdapter, config)
+    return mockApis[url](this.rc, this.mockAdapter, config)
   }
 
 }
