@@ -34,7 +34,7 @@ const DeleteCredentials =({props}:DeleteCredentialProps) =>{
             <Title >Delete Credentials</Title>
             <Typography sx={{ml:"30px",mb:"15px", typography:"body2"}}>All the data related to app will be deleted permanently</Typography>
             <Button variant="contained" color="warning" sx={{ml:"30px",mb:"10px"}} onClick={ClickDelete}>Delete Application</Button>
-            <PopupWarning open={del} setOpen={setDel} message="The App will be deleted permanently" />
+            <PopupWarning open={del} setOpen={setDel} message="The Application will be deleted permanently" />
         </EditBox>
     )
 }

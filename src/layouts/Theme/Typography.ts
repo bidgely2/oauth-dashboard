@@ -59,6 +59,10 @@ export const typographies = {
         fontSize: "17px",
         fontWeight: "500"
     },
+    body4: {
+        fontSize: "15px",
+        fontWeight: "500"
+    }
     
 
 }

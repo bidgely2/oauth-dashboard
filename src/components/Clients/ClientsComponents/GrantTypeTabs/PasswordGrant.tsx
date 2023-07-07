@@ -9,10 +9,10 @@ interface PasswordGrantProps{
 
 const PasswordGrant =({username,password}:PasswordGrantProps) =>{
 
-    const [hide,setHide] = useState(true);
+    const [hide,setHide] = useState("View");
 
     const ViewClick =()=>{
-        setHide(!hide);
+        setHide((hide==="Hide")?"View":"Hide");
     }
 
     return(
@@ -24,13 +24,13 @@ const PasswordGrant =({username,password}:PasswordGrantProps) =>{
                 border:"1px black",
                 borderRadius:"5px",
                 borderStyle:"solid"}}>
-            <Box sx={{display:"flex", flexDirection:"row",alignItems:"center",mb:"40px",ml:"20px"}}>
+            <Box sx={{display:"flex", flexDirection:"row",alignItems:"center",mb:"40px",ml:"30px"}}>
                 <Typography sx={{fontFamily:"Noto Sans SC", typography:"subtitle5"}}>Password Credential Grant Data</Typography>
-                <Button variant="contained" size="small" onClick={ViewClick} sx={{ml:"80px"}}>View/Hide</Button>
+                <Button variant="contained" size="small" onClick={ViewClick} sx={{ml:"120px"}}>{hide}</Button>
             </Box>
-            <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "10px",ml:"20px", mr: "auto" }}>
-                <InputBox hide={hide} title="username" placeholder={username} wide="400px"/>
-                <InputBox hide={hide} title="password" placeholder={password} wide="400px"/>
+            <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "10px", ml:"10px", mr: "auto" }}>
+                <InputBox hide={(hide==="View")} title="username" placeholder={username} wide="400px"/>
+                <InputBox hide={(hide==="View")} title="password" placeholder={password} wide="400px"/>
             </Box>
         </Box>
     )

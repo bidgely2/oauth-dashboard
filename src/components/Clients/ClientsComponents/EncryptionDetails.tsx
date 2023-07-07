@@ -51,7 +51,7 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
                 <InputBox title="Encryption Key" wide="500px" placeholder={EncryptDetail.EncryptionKey} />
                 <InputBox title="iV Vector" wide="500px" placeholder={EncryptDetail.iVVector}/>
             </Box>
-            <PopupWarning open={Regenerate} setOpen={setRegenerate} message="Do you want to regenerate the keys"/>
+            <PopupWarning open={Regenerate} setOpen={setRegenerate} message="Make sure to replace the previous keys"/>
             <ToastMessage 
                 open={ToastOpen} 
                 time={5000} 

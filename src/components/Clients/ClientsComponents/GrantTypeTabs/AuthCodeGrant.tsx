@@ -82,9 +82,9 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "10px" }}>
                     <TextField 
                         // label="Your App Doamins-1" 
+                        placeholder="you app domains"
                         value={AppDomain}
-                        InputProps={{readOnly:true, style:{fontSize:"18px"}}}
-                        // size="small"
+                        InputProps={{readOnly:true, style:{fontSize:"17px"}}}
                         sx={{ width: "350px" }} />
                     <Copy 
                         fontSize="small" 
@@ -99,14 +99,15 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
                     <TextField 
-                        label="Add a redirect uri" 
+                        // label="Add a redirect uri" 
+                        placeholder="Add a redirect uri"
                         onChange={SetInput} 
                         name="redirectURI" 
                         value={redirectURI}
-                        // size="small"
+                        InputProps={{style:{fontSize:"17px"}}}
+                        inputProps={{style:{width:"230px"}}}
                         autoComplete="off"
-                        sx={{ width: "350px", }}
-                        inputProps={{style:{width:"180px"}}}
+                        sx={{ width: "350px"}}
                         />
                     <Button
                         variant="contained" 
