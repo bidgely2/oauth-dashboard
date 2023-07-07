@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../../context/GlobalContext";
+import { RepeatOneSharp } from "@mui/icons-material";
 
 export interface EventsInterface{
     ClientDetail: {
@@ -54,7 +55,7 @@ export const CLIENTDATA =
                 },
                 GrantManagement: {
                     PasswordGrant:{
-                        username:"Reliance corp.",
+                        username:"PacifiCorp.",
                         password:"123456789",
                     },
                     AuthGrant:{
@@ -93,29 +94,4 @@ export const CLIENTDATA =
         ]
     }
 
-    export function useGetClientData(id :number){
-
-        const {rc} = useGlobalContext();
-        
-        const [DATA,setDATA] = useState<EventsInterface[]>([]);
-      
-        useEffect(() => {
-            const getDATA = async () => {
-              const res = await rc.apiClient.get("/api/clients/get",{params: {requestId:123}});
-              setDATA(res.data as EventsInterface[]);
-            };
-            getDATA();
-          },[]);
-
-        //   console.log(DATA);
-
-        //   const client:EventsInterface = DATA[id];
-        //   console.log(DATA);
-        //   console.log(client);
-        // console.log(DATA);
-        // const client = DATA.at(id) as EventsInterface;
-        // return client;
-        // return DATA.filter((client : EventsInterface,index:number)=>{return client?(index===id):null})
-        return CLIENTDATA.payload;
-      }
-
+    export default CLIENTDATA.payload;

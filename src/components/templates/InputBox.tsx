@@ -55,7 +55,7 @@ export const InputBox = (props:InputProps) =>{
                     userSelect:"none",
                     pl:"20px",
                     justifyContent:"stretch",
-                    fontWeight:"550",
+                    fontWeight:"400",
                     border:"1px #D8D8D8 solid",
                     // justifyContent:"center",
                 }}>

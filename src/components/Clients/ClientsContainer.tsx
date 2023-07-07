@@ -6,7 +6,7 @@ import KeyManagement from "./ClientsComponents/TokenManagement";
 import DeleteCredentials from "./ClientsComponents/DeleteCredentials";
 import AppDomains from "./ClientsComponents/AppDomains";
 import { useNavigate, useParams } from "react-router-dom";
-import { EventsInterface, useGetClientData } from "../../__mock__/apis/OauthMocks/ClientsInfo";
+import CLIENTDATA, { EventsInterface, } from "../../__mock__/apis/OauthMocks/ClientsInfo";
 
 const Clients = () => {
 
@@ -19,9 +19,7 @@ const Clients = () => {
         navigate("/dashboard")
     }
 
-    const ClientData:EventsInterface[] = useGetClientData(id);
-    // console.log(id);
-    // console.log(ClientData);
+    const ClientData: EventsInterface = CLIENTDATA[id];
 
     return (
         <Box sx={{ width: "100%",p: "70px 0px 80px 0px", mt:"20px", bgcolor: "#edede8"}}>
@@ -29,12 +27,12 @@ const Clients = () => {
                 <Typography sx={{fontFamily:"'Noto Sans SC', sans-serif", typography:"subtitle3", letterSpacing:"1px"}}> App/Credentials Information</Typography>
                 <Button variant="contained" sx={{ml:"auto",mr:"40px"}} onClick={BackClick}>Back</Button>  
             </Box>
-            <ClientDetails ClientDetail={ClientData[0].ClientDetail}/>
-            <EncryptionDetails EncryptDetail={ClientData[0].EncryptDetail}/>
-            <AppDomains AppDomain={ClientData[0].AppDomain}/>
-            <GrantTypeManagement GrantManagement={ClientData[0].GrantManagement}/>
-            <KeyManagement KeyManagement={ClientData[0].KeyManagement}/>
-            <DeleteCredentials props={ClientData[0]}/>
+            <ClientDetails ClientDetail={ClientData.ClientDetail}/>
+            <EncryptionDetails EncryptDetail={ClientData.EncryptDetail}/>
+            <AppDomains AppDomain={ClientData.AppDomain}/>
+            <GrantTypeManagement GrantManagement={ClientData.GrantManagement}/>
+            <KeyManagement KeyManagement={ClientData.KeyManagement}/>
+            <DeleteCredentials props={ClientData}/>
         </Box>
     )
 }

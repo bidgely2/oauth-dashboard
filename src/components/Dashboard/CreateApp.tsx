@@ -1,4 +1,4 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, Box, Button, Divider} from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, Box, Button } from "@mui/material";
 import { AppsInterface, useGetAppData } from "../../__mock__/apis/OauthMocks/AppInfo"
 import { useState } from "react";
 import React from "react";
@@ -85,9 +85,9 @@ const CreateApp = (props: PopupProps) => {
                     position:"relative"
                 }}>
                 <DialogTitle sx={{disply:"flex",flexDirection:"row",alignItems:"center",width:"85%",ml:"10px"}}>
-                    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center",justifyContent:"center", mt:"10px"}}>
-                        <Typography sx={{ typography:"title5",mr:"auto",ml:"10px"}} >Create App</Typography>
-                        <Close sx={{color:"black", ":active":{fontSize:"22px"}}} onClick={CloseClick}/>
+                    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center",justifyContent:"center"}}>
+                        <Typography sx={{ typography:"title4",mr:"auto",ml:"10px"}} >Create App</Typography>
+                        <Close sx={{color:"black",":active":{fontSize:"22px"}}} onClick={CloseClick}/>
                     </Box>
                 </DialogTitle>
                 <DialogContent sx={{
@@ -98,16 +98,10 @@ const CreateApp = (props: PopupProps) => {
                     mr:"auto",
                     ml:"45px"
                 }}>
-                    {/* <Box sx={{ display:"flex", flexDirection:"cloumn",alignItems:"center", width: "340px",mt:"10px"}}> */}
-                        {/* <Box sx={{display:"grid",gridTemplateColumns:"repeat(5,1fr)",mb:"20px", alignItems:"center"}}> */}
-                            <Typography variant="body2" sx={{mr:"auto"}}>App Name</Typography>
-                            <TextField variant="outlined" name="name" onChange={handleInput} autoComplete="off" sx={{width:"280px"}} />
-                        {/* </Box> */}
-                        {/* <Box sx={{display:"grid",gridTemplateColumns:"repeat(5,1fr)", alignItems:"center"}}> */}
-                            <Typography variant="body2" sx={{mr:"auto", mt:"20px"}}>App Type</Typography>
-                            <TextField variant="outlined" name="type" onChange={handleInput} autoComplete="off" sx={{width:"280px"}}/>
-                        {/* </Box> */}
-                    {/* </Box> */}
+                    <Typography variant="body2" sx={{mr:"auto",mb:"5px"}}>App Name</Typography>
+                    <TextField variant="outlined" name="name" placeholder="you-app-name" onChange={handleInput} autoComplete="off" sx={{width:"280px"}} InputProps={{style:{fontSize:"17px"}}}/>
+                    <Typography variant="body2" sx={{mr:"auto", mt:"20px",mb:"5px"}}>App Type</Typography>
+                    <TextField variant="outlined" name="type" placeholder="eg.widgets,api,others..." onChange={handleInput} autoComplete="off" sx={{width:"280px"}} InputProps={{style:{fontSize:"17px"}}}/>
                 </DialogContent>
                 <DialogActions>
                     <Box sx={{ mb: "20px", display: "flex", flexDirection: "row", justifyContent: "space-around",mr:"10px" }}>
