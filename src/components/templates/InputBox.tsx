@@ -11,8 +11,7 @@ export interface InputProps {
     hide?: boolean | undefined,
     placeholder: string,
     wide? :string | number,
-    margin? : string | undefined,
-    copy?: boolean | undefined
+    margin? : string | undefined
 }
 
  export interface ToastMsg {
@@ -64,15 +63,8 @@ export const InputBox = (props:InputProps) =>{
                     :<span>******</span>
                 }
             </Box>
-            {
-                props.copy===undefined
-                ?<Copy 
-                    fontSize="small" 
-                    color="primary" 
-                    sx={{gridColumn:"7/8", opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"18px"}}} 
-                    onClick={CopyClick}/>
-                :<Regenrate fontSize="small" color="primary" sx={{gridColumn:"7/8", opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"18px"}}}/>
-            }
+            <Copy fontSize="small" color="primary" onClick={CopyClick}
+                    sx={{gridColumn:"7/8", opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"19px"}}} />
             <ToastMessage 
                 open={ToastOpen} 
                 time={5000} 

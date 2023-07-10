@@ -84,8 +84,9 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "20px" }}>
                     <TextField 
                         // label="Your App Doamins-1"  
+                        placeholder="you app domains" 
                         value={AppDomain.AppDomain}
-                        InputProps={{readOnly:true}}
+                        InputProps={{readOnly:true, style:{fontSize:"17px"}}}
                         sx={{ width: "400px", typography:"subtitle4" }} />
                     <Copy 
                         fontSize="small" 
@@ -100,10 +101,13 @@ const AppDomains = ({AppDomain}:AppDomainProps) => {
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
                     <TextField 
-                        label="Add an app domain" 
+                        // label="Add an app domain" 
+                        placeholder="Add an app domain"
                         onChange={SetInput} 
                         name="redirectURI" 
                         value={redirectURI} 
+                        InputProps={{style:{fontSize:"17px"}}}
+                        inputProps={{style:{width:"230px"}}}
                         autoComplete="off"
                         sx={{ width: "400px" }} />
                     <Button

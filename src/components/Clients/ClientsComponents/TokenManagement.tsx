@@ -67,7 +67,7 @@ const KeyManagement =({KeyManagement}:KeyManagementProps) =>{
                             alignItems:"center",
                             userSelect:"none",
                             pl:"20px",
-                            fontWeight:"550",
+                            fontWeight:"400",
                             border:"1px #D8D8D8 solid",
                             // justifyContent:"center",
                         }}>
@@ -84,7 +84,7 @@ const KeyManagement =({KeyManagement}:KeyManagementProps) =>{
                         onClick={ClickRegenerate}/>
                 </Box>
             </Box>
-            <PopupWarning open={Regenerate} setOpen={setRegenerate} message="Do you want to regenerate the tokens"/>
+            <PopupWarning open={Regenerate} setOpen={setRegenerate} message="Make sure to replace the tokens"/>
             <ToastMessage 
                 open={ToastOpen} 
                 time={5000} 

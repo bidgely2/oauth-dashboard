@@ -1,4 +1,4 @@
-import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, Box, Button } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography, Box, Button, Select, MenuItem, FormControl, InputLabel, IconButton } from "@mui/material";
 import { AppsInterface, useGetAppData } from "../../__mock__/apis/OauthMocks/AppInfo"
 import { useState } from "react";
 import React from "react";
@@ -18,6 +18,7 @@ const CreateApp = (props: PopupProps) => {
 
     const [input, setInput] = useState<AppsInterface>({ name: "", type: "" });   //FormInputs
     const [Toast, setToast] = useState<ToastMsg>({ open: false, msgType: "success", content: "", time: 0 });  //ToastMsg
+    const [AppType,setAppType] = useState("");
 
     const AppData:AppsInterface[] = useGetAppData();
     // console.log(DATA);
@@ -56,6 +57,7 @@ const CreateApp = (props: PopupProps) => {
 
     const ClickCancel = () => {
         setInput({ name: "", type: "" })
+        setAppType("");
         ToastClose();
         props.setOpen(false);
         // console.log(timeOutId);
@@ -70,6 +72,11 @@ const CreateApp = (props: PopupProps) => {
         ClickCancel();
     }
 
+    const ClickSelect = (e:any) =>{
+        setAppType(e.target.value)
+        setInput({...input,type:AppType})
+    }
+
     return (
         <Dialog
             open={props.open}
@@ -81,14 +88,14 @@ const CreateApp = (props: PopupProps) => {
                     alignItems: "center",
                     bgcolor: "white",
                     width: "380px",
-                    height: "350px",
+                    height: "360px",
                     position:"relative"
                 }}>
+                <IconButton sx={{position:"absolute",right:"10px",top:"15px"}}>
+                    <Close color="action" fontSize="small" onClick={CloseClick}/>
+                </IconButton>
                 <DialogTitle sx={{disply:"flex",flexDirection:"row",alignItems:"center",width:"85%",ml:"10px"}}>
-                    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center",justifyContent:"center"}}>
-                        <Typography sx={{ typography:"title4",mr:"auto",ml:"10px"}} >Create App</Typography>
-                        <Close sx={{color:"black",":active":{fontSize:"22px"}}} onClick={CloseClick}/>
-                    </Box>
+                    <Typography sx={{ typography:"title2",mr:"auto",ml:"10px"}} >Create App</Typography>
                 </DialogTitle>
                 <DialogContent sx={{
                     padding: "0px",
@@ -101,7 +108,16 @@ const CreateApp = (props: PopupProps) => {
                     <Typography variant="body2" sx={{mr:"auto",mb:"5px"}}>App Name</Typography>
                     <TextField variant="outlined" name="name" placeholder="you-app-name" onChange={handleInput} autoComplete="off" sx={{width:"280px"}} InputProps={{style:{fontSize:"17px"}}}/>
                     <Typography variant="body2" sx={{mr:"auto", mt:"20px",mb:"5px"}}>App Type</Typography>
-                    <TextField variant="outlined" name="type" placeholder="eg.widgets,api,others..." onChange={handleInput} autoComplete="off" sx={{width:"280px"}} InputProps={{style:{fontSize:"17px"}}}/>
+                    <FormControl sx={{width:"280px"}}>
+                        <Select
+                            value={AppType}
+                            onChange={ClickSelect}
+                            displayEmpty
+                            renderValue={AppType !== "" ? undefined : () => "Select"}
+                            >
+                            <MenuItem value={"Widgets"}>Widgets</MenuItem>
+                        </Select>
+                    </FormControl>
                 </DialogContent>
                 <DialogActions>
                     <Box sx={{ mb: "20px", display: "flex", flexDirection: "row", justifyContent: "space-around",mr:"10px" }}>
