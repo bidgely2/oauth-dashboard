@@ -1,11 +1,12 @@
-import { Box, Button, Divider, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import AppBox from "./AppBox";
 import { useState } from "react";
 import CreateApp from "./CreateApp";
+import ToastMessage from "../templates/ToastMessage";
 
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
-
+    const [ToastOpen, setToast] = useState(false);
     function handlePopup() {
         setOpen(true);
     }
@@ -24,19 +25,43 @@ const Dashboard = () => {
                     alignItems: "center",
                 }}
             >
-                <Typography sx={{ ml: "40px", mt:"20px",fontFamily:"'Noto Sans SC', sans-serif", typography:"title5", letterSpacing:"1px"}}>
+                <Typography
+                    sx={{
+                        ml: "40px",
+                        mt: "20px",
+                        fontFamily: "'Noto Sans SC', sans-serif",
+                        typography: "title5",
+                        letterSpacing: "1px",
+                    }}
+                >
                     Hello Utility
                 </Typography>
                 <Button
                     variant="contained"
-                    sx={{ width: "150px", ml: "auto", mr: "30px", mt:"20px" }}
+                    sx={{ width: "150px", ml: "auto", mr: "30px", mt: "20px" }}
                     onClick={handlePopup}
                 >
                     Create App
                 </Button>
             </Box>
-            <AppBox/>
-            <CreateApp open={open} setOpen={setOpen} />
+            <AppBox />
+            <CreateApp
+                open={open}
+                setOpen={setOpen}
+                ToastOpen={ToastOpen}
+                setToastOpen={setToast}
+            />
+            <ToastMessage
+                open={ToastOpen}
+                time={5000}
+                ToastClose={() => {
+                    setToast(false);
+                }}
+                msgType="success"
+                content="Successfully created the app"
+                vertical="top"
+                horizontal="right"
+            />
         </>
     );
 };
