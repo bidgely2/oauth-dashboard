@@ -1,8 +1,4 @@
-import { useEffect, useState } from "react";
-import { useGlobalContext } from "../../../context/GlobalContext";
-import { RepeatOneSharp } from "@mui/icons-material";
-
-export interface EventsInterface{
+export interface ClientsInterface{
     ClientDetail: {
         ClientId:string,
         ClientSecret:string,
@@ -26,9 +22,7 @@ export interface EventsInterface{
         EncryptionKey:string,
         iVVector:string
     }
-    AppDomain: {
-        AppDomain:string[]
-    }
+    AppDomain: string[]
 }
 
 export const CLIENTDATA = 
@@ -50,16 +44,14 @@ export const CLIENTDATA =
                     EncryptionKey:"12njbds8b",
                     iVVector:"qwertty"
                 },
-                AppDomain: {
-                    AppDomain:["https://abc.com"]
-                },
+                AppDomain: [],
                 GrantManagement: {
                     PasswordGrant:{
                         username:"PacifiCorp.",
                         password:"123456789",
                     },
                     AuthGrant:{
-                        AppDomain:["https://xyz.com"]
+                        AppDomain:[]
                     }
                 }
             },
@@ -78,16 +70,14 @@ export const CLIENTDATA =
                     EncryptionKey:"23uob1",
                     iVVector:"opiuywe"
                 },
-                AppDomain: {
-                    AppDomain:["https://abc.com"]
-                },
+                AppDomain: [],
                 GrantManagement: {
                     PasswordGrant:{
                         username:"PacifiCorp.",
                         password:"12345",
                     },
                     AuthGrant:{
-                        AppDomain:["https://xyz.com"]
+                        AppDomain:[]
                     }
                 }
             }

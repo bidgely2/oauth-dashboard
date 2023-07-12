@@ -25,17 +25,17 @@ const Dashboard = () => {
                     alignItems: "center",
                 }}
             >
-                <Typography
+                {/* <Typography
                     sx={{
                         ml: "40px",
                         mt: "20px",
-                        fontFamily: "'Noto Sans SC', sans-serif",
-                        typography: "title5",
+                        fontFamily: "poppins, 'Arial Narrow', sans-serif",
+                        typography: "title2",
                         letterSpacing: "1px",
                     }}
                 >
-                    Hello Utility
-                </Typography>
+                    
+                </Typography> */}
                 <Button
                     variant="contained"
                     sx={{ width: "150px", ml: "auto", mr: "30px", mt: "20px" }}

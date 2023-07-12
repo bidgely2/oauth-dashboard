@@ -11,7 +11,7 @@ import { useGlobalContext } from "../../../context/GlobalContext";
 import { Title } from "./title/title";
 
 interface AppDomainProps {
-    AppDomain: any;
+    AppDomain: string[];
 }
 
 interface ToastMsg {
@@ -21,18 +21,91 @@ interface ToastMsg {
     time: number;
 }
 
-const AppDomains = ({ AppDomain }: AppDomainProps) => {
-    const { rc } = useGlobalContext();
+interface domainProps{
+    Domain: string,
+    id: number
+}
 
+
+const AppDomains = ({ AppDomain }: AppDomainProps) => {
+
+    
+    const AppDomainComponent = ({Domain,id}: domainProps) => {
+        return (
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: "10px",
+                    mb: "20px",
+                }}>
+                <Box
+                    sx={{
+                        backgroundColor:"#E3F4F4",
+                        borderRadius:"4px",
+                        height:"40px",
+                        display:"flex",
+                        flexDirection:"row",
+                        alignItems:"center",
+                        userSelect:"none",
+                        p:"5px 15px",
+                        mr:"10px",
+                        minWidth:"200px",
+                        border:"1px #D8D8D8 solid",
+                        typography:"body4",
+                        fontFamily:"'Lucida Console', Monaco, monospace",
+                    }}>
+                    {Domain}
+                </Box>
+                <Copy
+                    fontSize="small"
+                    color="primary"
+                    onClick={CopyClick}
+                    sx={{
+                        opacity: "60%",
+                        ":hover": { opacity: "100%" },
+                        ":active": { fontSize: "18px" },
+                    }}
+                    />
+                <Delete
+                    key={id}
+                    fontSize="small"
+                    color="primary"
+                    onClick={(e)=>DelClick(e,id)}
+                    sx={{
+                        opacity: "60%",
+                        ":hover": { opacity: "100%" },
+                        ":active": { fontSize: "18px" },
+                    }}/>
+            </Box>
+        )
+    }
+    
+    
+    const { rc } = useGlobalContext();
+    
     const [redirectURI, setURI] = useState("");
+    const [currentId,setCurrentId] = useState(0);
+    const [del, setDel] = useState({ open: false, clickedYes: false });
     const [Toast, setToast] = useState<ToastMsg>({
         open: false,
         msgType: "success",
         content: "",
         time: 0,
     });
-    const [del, setDel] = useState({ open: false, clickedYes: false });
+    
+    const isValidUrl = (urlString: string) => {
+        var inputElement = document.createElement("input");
+        inputElement.type = "url";
+        inputElement.value = urlString;
 
+        if (!inputElement.checkValidity()) {
+            return false;
+        } else {
+            return true;
+        }
+    };
     const CopyClick = (e: any) => {
         navigator.clipboard.writeText(redirectURI);
         setToast({
@@ -43,7 +116,9 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
         });
     };
 
-    const DelClick = () => {
+    const DelClick = (e:any,id:number) => {
+        console.log(id);
+        setCurrentId(id);
         setDel({ open: true, clickedYes: false });
     };
 
@@ -63,7 +138,7 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
             .then((res) => {
                 console.log(res.data);
             });
-        AppDomain.AppDomain.pop();
+        AppDomain.splice(currentId,1);
     }
 
     const SetInput = (e: any) => {
@@ -74,21 +149,10 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
         setToast({ open: false, msgType: "success", content: "", time: 0 });
     };
 
-    const isValidUrl = (urlString: string) => {
-        var inputElement = document.createElement("input");
-        inputElement.type = "url";
-        inputElement.value = urlString;
-
-        if (!inputElement.checkValidity()) {
-            return false;
-        } else {
-            return true;
-        }
-    };
     const SaveURI = () => {
         // console.log(AppDomain.AppDomain);
         if (isValidUrl(redirectURI) && redirectURI.length !== 0) {
-            AppDomain.AppDomain.push(redirectURI);
+            AppDomain.push(redirectURI);
             rc.apiClient
                 .post("/api/v2.0/whitelist-origin/post", { requestId: 123 })
                 .then((res) => {
@@ -105,69 +169,31 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
         setURI("");
     };
 
+    const Domains = AppDomain.map((domain, index) => { return <AppDomainComponent Domain={domain} id={index}/> })
+
     return (
         <EditBox>
             <Title> Your App Domains</Title>
-            <Box sx={{ disply: "grid", gridTemplateColumns: "auto", ml: "100px" }}>
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        gap: "10px",
-                        mb: "20px",
-                    }}
-                >
+            <Box sx={{ disply: "flex", flexDirection:"column", mt:"15px" }}>
+                {Domains}
+                <Box sx={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
                     <TextField
-                        // label="Your App Doamins-1"
-                        placeholder="your app domains"
-                        value={AppDomain.AppDomain}
-                        InputProps={{ readOnly: true, style: { fontSize: "17px" } }}
-                        sx={{ width: "400px", typography: "subtitle4" }}
-                    />
-                    <Copy
-                        fontSize="small"
-                        color="primary"
-                        onClick={CopyClick}
-                        sx={{
-                            opacity: "60%",
-                            ":hover": { opacity: "100%" },
-                            ":active": { fontSize: "18px" },
-                        }}
-                    />
-                    <Delete
-                        fontSize="small"
-                        color="primary"
-                        onClick={DelClick}
-                        sx={{
-                            opacity: "60%",
-                            ":hover": { opacity: "100%" },
-                            ":active": { fontSize: "18px" },
-                        }}
-                    />
-                </Box>
-                <Box
-                    sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
-                >
-                    <TextField
-                        // label="Add an app domain"
                         placeholder="Add an app domain"
                         onChange={SetInput}
                         name="redirectURI"
                         value={redirectURI}
-                        InputProps={{ style: { fontSize: "17px" } }}
-                        inputProps={{ style: { width: "230px" } }}
+                        size="small"
+                        InputProps={{ style: { fontSize: "17px", borderRadius:"2px 0 0 2px", width:"240px" } }}
                         autoComplete="off"
-                        sx={{ width: "400px" }}
                     />
                     <Button
                         variant="contained"
                         onClick={SaveURI}
                         sx={{
-                            position: "absolute",
-                            left: "450px",
+                            boxShadow:"none",
+                            borderRadius:"0 3px 3px 0",
                             fontSize: "17px",
-                            height: "40px",
+                            height: "41px",
                             width: "80px",
                             textTransform: "none",
                         }}
@@ -182,8 +208,8 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
                 ToastClose={CloseToast}
                 msgType={Toast.msgType}
                 content={Toast.content}
-                vertical="bottom"
-                horizontal="left"
+                vertical="top"
+                horizontal="right"
             />
             <PopupWarning
                 open={del}

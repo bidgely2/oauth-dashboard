@@ -12,11 +12,11 @@ export const APPDATA = {
     [
       {
         name: "PacifiCorp",
-        type: "widgets"
+        type: "Widgets SDK"
       },
       {
         name: "PacifiCorp2",
-        type: "others"
+        type: "Widgets SDK"
       }
     ]
 }

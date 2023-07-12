@@ -42,8 +42,8 @@ const PopupWarning =({open,setOpen,message}:PopupProps)=>{
                         p:"0",
                     }}>
                     <Box sx={{ml:"auto",mr:"20px",display:"flex",gap:"20px"}}>
-                        <Button variant="contained"  sx={{ bgcolor:"#0081C9", width: "80px",height:"40px",borderRadius:"2px", ":hover":{bgcolor:"#5A96E3"}}} onClick={ClickYes}>Yes</Button>
                         <Button variant="contained"  sx={{ bgcolor:"#0081C9", width: "80px",height:"40px",borderRadius:"2px", ":hover":{bgcolor:"#5A96E3"}}} onClick={ClickNo}>No</Button>
+                        <Button variant="contained"  sx={{ bgcolor:"#0081C9", width: "80px",height:"40px",borderRadius:"2px", ":hover":{bgcolor:"#5A96E3"}}} onClick={ClickYes}>Yes</Button>
                     </Box>
                 </DialogActions>
             </Box>

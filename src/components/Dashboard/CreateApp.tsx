@@ -14,14 +14,17 @@ import {
 } from "@mui/material";
 import {
     AppsInterface,
-    useGetAppData,
 } from "../../__mock__/apis/OauthMocks/AppInfo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import { Close } from "@mui/icons-material";
 import ToastMessage from "../templates/ToastMessage";
 import { ToastMsg } from "../templates/InputBox";
-import { useGlobalContext } from "../../context/GlobalContext";
+import { useDispatch, useSelector } from "react-redux";
+import { APP_ACTIONS } from "../../store/actions/AppActions";
+import { useNavigate } from "react-router-dom";
+import { CLIENT_ACTIONS } from "../../store/actions/ClientActions";
+
 
 interface PopupProps {
     open: boolean;
@@ -31,7 +34,8 @@ interface PopupProps {
 }
 
 const CreateApp = (props: PopupProps) => {
-    const { rc } = useGlobalContext();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [input, setInput] = useState<AppsInterface>({ name: "", type: "" }); //FormInputs
     const [Toast, setToast] = useState<ToastMsg>({
@@ -42,15 +46,15 @@ const CreateApp = (props: PopupProps) => {
     }); //ToastMsg
     const [AppType, setAppType] = useState("");
 
-    const AppData: AppsInterface[] = useGetAppData();
+    // const AppData: AppsInterface[] = useGetAppData();
+    const AppData:AppsInterface[] = (useSelector((state:any)=>state.apps))
 
     const ClickCreate = () => {
-        // app name is already present
-        let present: AppsInterface | undefined = AppData.find((data) => {
+        let present: AppsInterface | undefined = AppData.find((data) => {    // app name is already present
             return data.name === input.name ? true : false;
         });
-        // all inputs empty
-        let failure: boolean = input.type === "" || input.name === "";
+
+        let failure: boolean = input.type === "" || input.name === "";       // all inputs empty
         console.log(input);
 
         if (failure) {
@@ -64,26 +68,22 @@ const CreateApp = (props: PopupProps) => {
             setToast({
                 open: true,
                 msgType: "warning",
-                content: "The given App already exists",
+                content: "The given App name already exists",
                 time: 10000,
             });
         } else {
-            AppData.push(input);
-
-            rc.apiClient.post("/api/apps/post", {
-                requestId: 123,
-                name: input.name,
-                type: input.type,
-            });
-            // .then(res=>console.log(res.data));
-
+            dispatch(APP_ACTIONS.POST_APP(input));
+            dispatch(CLIENT_ACTIONS.SET_CLIENTS());
+            navigate(`/editApp/${AppData.length}`)
             props.setToastOpen(true);
             ClickCancel();
         }
     };
 
+
     const handleInput = (e: any) => {
         const VALUE = e.target.value;
+
         setInput({ ...input, name: VALUE });
     };
 
@@ -100,12 +100,9 @@ const CreateApp = (props: PopupProps) => {
 
     const ClickSelect = (e: any) => {
         ToastClose();
-        // console.log(e.target.value);
         const VALUE: string = e.target.value;
-        // console.log(VALUE);
         setAppType(VALUE);
         setInput({ ...input, type: VALUE });
-        // console.log(AppType);
     };
 
     return (
@@ -138,7 +135,7 @@ const CreateApp = (props: PopupProps) => {
                         width: "85%",
                     }}
                 >
-                    <Typography sx={{ typography: "title2", mr: "auto", ml: "15px" }}>
+                    <Typography sx={{ typography: "title1", mr: "auto", ml: "15px" }}>
                         Create App
                     </Typography>
                 </DialogTitle>
@@ -158,7 +155,7 @@ const CreateApp = (props: PopupProps) => {
                     <TextField
                         variant="outlined"
                         name="name"
-                        placeholder="your-app-name"
+                        placeholder="Your App Name"
                         onChange={handleInput}
                         autoComplete="off"
                         sx={{ width: "280px" }}
@@ -177,10 +174,7 @@ const CreateApp = (props: PopupProps) => {
                             displayEmpty
                             renderValue={AppType === "" ? () => "Select" : () => AppType}
                         >
-                            {/* <MenuItem disabled value={""}>Select</MenuItem> */}
-                            <MenuItem value={"Widgets"}>Widgets</MenuItem>
-                            <MenuItem value={"API"}>API</MenuItem>
-                            <MenuItem value={"Others"}>Others</MenuItem>
+                            <MenuItem value={"Widgets SDK"}>Widgets SDK</MenuItem>
                         </Select>
                     </FormControl>
                 </DialogContent>
@@ -197,16 +191,16 @@ const CreateApp = (props: PopupProps) => {
                         <Button
                             variant="contained"
                             sx={{ mr: "40px", width: "100px" }}
-                            onClick={ClickCreate}
+                            onClick={ClickCancel}
                         >
-                            Create
+                            Cancel
                         </Button>
                         <Button
                             variant="contained"
                             sx={{ ml: "40px", width: "100px" }}
-                            onClick={ClickCancel}
+                            onClick={ClickCreate}
                         >
-                            Cancel
+                            Create
                         </Button>
                     </Box>
                 </DialogActions>

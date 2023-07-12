@@ -1,5 +1,5 @@
 import { InputBox } from "../../templates/InputBox";
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Button,Typography } from "@mui/material";
 import { EditBox } from "../../templates/EditBox";
 import {CachedOutlined as Regenrate} from "@mui/icons-material"
 import { useState } from "react";
@@ -32,57 +32,23 @@ const KeyManagement =({KeyManagement}:KeyManagementProps) =>{
 
     return(
         <EditBox>
-            <Title>Token Management</Title>
-            <Typography sx={{ml:"30px",mb:"20px", typography:"body2"}}>Use this Section to generate access token, refresh token and expiry time</Typography>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "15px"}}>
-                <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "10px", margin: "0 0 10px 100px" }}>
-                    <InputBox 
-                        title="Access token" 
-                        wide="500px" 
-                        placeholder={KeyManagement.AccessToken}/>
-                    <InputBox 
-                        title="Refresh token" 
-                        wide="500px" 
-                        placeholder={KeyManagement.RefreshToken}/>
-                </Box>
-                <Box 
-                    sx={{
-                        display:"grid",
-                        gridTemplateColumns:"repeat(7,1fr)",
-                        alignItems:"center",
-                        gap:"15px",
-                        width:"500px",
-                        ml:"100px"
-                    }}>
-                    <Typography variant="body1" flexWrap="wrap" sx={{gridColumn:"1/3", fontSize:"18px", typography:"body1",textAlign:"end"}}>Expiry Time</Typography>
-                    <Box
-                        sx={{
-                            backgroundColor:"#E3F4F4",
-                            color:"#567189",
-                            borderRadius:"5px",
-                            gridColumn:"3/7",
-                            height:"50px",
-                            display:"flex",
-                            flexDirection:"row",
-                            alignItems:"center",
-                            userSelect:"none",
-                            pl:"20px",
-                            fontWeight:"400",
-                            border:"1px #D8D8D8 solid",
-                            // justifyContent:"center",
-                        }}>
-                        <span>{KeyManagement.ExpiryTime}</span>
-                    </Box>
-                    <Regenrate 
-                        fontSize="small" 
-                        color="primary" 
-                        sx={{
-                            gridColumn:"7/8", 
-                            opacity:"60%",
-                            ":hover":{opacity:"100%"}, 
-                            ":active":{fontSize:"18px"}}}
-                        onClick={ClickRegenerate}/>
-                </Box>
+            <Box sx={{display: "flex", flexDirection: "row",alignItems:"center"}} >
+                <Title>Token Management</Title>
+                <Button sx={{ml:"5px",textTransform:"none",fontSize:"16px"}} onClick={ClickRegenerate} startIcon={<Regenrate />}>
+                    Regenerate
+                </Button>
+            </Box>
+            <Typography sx={{mb:"25px", typography:"body2"}}>Use this Section to generate access token, refresh token and expiry time</Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "17px"}}>
+                <InputBox 
+                    title="Access token"
+                    placeholder={KeyManagement.AccessToken}/>
+                <InputBox 
+                    title="Refresh token"
+                    placeholder={KeyManagement.RefreshToken}/>
+                <InputBox 
+                    title="Expiry Time"
+                    placeholder={KeyManagement.ExpiryTime}/>
             </Box>
             <PopupWarning open={Regenerate} setOpen={setRegenerate} message="Make sure to replace the tokens"/>
             <ToastMessage 
@@ -91,7 +57,7 @@ const KeyManagement =({KeyManagement}:KeyManagementProps) =>{
                 ToastClose={()=>{setToast(false)}} 
                 msgType={"success"} 
                 content={"Successfully regenerated the tokens"}
-                vertical='bottom'
+                vertical='top'
                 horizontal='right'/>
         </EditBox>
     )

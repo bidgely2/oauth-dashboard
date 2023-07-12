@@ -3,17 +3,17 @@ import lock from "../../../assets/img/lock.png";
 import Header from "../../layouts/Header";
 import Footer from "../../layouts/Footer";
 import styles from './Loginbody.module.css'
-import { useGlobalContext } from "../../../context/GlobalContext";
+import { useDispatch } from "react-redux";
+import { SESSION_ACTIONS } from "../../../store/actions/SessionActions";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
-    // const {loggedIn,setLoggedIn} = useGlobalContext();
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    const LoginClick = ()=>{
-        // setLoggedIn(!loggedIn)
+    
+    const ClickLogin = () =>{
+        dispatch(SESSION_ACTIONS.SET_LOGGED_IN(true))
         navigate("/dashboard");
     }
 
@@ -35,27 +35,26 @@ const Login = () => {
                     justifyContent:'center'
                 }}
             >
-                {/* <Box sx={{
-                    width:"25%",
-                    height:"70%", 
+                <Box sx={{
+                    width:{xs:"55%",md:"35%",lg:"25%"},
+                    height:{xs:"60%",md:"60%",lg:"70%"},
                     borderRadius:"5px", 
-                    bgcolor:"#F8F6F4",
+                    bgcolor:"#ffffffd1",
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    justifyContent:'center'
-                }}> */}
+                    justifyContent:'center',
+                    boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px"
+                }}>
                     <img className={styles.lockImg} src={lock} alt={"Lock img"} />
-                    <Typography fontSize={20} margin={"10px"}>
+                    <Typography  fontSize={{"md":"20px","xs":"16px"}} margin={"10px"} textAlign="center">
                         Login to Your Oauth Dashboard
                     </Typography>
                     <Typography
-                        fontSize={13}
-                        fontWeight={100}
+                        sx={{fontSize:{xs:"9px",md:"13px"}, m:"16px 16px 40px 16px"}}
                         letterSpacing={1.5}
                         color={"#5c5c5a"}
-                        mt={2}
-                        mb={5}
+                        textAlign="center"
                     >
                         Once you login yours apps will be available
                     </Typography>
@@ -67,11 +66,11 @@ const Login = () => {
                             height: "40px",
                             width: "120px",
                         }}
-                        onClick={LoginClick}
+                        onClick={ClickLogin}
                     >
                         Log In
                     </Button>
-                {/* </Box> */}
+                </Box>
             </Box>
             <Footer />
         </>

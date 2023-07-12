@@ -1,17 +1,19 @@
+import { SESSION_ACTIONS } from "../../store/actions/SessionActions";
 import {MenuOutlined} from "@mui/icons-material"
 import { Button, Menu as MENU, MenuItem, Fade } from "@mui/material";
 import {useEffect, useState} from "react"
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 
 interface Menuprops{
-    LoggedIn: boolean,
-    setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
+    loggedIn: boolean,
 }
 
 const Menu = (props: Menuprops) =>{
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [menu, setMenu] = useState<null| HTMLElement>(null);
     const open = Boolean(menu);
@@ -21,11 +23,10 @@ const Menu = (props: Menuprops) =>{
         
     }
     const handleClose = () =>{
-        props.setLoggedIn(false);
+        dispatch(SESSION_ACTIONS.SET_LOGGED_IN(false));
         setMenu(null);
         navigate("/login");
     }
-
 
     return (
         <>

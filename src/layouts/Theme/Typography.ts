@@ -1,31 +1,15 @@
 export const typographies = {
     title1: {
-        fontSize: "30px",
-        fontWeight: "700"
+        fontSize: "25px",
+        fontWeight: "600"
     },
     title2: {
-        fontSize: "25px",
+        fontSize: "21px",
         fontWeight: "600"
     },
     title3: {
-        fontSize: "25px",
+        fontSize: "20.5px",
         fontWeight: "550"
-    },
-    title4: {
-        fontSize: "23px",
-        fontWeight: "700"
-    },
-    title5: {
-        fontSize: "21px",
-        fontWeight: "600"
-    },
-    title6: {
-        fontSize: "21px",
-        fontWeight: "500"
-    },
-    title7: {
-        fontSize: "23px",
-        fontWeight: "500"
     },
     subtitle1: {
         fontSize: "20px",
@@ -62,7 +46,5 @@ export const typographies = {
     body4: {
         fontSize: "15px",
         fontWeight: "500"
-    }
-    
-
+    }  
 }
