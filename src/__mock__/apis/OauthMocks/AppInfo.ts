@@ -1,5 +1,5 @@
-import { useEffect, useState, useContext } from "react";
-import { GlobalContext } from "../../../context/GlobalContext";
+import { useEffect, useState } from "react";
+import { useGlobalContext } from "../../../context/GlobalContext";
 
 // App Interface and AppMockData
 export interface AppsInterface{
@@ -11,11 +11,11 @@ export const APPDATA = {
   payload:
     [
       {
-        name: "PacifiCorp",
+        name: "Ameren Mobile",
         type: "Widgets SDK"
       },
       {
-        name: "PacifiCorp2",
+        name: "Ameren Web",
         type: "Widgets SDK"
       }
     ]
@@ -25,17 +25,18 @@ export const APPDATA = {
 // custom hook to get data from mock api
 export function useGetAppData(){
 
-  const {rc} = useContext(GlobalContext);
+  const {rc} = useGlobalContext();
   
-  const [DATA,setDATA] = useState<AppsInterface[]>([]);
+  const [data,setData] = useState<AppsInterface[]>([]);
 
-  useEffect(() => {
-      const getDATA = async () => {
-        const res = await rc.apiClient.get("/api/apps/get",{params:{requestId:123}});
-        setDATA(res.data as AppsInterface[]);
-      };
-      getDATA();
-    },[]);
+  // useEffect(() => {
+      // const getDATA = async () => {
+          rc.apiClient.get("/api/apps/get",{params:{requestId:123}})
+          .then((response)=>{setData(response.data as AppsInterface[])})
+        // setData(res.data as AppsInterface[]);
+      // };
+      // getDATA();
+    // },[]);
     // console.log(DATA);
-    return DATA;
-}
+    return data;
+} 

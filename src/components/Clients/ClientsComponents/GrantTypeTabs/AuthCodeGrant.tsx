@@ -39,6 +39,7 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                 }}>
                 <Box
                     sx={{
+                        color:"#414547",
                         backgroundColor:"#E3F4F4",
                         borderRadius:"4px",
                         height:"40px",
@@ -48,10 +49,10 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                         userSelect:"none",
                         p:"5px 15px",
                         mr:"10px",
-                        minWidth:"200px",
                         border:"1px #D8D8D8 solid",
                         typography:"body4",
-                        fontFamily:"'Lucida Console', Monaco, monospace",
+                        fontWeight:"400",
+                        fontFamily:"'Roboto Mono', Monaco, monospace",
                     }}>
                     {RedirectURI}
                 </Box>

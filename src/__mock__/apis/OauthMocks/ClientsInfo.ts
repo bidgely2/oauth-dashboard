@@ -31,9 +31,9 @@ export const CLIENTDATA =
         payload: [
             {
                 ClientDetail: {
-                    ClientId:"PacifiCorp",
+                    ClientId:"Ameren",
                     ClientSecret:"hcb7e3xv",
-                    APIEndpoint:"https://btocdevapi.bidgely.com/"
+                    APIEndpoint:"https://amerenapi.bidgely.com/"
                 },
                 KeyManagement: {
                     AccessToken:"d32fg4h3j",
@@ -44,22 +44,22 @@ export const CLIENTDATA =
                     EncryptionKey:"12njbds8b",
                     iVVector:"qwertty"
                 },
-                AppDomain: [],
+                AppDomain: ["https://ameren.com"],
                 GrantManagement: {
                     PasswordGrant:{
-                        username:"PacifiCorp.",
+                        username:"Ameren",
                         password:"123456789",
                     },
                     AuthGrant:{
-                        AppDomain:[]
+                        AppDomain:["https://ameren.com/bidgely_auth"]
                     }
                 }
             },
             {
                 ClientDetail: {
-                    ClientId:"PacfiCorp",
+                    ClientId:"Ameren-Missouri",
                     ClientSecret:"askdbhf",
-                    APIEndpoint:"https://btocdevapi.bidgely.com/"
+                    APIEndpoint:"https://amerenapi.bidgely.com/"
                 },
                 KeyManagement: {
                     AccessToken:"aiwbf",
@@ -70,14 +70,14 @@ export const CLIENTDATA =
                     EncryptionKey:"23uob1",
                     iVVector:"opiuywe"
                 },
-                AppDomain: [],
+                AppDomain: ["https://ameren.com"],
                 GrantManagement: {
                     PasswordGrant:{
-                        username:"PacifiCorp.",
+                        username:"Ameren",
                         password:"12345",
                     },
                     AuthGrant:{
-                        AppDomain:[]
+                        AppDomain:["https://ameren.com/bidgely_auth"]
                     }
                 }
             }

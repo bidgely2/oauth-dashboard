@@ -12,7 +12,7 @@ interface GrantTypeManagementProps{
 
 const GrantTypeManagement =({GrantManagement}:GrantTypeManagementProps) =>{
 
-    const [TabValue,setTabValue] = useState("1");
+    const [tabValue,setTabValue] = useState("1");
 
     const ClickTab =(e:any,newValue:string)=>{
         setTabValue(newValue);
@@ -22,7 +22,7 @@ const GrantTypeManagement =({GrantManagement}:GrantTypeManagementProps) =>{
         <EditBox >
             <Title >Oauth Grant Type Management</Title>
             <Box sx={{mt:"15px"}}>
-                <TabContext value={TabValue}>
+                <TabContext value={tabValue}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
                         <TabList onChange={ClickTab}>
                             <Tab label="Password Grant" value="1" sx={{width:"40px",textTransform:"none"}}/>
