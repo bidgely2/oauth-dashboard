@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { InputBox } from "../../templates/InputBox";
 import { EditBox } from "../../templates/EditBox";
 import { CachedOutlined as Regenrate} from '@mui/icons-material';
@@ -32,24 +32,15 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
     
     return (
         <EditBox>
-            <Box sx={{display: "flex", flexDirection: "row", alignItems:"center", mb:"20px"}} >
+            <Box sx={{display: "flex", flexDirection: "row", alignItems:"center"}} >
                 <Title >Encryption Details</Title>
-                <Regenrate 
-                    fontSize="small" 
-                    color="primary" 
-                    sx={{
-                        mb:"20px",
-                        ml:"5px",
-                        opacity:"60%", 
-                        ":hover":{opacity:"100%"}, 
-                        ":active":{fontSize:"18px"}
-                    }}
-                    onClick={ClickRegenerate}/>
-                    <Typography variant="body2" color="primary" sx={{ml:"5px",mb:"20px", opacity:"90%"}}>Regenerate</Typography>
+                <Button sx={{ml:"5px",textTransform:"none",fontSize:"16px"}} onClick={ClickRegenerate} startIcon={<Regenrate />}>
+                    Regenerate
+                </Button>
             </Box>
-            <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "10px", ml: "100px", mr: "auto" }}>
-                <InputBox title="Encryption Key" wide="500px" placeholder={EncryptDetail.EncryptionKey} />
-                <InputBox title="iV Vector" wide="500px" placeholder={EncryptDetail.iVVector}/>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "17px", mt:"15px" }}>
+                <InputBox title="Encryption Key" placeholder={EncryptDetail.EncryptionKey} />
+                <InputBox title="iV Vector" placeholder={EncryptDetail.iVVector}/>
             </Box>
             <PopupWarning open={Regenerate} setOpen={setRegenerate} message="Make sure to replace the previous keys"/>
             <ToastMessage 
@@ -58,7 +49,7 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
                 ToastClose={()=>{setToast(false)}} 
                 msgType={"success"} 
                 content={"Successfully regenerated the keys"}
-                vertical='bottom'
+                vertical='top'
                 horizontal='right'/>
         </EditBox>
     )

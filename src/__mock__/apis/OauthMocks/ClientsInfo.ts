@@ -1,8 +1,4 @@
-import { useEffect, useState } from "react";
-import { useGlobalContext } from "../../../context/GlobalContext";
-import { RepeatOneSharp } from "@mui/icons-material";
-
-export interface EventsInterface{
+export interface ClientsInterface{
     ClientDetail: {
         ClientId:string,
         ClientSecret:string,
@@ -26,9 +22,7 @@ export interface EventsInterface{
         EncryptionKey:string,
         iVVector:string
     }
-    AppDomain: {
-        AppDomain:string[]
-    }
+    AppDomain: string[]
 }
 
 export const CLIENTDATA = 
@@ -37,9 +31,9 @@ export const CLIENTDATA =
         payload: [
             {
                 ClientDetail: {
-                    ClientId:"PacifiCorp",
+                    ClientId:"Ameren",
                     ClientSecret:"hcb7e3xv",
-                    APIEndpoint:"https://btocdevapi.bidgely.com/"
+                    APIEndpoint:"https://amerenapi.bidgely.com/"
                 },
                 KeyManagement: {
                     AccessToken:"d32fg4h3j",
@@ -50,24 +44,22 @@ export const CLIENTDATA =
                     EncryptionKey:"12njbds8b",
                     iVVector:"qwertty"
                 },
-                AppDomain: {
-                    AppDomain:["https://abc.com"]
-                },
+                AppDomain: ["https://ameren.com"],
                 GrantManagement: {
                     PasswordGrant:{
-                        username:"PacifiCorp.",
+                        username:"Ameren",
                         password:"123456789",
                     },
                     AuthGrant:{
-                        AppDomain:["https://xyz.com"]
+                        AppDomain:["https://ameren.com/bidgely_auth"]
                     }
                 }
             },
             {
                 ClientDetail: {
-                    ClientId:"PacfiCorp",
+                    ClientId:"Ameren-Missouri",
                     ClientSecret:"askdbhf",
-                    APIEndpoint:"https://btocdevapi.bidgely.com/"
+                    APIEndpoint:"https://amerenapi.bidgely.com/"
                 },
                 KeyManagement: {
                     AccessToken:"aiwbf",
@@ -78,16 +70,14 @@ export const CLIENTDATA =
                     EncryptionKey:"23uob1",
                     iVVector:"opiuywe"
                 },
-                AppDomain: {
-                    AppDomain:["https://abc.com"]
-                },
+                AppDomain: ["https://ameren.com"],
                 GrantManagement: {
                     PasswordGrant:{
-                        username:"PacifiCorp.",
+                        username:"Ameren",
                         password:"12345",
                     },
                     AuthGrant:{
-                        AppDomain:["https://xyz.com"]
+                        AppDomain:["https://ameren.com/bidgely_auth"]
                     }
                 }
             }

@@ -1,13 +1,14 @@
 // This inputbox contains a title for the input Box, an input box and an icon
 // and toast msg for the icon on click
 
-import { Box, Typography, TextField, AlertColor } from "@mui/material";
-import { ContentCopyOutlined as Copy, CachedOutlined as Regenrate} from '@mui/icons-material';
+import { Box, Typography, AlertColor, TextField, FormControl, Input } from "@mui/material";
+import { ContentCopyOutlined as Copy, CachedOutlined as Regenrate, WrapText} from '@mui/icons-material';
 import { useState } from "react";
 import ToastMessage from "./ToastMessage";
 
 export interface InputProps {
     title: string,
+    copy?: boolean | undefined,
     hide?: boolean | undefined,
     placeholder: string,
     wide? :string | number,
@@ -21,6 +22,7 @@ export interface InputProps {
     time: number
 }
 
+
 export const InputBox = (props:InputProps) =>{
 
     const [ToastOpen,setToast] = useState(false);
@@ -31,47 +33,43 @@ export const InputBox = (props:InputProps) =>{
     }
 
     return(
-        <Box 
-            sx={{
-                display:"grid",
-                gridTemplateColumns:"repeat(7,1fr)",
-                alignItems:"center",
-                gap:"15px",
-                width:props.wide,
-                margin: props.margin
-            }}>
-            <Typography variant="h6" flexWrap="wrap" sx={{gridColumn:"1/3",fontSize:"18px",typography:"body1", textAlign:"end"}}>{props.title}</Typography>
-            <Box
-                sx={{
-                    backgroundColor:"#E3F4F4",
-                    color:"#567189",
-                    borderRadius:"5px",
-                    gridColumn:"3/7",
-                    height:"50px",
-                    display:"flex",
-                    flexDirection:"row",
-                    alignItems:"center",
-                    userSelect:"none",
-                    pl:"20px",
-                    justifyContent:"stretch",
-                    fontWeight:"400",
-                    border:"1px #D8D8D8 solid",
-                    // justifyContent:"center",
-                }}>
-                {   (props.hide!==true)
-                    ?<span>{props.placeholder}</span>
-                    :<span>******</span>
-                }
+        <Box sx={{ margin: props.margin}}>
+            <Typography sx={{
+                typography:"body2",
+                fontFamily:"'Lucida Console', Monaco, monospace",
+                textTransform:"uppercase",
+                color: "rgb(109, 109, 109)"}}>{props.title}</Typography>
+            <Box sx={{display:"flex",flexDirection:"row",alignItems:"center",mt:"3px"}}>
+                <Box
+                    sx={{
+                        color:"#414547",
+                        backgroundColor:"#E3F4F4",
+                        borderRadius:"4px",
+                        height:"40px",
+                        display:"flex",
+                        flexDirection:"row",
+                        alignItems:"center",
+                        userSelect:"none",
+                        p:"5px 15px",
+                        mr:"10px",
+                        width:"350px",
+                        border:"1px #D8D8D8 solid",
+                        typography:"body4",
+                        fontWeight:"400",
+                        fontFamily:"'Roboto Mono', Monaco, monospace",
+                    }}>
+                    {props.hide!==true?props.placeholder:"******"}
+                </Box>
+                    {props.copy!==false && <Copy fontSize="small" color="primary" onClick={CopyClick}
+                            sx={{opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"19px"}}} />}
             </Box>
-            <Copy fontSize="small" color="primary" onClick={CopyClick}
-                    sx={{gridColumn:"7/8", opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"19px"}}} />
             <ToastMessage 
                 open={ToastOpen} 
                 time={5000} 
                 ToastClose={()=>{setToast(false)}} 
                 msgType={"success"} 
                 content={"Successfully copied"}
-                vertical='bottom'
+                vertical='top'
                 horizontal='right'/>
         </Box>
     )

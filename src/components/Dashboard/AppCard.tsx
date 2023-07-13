@@ -1,4 +1,4 @@
-import { Card, Typography, CardContent, IconButton } from "@mui/material";
+import { Card, Typography, IconButton, Box } from "@mui/material";
 import { AppsInterface } from "../../__mock__/apis/OauthMocks/AppInfo";
 import {LaunchTwoTone as Edit} from '@mui/icons-material';
 import { useNavigate } from "react-router-dom";
@@ -28,12 +28,12 @@ const AppCard = (props: AppCardProps) => {
             <IconButton sx={{position:"absolute",right:"2px",top:"2px", opacity:"70%"}}>
                 <Edit color="primary" fontSize="small" onClick={EditClick}/>
             </IconButton>
-            <CardContent sx={{ mt:"20px",display:"flex",flexDirection:"column",alignItems:"center"}}>
-                <Typography sx={{ typography:"subtitle3", wordWrap:"unset",letterSpacing:"1px"}}>
+            <Box sx={{height:"100%",p:"0 10px", display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
+                <Typography sx={{ typography:"subtitle3",letterSpacing:"1px",textAlign:"center"}}>
                     {props.data.name}
                 </Typography>
                 <Typography sx={{typography:"body3"}}>{props.data.type}</Typography>
-            </CardContent>
+            </Box>
             
         </Card>
     );

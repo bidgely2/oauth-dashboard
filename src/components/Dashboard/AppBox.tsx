@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
 import AppCard from "./AppCard";
-import { useGetAppData,AppsInterface } from "../../__mock__/apis/OauthMocks/AppInfo";
+import { AppsInterface } from "../../__mock__/apis/OauthMocks/AppInfo";
+import { useSelector } from "react-redux";
 
 function AppBox(){
 
-    const DATA: AppsInterface[] = useGetAppData();
-    // console.log(DATA);
-    const Apps = DATA && DATA.map((data,index)=><AppCard data={data} id={index}/>)
+    const appData: AppsInterface[] = useSelector((state:any)=>state.apps)
+    const Apps = appData && appData.map((data,index)=><AppCard data={data} id={index}/>)
 
     return (
         <Box sx={{
@@ -22,7 +22,6 @@ function AppBox(){
             columnGap:"20px",
             rowGap:"20px",
             p:"20px 30px 0 30px",
-
             boxSizing:"border-box"
         }}>{Apps}</Box>
     )

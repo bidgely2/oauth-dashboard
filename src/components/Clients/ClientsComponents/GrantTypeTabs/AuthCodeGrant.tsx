@@ -5,7 +5,7 @@ import ToastMessage from "../../../templates/ToastMessage";
 import PopupWarning from "../../../templates/PopupWarning";
 
 interface AuthGrantProps{
-    AppDomain:any
+    AppDomain:string[]
 }
 
 interface ToastMsg{
@@ -15,25 +15,86 @@ interface ToastMsg{
     time: number
 }
 
+interface RedirectURIProps{
+    RedirectURI: string,
+    id: number
+}
+
 const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
 
     const [redirectURI,setURI] = useState("");
+    const [currentId,setCurrentId] = useState(0);
     const [Toast,setToast] = useState<ToastMsg>({open:false,msgType:"success",content:"",time:0});
     const [del, setDel] = useState({open:false,clickedYes:false}); 
 
-    const CopyClick=(e:any)=>{
-        navigator.clipboard.writeText(redirectURI);
-        setToast({open:true,msgType:"success",content:"Successfully copied the domain",time:3000})
+    const RedirectURIComponent = ({RedirectURI,id}: RedirectURIProps) => {
+        return (
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    gap: "10px",
+                    mb: "20px",
+                }}>
+                <Box
+                    sx={{
+                        color:"#414547",
+                        backgroundColor:"#E3F4F4",
+                        borderRadius:"4px",
+                        height:"40px",
+                        display:"flex",
+                        flexDirection:"row",
+                        alignItems:"center",
+                        userSelect:"none",
+                        p:"5px 15px",
+                        mr:"10px",
+                        border:"1px #D8D8D8 solid",
+                        typography:"body4",
+                        fontWeight:"400",
+                        fontFamily:"'Roboto Mono', Monaco, monospace",
+                    }}>
+                    {RedirectURI}
+                </Box>
+                <Copy
+                    fontSize="small"
+                    color="primary"
+                    onClick={CopyClick}
+                    sx={{
+                        opacity: "60%",
+                        ":hover": { opacity: "100%" },
+                        ":active": { fontSize: "18px" },
+                    }}
+                    />
+                <Delete
+                    key={id}
+                    fontSize="small"
+                    color="primary"
+                    onClick={(e)=>DelClick(e,id)}
+                    sx={{
+                        opacity: "60%",
+                        ":hover": { opacity: "100%" },
+                        ":active": { fontSize: "18px" },
+                    }}/>
+            </Box>
+        )
     }
 
-    const DelClick =()=>{
+    const CopyClick=(e:any)=>{
+        navigator.clipboard.writeText(redirectURI);
+        setToast({open:true,msgType:"success",content:"Successfully copied the URI",time:3000})
+    }
+
+    const DelClick =(e:any,id:number)=>{
+        setCurrentId(id);
         setDel({open:true,clickedYes:false});
     }
     if(del.clickedYes){
         
         setURI("");
-        setToast({open:true,msgType:"success",content:"Domain deleted successfully",time:3000})
+        setToast({open:true,msgType:"success",content:"URI deleted successfully",time:3000})
         setDel({open:false,clickedYes:false});
+        AppDomain.splice(currentId,1);
     }
 
     const SetInput =(e:any)=>{
@@ -67,52 +128,42 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
         setToast({open:false,msgType:"success",content:"",time:0});
     }
 
+    const URIs = AppDomain.map((RedirectURI, index) => { return <RedirectURIComponent RedirectURI={RedirectURI} id={index}/> })
+
     return(
         <Box 
             sx={{
                 p:"20px 0",
                 maxWidth:"540px",
                 height:"250px",
-                border:"1px black",
-                borderRadius:"5px",
-                borderStyle:"solid"}}>
-           <Typography variant="body2" sx={{ml:"20px", mb:"10px"}}>Enable Auth Code by specifying atleast one uri</Typography>
-           <Typography  sx={{ml:"20px",mb:"20px", fontFamily:"Noto Sans SC", typography:"subtitle5"}}>Redirect URI Management</Typography>
-           <Box sx={{ disply: "grid", gridTemplateColumns: "auto", ml: "20px" }}>
-                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "10px", mb: "10px" }}>
-                    <TextField 
-                        // label="Your App Doamins-1" 
-                        placeholder="you app domains"
-                        value={AppDomain}
-                        InputProps={{readOnly:true, style:{fontSize:"17px"}}}
-                        sx={{ width: "350px" }} />
-                    <Copy 
-                        fontSize="small" 
-                        color="primary" 
-                        onClick={CopyClick}
-                        sx={{opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"18px"}}}/>
-                    <Delete 
-                        fontSize="small" 
-                        color="primary" 
-                        onClick={DelClick}
-                        sx={{opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"18px"}}}/>
-                </Box>
-                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                    <TextField 
-                        // label="Add a redirect uri" 
-                        placeholder="Add a redirect uri"
-                        onChange={SetInput} 
-                        name="redirectURI" 
+                border:"1px lightgray solid",
+                borderRadius:"5px"}}>
+            <Typography  sx={{ml:"40px",mb:"10px", fontFamily:"Noto Sans SC", typography:"subtitle5"}}>Redirect URI Management</Typography>
+            <Typography variant="body2" sx={{ml:"40px", mb:"30px"}}>Enable Auth Code by specifying atleast one uri</Typography>
+            <Box sx={{ disply: "flex", flexDirection:"column", ml: "40px" }}>
+                {URIs}
+                <Box sx={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
+                    <TextField
+                        placeholder="Add a redirect URI"
+                        onChange={SetInput}
+                        name="redirectURI"
                         value={redirectURI}
-                        InputProps={{style:{fontSize:"17px"}}}
-                        inputProps={{style:{width:"230px"}}}
+                        size="small"
+                        InputProps={{ style: { fontSize: "17px", borderRadius:"2px 0 0 2px", width:"240px" } }}
                         autoComplete="off"
-                        sx={{ width: "350px"}}
-                        />
+                    />
                     <Button
-                        variant="contained" 
+                        variant="contained"
                         onClick={SaveURI}
-                        sx={{ position: "absolute", left:"420px",height:"40px", width:"80px", fontSize:"17px", textTransform:"none"  }}>Save</Button>
+                        sx={{
+                            boxShadow:"none",
+                            borderRadius:"0 3px 3px 0",
+                            fontSize: "17px",
+                            height: "41px",
+                            width: "80px",
+                            textTransform: "none",
+                        }}>Save
+                    </Button>
                 </Box>
             </Box>
             <ToastMessage 
@@ -121,9 +172,9 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                 ToastClose={CloseToast} 
                 msgType={Toast.msgType} 
                 content={Toast.content}
-                vertical='bottom'
-                horizontal='left'/>
-            <PopupWarning open={del} setOpen={setDel} message="The App Domain will be deleted permanently"/>
+                vertical='top'
+                horizontal='right'/>
+            <PopupWarning open={del} setOpen={setDel} message="The redirect URI will be deleted permanently"/>
         </Box>
     )
 }

@@ -1,4 +1,5 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Tab } from "@mui/material";
+import {TabList, TabContext, TabPanel} from "@mui/lab"
 import { EditBox } from "../../templates/EditBox";
 import PasswordGrant from "./GrantTypeTabs/PasswordGrant";
 import AuthCodeGrant from "./GrantTypeTabs/AuthCodeGrant";
@@ -11,30 +12,26 @@ interface GrantTypeManagementProps{
 
 const GrantTypeManagement =({GrantManagement}:GrantTypeManagementProps) =>{
 
-    const [Tab,setTab] = useState(<PasswordGrant username={GrantManagement.PasswordGrant.username} password={GrantManagement.PasswordGrant.password}/>);
+    const [tabValue,setTabValue] = useState("1");
 
-    const ClickTab =(e:any)=>{
-
-        const activeTab = e.target.name;
-        const ele = document.getElementsByName(activeTab);
-        ele[0].style.backgroundColor="#FFFFFF"
-        if(activeTab==="PswdGrant"){
-            document.getElementsByName("AuthGrant")[0].style.backgroundColor = "#FAF7F0"
-            setTab(<PasswordGrant username={GrantManagement.PasswordGrant.username} password={GrantManagement.PasswordGrant.password}/>)
-        }
-        else{
-            document.getElementsByName("PswdGrant")[0].style.backgroundColor = "#FAF7F0"
-            setTab(<AuthCodeGrant AppDomain={GrantManagement.AuthGrant.AppDomain}/>)
-        }
+    const ClickTab =(e:any,newValue:string)=>{
+        setTabValue(newValue);
     }
 
     return(
         <EditBox >
             <Title >Oauth Grant Type Management</Title>
-            <Box sx={{ml:"100px"}}>
-                <Button name="PswdGrant" onClick={ClickTab} sx={{width:"110px", textTransform: "none",border:"1px #97C4B8",borderStyle:"solid", bgcolor:"#FFFFFF", ":hover":{bgcolor:"#EFF5F5"}, ":focus":{bgcolor:"#FFFFFF"}}}>Password Grant</Button>
-                <Button name="AuthGrant" onClick={ClickTab} sx={{width:"110px", textTransform: "none",border:"1px #97C4B8",borderStyle:"solid", bgcolor:"#FAF7F0", ":hover":{bgcolor:"#EFF5F5"}, ":focus":{bgcolor:"#FFFFFF"}}}>AuthCode Grant</Button>
-                {Tab}
+            <Box sx={{mt:"15px"}}>
+                <TabContext value={tabValue}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider'}}>
+                        <TabList onChange={ClickTab}>
+                            <Tab label="Password Grant" value="1" sx={{width:"40px",textTransform:"none"}}/>
+                            <Tab label="AuthCode Grant" value="2" sx={{width:"40px",textTransform:"none"}}/>
+                        </TabList>
+                    </Box>
+                    <TabPanel value="1"><PasswordGrant username={GrantManagement.PasswordGrant.username} password={GrantManagement.PasswordGrant.password}/></TabPanel>
+                    <TabPanel value="2"><AuthCodeGrant AppDomain={GrantManagement.AuthGrant.AppDomain}/></TabPanel>
+                </TabContext>
             </Box>
         </EditBox>
     )

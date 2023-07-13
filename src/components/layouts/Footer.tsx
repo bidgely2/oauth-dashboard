@@ -14,7 +14,7 @@ const Footer = () =>{
                 alignItems: "center",
                 bgcolor:"white"
             }}>
-            <Typography variant="body1">@2023, Bidgely Inc.</Typography>
+            <Typography variant="body1">&copy; 2023, Bidgely Inc.</Typography>
         </Box>
     )
 }

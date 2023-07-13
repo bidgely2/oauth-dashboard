@@ -1,8 +1,11 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import { RunContextApp } from "./framework/RCApp";
 import AppRoutes from "./routes/AppRoutes";
 import GlobalContextProvider from './context/GlobalContext';
+import { reducers } from "./store/reducers";
+import {configureStore} from "@reduxjs/toolkit"
 
 
 interface AppProps {
@@ -10,11 +13,16 @@ interface AppProps {
 }
 
 const App = (props: AppProps) => {
+
+  const store = configureStore({reducer: reducers})
+
   return (
     <GlobalContextProvider rc={props.rc}>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </Provider>
     </GlobalContextProvider>
   );
 };
