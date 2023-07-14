@@ -52,6 +52,7 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
                         userSelect:"none",
                         p:"5px 15px",
                         mr:"10px",
+                        minWidth:"350px",
                         border:"1px #D8D8D8 solid",
                         typography:"body4",
                         fontWeight:"400",

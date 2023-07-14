@@ -49,6 +49,7 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                         userSelect:"none",
                         p:"5px 15px",
                         mr:"10px",
+                        minWidth:"350px",
                         border:"1px #D8D8D8 solid",
                         typography:"body4",
                         fontWeight:"400",
@@ -135,7 +136,7 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
             sx={{
                 p:"20px 0",
                 maxWidth:"540px",
-                height:"250px",
+                minHeight:"250px",
                 border:"1px lightgray solid",
                 borderRadius:"5px"}}>
             <Typography  sx={{ml:"40px",mb:"10px", fontFamily:"Noto Sans SC", typography:"subtitle5"}}>Redirect URI Management</Typography>

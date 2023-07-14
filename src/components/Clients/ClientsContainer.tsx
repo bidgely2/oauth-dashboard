@@ -33,7 +33,7 @@ const Clients = () => {
             <AppDomains AppDomain={clientData.AppDomain}/>
             <GrantTypeManagement GrantManagement={clientData.GrantManagement}/>
             <KeyManagement KeyManagement={clientData.KeyManagement}/>
-            <DeleteCredentials props={clientData}/>
+            <DeleteCredentials props={clientData} id={id}/>
         </Box>
     )
 }

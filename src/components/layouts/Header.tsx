@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 const Header = ()=>{
 
     const loggedIn = useSelector((state:any)=>state.session);
-    console.log(loggedIn);
 
     return (
         <AppBar sx={{

@@ -3,7 +3,8 @@ import { AppsInterface } from "../../__mock__/apis/OauthMocks/AppInfo"
 
 export const APP_TYPES = {
     GET_APPS: "GET_APPS",
-    POST_APP: "POST_APP"
+    POST_APP: "POST_APP",
+    DELETE_APP: "DELETE_APP"
 }
 
 export const APP_ACTIONS = {
@@ -17,6 +18,12 @@ export const APP_ACTIONS = {
         return {
             type: APP_TYPES.POST_APP,
             payload: App
+        }
+    },
+    DELETE_APP: (id:number) =>{
+        return {
+            type: APP_TYPES.DELETE_APP,
+            payload: id
         }
     }
 }

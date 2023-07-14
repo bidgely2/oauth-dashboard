@@ -26,7 +26,7 @@ export const APPDATA = {
 export function useGetAppData(){
 
   const {rc} = useGlobalContext();
-  
+
   const [data,setData] = useState<AppsInterface[]>([]);
 
   // useEffect(() => {
@@ -40,3 +40,4 @@ export function useGetAppData(){
     // console.log(DATA);
     return data;
 } 
+
