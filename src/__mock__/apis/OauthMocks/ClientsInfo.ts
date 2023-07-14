@@ -31,27 +31,27 @@ export const CLIENTDATA =
         payload: [
             {
                 ClientDetail: {
-                    ClientId:"Ameren",
+                    ClientId:"ameren-dashboard",
                     ClientSecret:"hcb7e3xv",
-                    APIEndpoint:"https://amerenapi.bidgely.com/"
+                    APIEndpoint:"https://btocdevapi.bidgely.com"
                 },
                 KeyManagement: {
-                    AccessToken:"d32fg4h3j",
-                    RefreshToken:"asdjkl",
+                    AccessToken:"d9ae051d-f4ed-4701-a8bf-ba4f7cbb5a7c",
+                    RefreshToken:"asdjkl2h-f4ed-4701-a8bf-ba4f7cbb5a7c",
                     ExpiryTime:"43200"
                 },
                 EncryptDetail: {
-                    EncryptionKey:"12njbds8b",
-                    iVVector:"qwertty"
+                    EncryptionKey:"ikuuRaHhl8uSX8//RBXfr6pwap/Nt0dY",
+                    iVVector:"oogP1x9Ef3MtYDhS"
                 },
-                AppDomain: ["https://ameren.com"],
+                AppDomain: ["https://ameren-dev.bidgely.com/"],
                 GrantManagement: {
                     PasswordGrant:{
                         username:"Ameren",
                         password:"123456789",
                     },
                     AuthGrant:{
-                        AppDomain:["https://ameren.com/bidgely_auth"]
+                        AppDomain:["https://ameren-dev.bidgely.com/bidgely_auth"]
                     }
                 }
             },
@@ -59,7 +59,7 @@ export const CLIENTDATA =
                 ClientDetail: {
                     ClientId:"Ameren-Missouri",
                     ClientSecret:"askdbhf",
-                    APIEndpoint:"https://amerenapi.bidgely.com/"
+                    APIEndpoint:"https://btocdevapi.bidgely.com"
                 },
                 KeyManagement: {
                     AccessToken:"aiwbf",
@@ -67,8 +67,8 @@ export const CLIENTDATA =
                     ExpiryTime:"43200"
                 },
                 EncryptDetail: {
-                    EncryptionKey:"23uob1",
-                    iVVector:"opiuywe"
+                    EncryptionKey:"ikuuRaHhl8uSX8//RBXfr6pwap/Nt0dY",
+                    iVVector:"oogP1x9Ef3MtYDhS"
                 },
                 AppDomain: ["https://ameren.com"],
                 GrantManagement: {
