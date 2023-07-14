@@ -7,16 +7,20 @@ import PopupWarning from "../../templates/PopupWarning";
 import { useState } from "react";
 import {Title} from "./title/title"
 import { DeleteOutlined as Delete } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { APP_ACTIONS } from "../../../store/actions/AppActions";
 
 interface DeleteCredentialProps{
-    props:ClientsInterface
+    props:ClientsInterface,
+    id:number
 }
 
-const DeleteCredentials =({props}:DeleteCredentialProps) =>{
+const DeleteCredentials =({props,id}:DeleteCredentialProps) =>{
 
     const {rc} = useGlobalContext();
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [del, setDel] = useState({open:false,clickedYes:false}); 
 
@@ -25,6 +29,7 @@ const DeleteCredentials =({props}:DeleteCredentialProps) =>{
     }
     
     if(del.clickedYes){
+        dispatch(APP_ACTIONS.DELETE_APP(id));
         rc.apiClient.delete("/api/v2.0/oauth-app/delete",{params:{requestId:123}})
              .then((res)=>{console.log(res.data)});
         navigate("/dashboard");

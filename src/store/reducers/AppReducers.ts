@@ -8,6 +8,8 @@ export const AppReducer = (state:AppsInterface[] = APPDATA.payload, action: Acti
             return action.payload
         case APP_TYPES.POST_APP :
             return [...state,action.payload]
+        case APP_TYPES.DELETE_APP :
+            return state.filter((app,index)=>{return (index!==action.payload)?app:null})
         default : 
             return state
     }

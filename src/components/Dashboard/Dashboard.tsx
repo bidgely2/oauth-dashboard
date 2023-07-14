@@ -25,20 +25,9 @@ const Dashboard = () => {
                     alignItems: "center",
                 }}
             >
-                {/* <Typography
-                    sx={{
-                        ml: "40px",
-                        mt: "20px",
-                        fontFamily: "poppins, 'Arial Narrow', sans-serif",
-                        typography: "title2",
-                        letterSpacing: "1px",
-                    }}
-                >
-                    
-                </Typography> */}
                 <Button
                     variant="contained"
-                    sx={{ width: "150px", ml: "auto", mr: "30px", mt: "20px" }}
+                    sx={{ width: {xs:"120px",md:"150px"}, ml: "auto", mr: "30px", mt: "20px" }}
                     onClick={handlePopup}
                 >
                     Create App

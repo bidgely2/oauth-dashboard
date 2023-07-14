@@ -20,12 +20,12 @@ const AppCard = (props: AppCardProps) => {
         <Card
             sx={{
                 margin: "10px",
-                width:"170px",
-                height:"140px",
+                width:{xs:"130px",md:"170px"},
+                height:{xs:"100px",md:"140px"},
                 position:"relative",
             }}
         >
-            <IconButton sx={{position:"absolute",right:"2px",top:"2px", opacity:"70%"}}>
+            <IconButton sx={{position:"absolute",right:{xs:"0",md:"2px"},top:{xs:"0",md:"2px"}, opacity:"70%"}}>
                 <Edit color="primary" fontSize="small" onClick={EditClick}/>
             </IconButton>
             <Box sx={{height:"100%",p:"0 10px", display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"}}>
