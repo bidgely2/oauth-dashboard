@@ -10,6 +10,7 @@ import PopupWarning from "../../templates/PopupWarning";
 import { useGlobalContext } from "../../../context/GlobalContext";
 import { Title } from "./title/title";
 import { APIURLS, OauthAPIs } from "../../../apis/OauthAPI";
+import { AxiosRequestConfig } from "axios";
 
 interface AppDomainProps {
     AppDomain: string[];
@@ -24,7 +25,8 @@ interface ToastMsg {
 
 interface domainComponentProps{
     Domain: string,
-    id: number
+    domainId: number,
+    arrayId:number
 }
 
 interface domainAPIProps{
@@ -37,7 +39,7 @@ interface domainAPIProps{
 const AppDomains = ({ AppDomain }: AppDomainProps) => {
 
     
-    const AppDomainComponent = ({Domain,id}: domainComponentProps) => {
+    const AppDomainComponent = ({Domain,domainId,arrayId}: domainComponentProps) => {
         return (
             <Box
                 sx={{
@@ -70,7 +72,7 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
                 <Copy
                     fontSize="small"
                     color="primary"
-                    onClick={CopyClick}
+                    onClick={(e)=>CopyClick(e,arrayId)}
                     sx={{
                         opacity: "60%",
                         ":hover": { opacity: "100%" },
@@ -78,10 +80,9 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
                     }}
                     />
                 <Delete
-                    key={id}
                     fontSize="small"
                     color="primary"
-                    onClick={(e)=>DelClick(e,id)}
+                    onClick={(e)=>DelClick(e,domainId,arrayId)}
                     sx={{
                         opacity: "60%",
                         ":hover": { opacity: "100%" },
@@ -95,7 +96,7 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
     const { rc } = useGlobalContext();
     
     const [redirectURI, setURI] = useState("");
-    const [currentId,setCurrentId] = useState(0);
+    const [currentId,setCurrentId] = useState({domainId:0,arrayId:0});
     const [del, setDel] = useState({ open: false, clickedYes: false });
     const [Toast, setToast] = useState<ToastMsg>({
         open: false,
@@ -107,11 +108,36 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
 
     useEffect(()=>{
         const getData = async() => {
-            const res = await OauthAPIs.getData(rc,APIURLS.APPDOMAINS)
+            if(!del.clickedYes){
+                const res = await OauthAPIs.getData(rc,APIURLS.APPDOMAINS)
                 .then((response)=>setAppDomain(response.data as domainAPIProps[]))
+            }
+            else{
+                setURI("");
+                setToast({
+                    open: true,
+                    msgType: "success",
+                    content: "Domain deleted successfully",
+                    time: 3000,
+                });
+                setDel({ open: false, clickedYes: false });
+                
+                const config:AxiosRequestConfig = {
+                    headers: {
+                        "Authorization": "Bearer d9ae051d-f4ed-4701-a8bf-ba4f7cbb5a7c"
+                    },
+                    data: {
+                        "clientId":"ameren-dashboard",
+                        "requestOrigin":appDomain[currentId.arrayId].requestOrigin
+                    }
+                }
+                const res = await OauthAPIs.deleteData(rc,APIURLS.APPDOMAINS,config,currentId.domainId)
+                .then((response)=>console.log(response.data));
+            }
         }
         getData();
-    },[])
+        // console.log(appDomain);
+    },[del.clickedYes])
 
     // console.log(appDomain);
     
@@ -126,40 +152,21 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
             return true;
         }
     };
-    const CopyClick = (e: any) => {
-        navigator.clipboard.writeText(redirectURI);
+    const CopyClick = (e: any,arraydId:number) => {
+        navigator.clipboard.writeText(appDomain[arraydId].requestOrigin);
         setToast({
             open: true,
             msgType: "success",
-            content: "Successfullt copied the domain",
+            content: "Successfully copied the domain",
             time: 3000,
         });
     };
 
-    const DelClick = (e:any,id:number) => {
-        console.log(id);
-        setCurrentId(id);
+    const DelClick = (e:any,domainId:number,arrayId:number) => {
+        // console.log(id);
+        setCurrentId({domainId:domainId,arrayId:arrayId});
         setDel({ open: true, clickedYes: false });
     };
-
-    if (del.clickedYes) {
-        setURI("");
-        setToast({
-            open: true,
-            msgType: "success",
-            content: "Domain deleted successfully",
-            time: 3000,
-        });
-        setDel({ open: false, clickedYes: false });
-        rc.apiClient
-            .delete("/api/v2.0/whitelist-origin/delete", {
-                params: { requestId: 123 },
-            })
-            .then((res) => {
-                console.log(res.data);
-            });
-        AppDomain.splice(currentId,1);
-    }
 
     const SetInput = (e: any) => {
         setURI(e.target.value);
@@ -189,12 +196,12 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
         setURI("");
     };
 
-    const Domains = appDomain.map((domain, index) => { return <AppDomainComponent Domain={domain.requestOrigin} id={index}/> })
+    const Domains = appDomain.map((domain, index) => { return <AppDomainComponent Domain={domain.requestOrigin} domainId={domain.id} arrayId={index}/> })
 
     return (
         <EditBox>
             <Title> Your App Domains</Title>
-            <Box sx={{ disply: "flex", flexDirection:"column", mt:"15px" }}>
+            <Box sx={{ disply: "flex", flexDirection:"column", mt:"15px",maxHeight:"400px",overflow:"auto" }}>
                 {Domains}
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
                     <TextField

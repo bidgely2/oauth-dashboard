@@ -20,12 +20,13 @@ const PasswordGrant =({username,password}:PasswordGrantProps) =>{
     return(
         <Box 
             sx={{
-                p:"20px 0",
+                p:"20px",
                 maxWidth:"540px",
-                minHeight:"250px",
+                height:"250px",
+                overflow:"auto",
                 border:"1px lightgray solid",
                 borderRadius:"5px"}}>
-            <Box sx={{display:"flex", flexDirection:"row",alignItems:"center",mb:"30px",ml:"40px"}}>
+            <Box sx={{display:"flex", flexDirection:"row",alignItems:"center",mb:"20px",ml:"20px"}}>
                 <Typography sx={{fontFamily:"Noto Sans SC", typography:"subtitle5"}}>Password Credential Grant Data</Typography>
                 <IconButton sx={{ml:"10px"}}>
                     {(hide==="View")
@@ -34,7 +35,7 @@ const PasswordGrant =({username,password}:PasswordGrantProps) =>{
                     }
                 </IconButton>
             </Box>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "15px", ml:"40px",}}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "15px", ml:"20px",}}>
                 <InputBox hide={(hide==="View")} title="username" placeholder={username} wide="400px"/>
                 <InputBox hide={(hide==="View")} title="password" placeholder={password} wide="400px"/>
             </Box>

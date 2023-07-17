@@ -5,7 +5,8 @@ import { RunContextApp } from "./framework/RCApp";
 import AppRoutes from "./routes/AppRoutes";
 import GlobalContextProvider from './context/GlobalContext';
 import { reducers } from "./store/reducers";
-import {configureStore} from "@reduxjs/toolkit"
+import {store,persistor }from "./store/Store"
+import { PersistGate } from 'redux-persist/integration/react'
 
 
 interface AppProps {
@@ -14,14 +15,14 @@ interface AppProps {
 
 const App = (props: AppProps) => {
 
-  const store = configureStore({reducer: reducers})
-
   return (
     <GlobalContextProvider rc={props.rc}>
       <Provider store={store}>
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <AppRoutes />
+          </BrowserRouter>
+        </PersistGate>
       </Provider>
     </GlobalContextProvider>
   );

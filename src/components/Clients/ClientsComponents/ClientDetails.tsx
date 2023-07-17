@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { InputBox } from "../../templates/InputBox";
 import { EditBox } from "../../templates/EditBox";
 import {Visibility as Eye, VisibilityOff as ClosedEye} from '@mui/icons-material';
@@ -24,18 +24,18 @@ const ClientDetails = ({ClientDetail}:ClientDetailProps) => {
                     <InputBox title="Client Id" placeholder={ClientDetail.ClientId}/>
                     <Box sx={{display:"flex"}}>
                         <InputBox title="Client Secret" placeholder={clientSecret}/>
-                        {(clientSecret==="******")
-                            ?<Eye 
-                                fontSize="small" 
-                                color="primary" 
-                                sx={{ml:"10px",mt:"42px", opacity:"60%", ":hover":{opacity:"100%"}, ":active":{fontSize:"19px"}}} 
-                                onClick={ClickHide}/>
-                            :<ClosedEye 
-                                fontSize="small" 
-                                color="primary" 
-                                sx={{ml:"10px",mt:"42px", ":active":{fontSize:"19px"}}} 
-                                onClick={ClickHide}/> 
-                        }      
+                        <IconButton sx={{ml:"5px",mt:"28px"}}>
+                            {(clientSecret==="******")
+                                ?<Eye 
+                                    fontSize="small" 
+                                    color="primary" 
+                                    onClick={ClickHide}/>
+                                :<ClosedEye 
+                                    fontSize="small" 
+                                    color="primary" 
+                                    onClick={ClickHide}/> 
+                            }      
+                        </IconButton>
                     </Box>
                 <InputBox title="Api Endpoint" placeholder={ClientDetail.APIEndpoint} />
             </Box>

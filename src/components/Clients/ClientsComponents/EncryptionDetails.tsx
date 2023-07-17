@@ -30,24 +30,23 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
 
     useEffect(()=>{
         const getData = async() => {
-            const res = await OauthAPIs.getData(rc,APIURLS.ENCRYPTIONKEYS)
+            if(!Regenerate.clickedYes){
+                const res = await OauthAPIs.getData(rc,APIURLS.ENCRYPTIONKEYS)
                 .then((response)=>setEncryptionKeys(response.data as encryptionKeysInterface));
+            }
+            else{
+                console.log("helo")
+                const res = await OauthAPIs.postData(rc,APIURLS.ENCRYPTIONKEYS,{clientId:"ameren-dashboard"})
+                .then((response)=>setEncryptionKeys(response.data as encryptionKeysInterface));
+                setToast(true);
+                setRegenerate({open:false,clickedYes:false});
+            }
         }
         getData();
-    },[])
-
-    // console.log(encryptionKeys)
-
+    },[Regenerate.clickedYes])
     
     const ClickRegenerate =()=>{
         setRegenerate({open:true,clickedYes:false});
-    }
-    if(Regenerate.clickedYes){
-        // then code to regenerate
-        setToast(true);
-        rc.apiClient.post("/api/v2.0/encryption/key/post",{requestId:123})
-            .then(res=>console.log(res.data))
-        setRegenerate({open:false,clickedYes:false});
     }
     
     return (
@@ -65,7 +64,7 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
             <PopupWarning open={Regenerate} setOpen={setRegenerate} message="Make sure to replace the previous keys"/>
             <ToastMessage 
                 open={ToastOpen} 
-                time={5000} 
+                time={3000} 
                 ToastClose={()=>{setToast(false)}} 
                 msgType={"success"} 
                 content={"Successfully regenerated the keys"}

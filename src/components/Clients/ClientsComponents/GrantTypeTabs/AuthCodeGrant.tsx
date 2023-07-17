@@ -60,7 +60,7 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                 <Copy
                     fontSize="small"
                     color="primary"
-                    onClick={CopyClick}
+                    onClick={(e)=>CopyClick(e,id)}
                     sx={{
                         opacity: "60%",
                         ":hover": { opacity: "100%" },
@@ -81,8 +81,8 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
         )
     }
 
-    const CopyClick=(e:any)=>{
-        navigator.clipboard.writeText(redirectURI);
+    const CopyClick=(e:any,id:number)=>{
+        navigator.clipboard.writeText(AppDomain[id]);
         setToast({open:true,msgType:"success",content:"Successfully copied the URI",time:3000})
     }
 
@@ -134,14 +134,14 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
     return(
         <Box 
             sx={{
-                p:"20px 0",
+                p:"20px",
                 maxWidth:"540px",
-                minHeight:"250px",
+                height:"250px",
                 border:"1px lightgray solid",
                 borderRadius:"5px"}}>
-            <Typography  sx={{ml:"40px",mb:"10px", fontFamily:"Noto Sans SC", typography:"subtitle5"}}>Redirect URI Management</Typography>
-            <Typography variant="body2" sx={{ml:"40px", mb:"30px"}}>Enable Auth Code by specifying atleast one uri</Typography>
-            <Box sx={{ disply: "flex", flexDirection:"column", ml: "40px" }}>
+            <Typography  sx={{ml:"20px",mb:"10px", fontFamily:"Noto Sans SC", typography:"subtitle5"}}>Redirect URI Management</Typography>
+            <Typography variant="body2" sx={{ml:"20px", mb:"30px"}}>Enable Auth Code by specifying atleast one uri</Typography>
+            <Box sx={{ disply: "flex", flexDirection:"column", ml: "20px",maxHeight:"150px",overflow:"auto" }}>
                 {URIs}
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
                     <TextField

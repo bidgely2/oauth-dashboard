@@ -22,14 +22,13 @@ export const OauthAPIs = {
         const response = await rc.apiClient.get(url,config);
         return response;
     },
-    postData: async (rc: RunContextApp,url:string,data:any) =>{
-        url = `${url}${client_id}`
-        const response = await axios.post(url,data,config);
+    postData: async (rc: RunContextApp,url:string,data?:any) =>{
+        const response = await rc.apiClient.post(url,data,config);
         return response;
     },
-    deleteData: async (rc: RunContextApp,url:string) =>{
-        url = `${url}${client_id}`
-        const response = await axios.delete(url,config);
+    deleteData: async (rc: RunContextApp,url:string,config:AxiosRequestConfig,id:number) =>{
+        url = `${url}${client_id}/${id}`
+        const response = await rc.apiClient.delete(url,config);
         return response;
     },
 }
