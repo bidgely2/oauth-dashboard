@@ -12,7 +12,7 @@ export class AppFlavour {
   constructor() {
     this.pilotId = 10082;
     this.environment = "dev";
-    this.backendApiUrl = "avangriddevapi.bidgely.com";
+    this.backendApiUrl = "btocdevapi.bidgely.com";
   }
 
   static getFlavour() {

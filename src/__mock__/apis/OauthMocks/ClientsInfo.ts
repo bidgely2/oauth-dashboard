@@ -1,7 +1,3 @@
-import { res } from "../../../apis/EncrptionKeys"
-
-// console.log(res);
-
 export interface ClientsInterface{
     ClientDetail: {
         ClientId:string,

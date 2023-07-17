@@ -4,11 +4,12 @@ import {
     DeleteOutlined as Delete,
 } from "@mui/icons-material";
 import { EditBox } from "../../templates/EditBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToastMessage from "../../templates/ToastMessage";
 import PopupWarning from "../../templates/PopupWarning";
 import { useGlobalContext } from "../../../context/GlobalContext";
 import { Title } from "./title/title";
+import { APIURLS, OauthAPIs } from "../../../apis/OauthAPI";
 
 interface AppDomainProps {
     AppDomain: string[];
@@ -21,16 +22,22 @@ interface ToastMsg {
     time: number;
 }
 
-interface domainProps{
+interface domainComponentProps{
     Domain: string,
     id: number
+}
+
+interface domainAPIProps{
+    id:number,
+    clientId:string,
+    requestOrigin:string
 }
 
 
 const AppDomains = ({ AppDomain }: AppDomainProps) => {
 
     
-    const AppDomainComponent = ({Domain,id}: domainProps) => {
+    const AppDomainComponent = ({Domain,id}: domainComponentProps) => {
         return (
             <Box
                 sx={{
@@ -96,6 +103,17 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
         content: "",
         time: 0,
     });
+    const [appDomain,setAppDomain] = useState<domainAPIProps[]>([{id:0,clientId:"",requestOrigin:""}]);
+
+    useEffect(()=>{
+        const getData = async() => {
+            const res = await OauthAPIs.getData(rc,APIURLS.APPDOMAINS)
+                .then((response)=>setAppDomain(response.data as domainAPIProps[]))
+        }
+        getData();
+    },[])
+
+    // console.log(appDomain);
     
     const isValidUrl = (urlString: string) => {
         var inputElement = document.createElement("input");
@@ -171,7 +189,7 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
         setURI("");
     };
 
-    const Domains = AppDomain.map((domain, index) => { return <AppDomainComponent Domain={domain} id={index}/> })
+    const Domains = appDomain.map((domain, index) => { return <AppDomainComponent Domain={domain.requestOrigin} id={index}/> })
 
     return (
         <EditBox>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../../../context/GlobalContext";
+import axios, { AxiosRequestConfig } from "axios";
 
 // App Interface and AppMockData
 export interface AppsInterface{
@@ -23,21 +24,20 @@ export const APPDATA = {
 
 
 // custom hook to get data from mock api
-export function useGetAppData(){
+export function useGetData<T>(url:string,config?:AxiosRequestConfig){
 
-  const {rc} = useGlobalContext();
+  // const {rc} = useGlobalContext();
 
-  const [data,setData] = useState<AppsInterface[]>([]);
+  const [data,setData] = useState<T>();
 
-  // useEffect(() => {
-      // const getDATA = async () => {
-          rc.apiClient.get("/api/apps/get",{params:{requestId:123}})
-          .then((response)=>{setData(response.data as AppsInterface[])})
-        // setData(res.data as AppsInterface[]);
-      // };
-      // getDATA();
-    // },[]);
-    // console.log(DATA);
-    return data;
+    useEffect(() => {
+      const getDATA = async () => {
+          const res = await axios.get(url,config)
+            .then((response)=>setData(response.data.payload as T));
+      }
+      getDATA();
+    },[]);
+
+  return data;
 } 
 
