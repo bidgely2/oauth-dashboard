@@ -15,7 +15,7 @@ import {
 import {
     AppsInterface,
 } from "../../__mock__/apis/OauthMocks/AppInfo";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import React from "react";
 import { Close } from "@mui/icons-material";
 import ToastMessage from "../templates/ToastMessage";
@@ -46,7 +46,6 @@ const CreateApp = (props: PopupProps) => {
     }); //ToastMsg
     const [AppType, setAppType] = useState("");
 
-    // const AppData: AppsInterface[] = useGetAppData();
     const AppData:AppsInterface[] = (useSelector((state:any)=>state.apps))
 
     const ClickCreate = () => {
@@ -55,7 +54,7 @@ const CreateApp = (props: PopupProps) => {
         });
 
         let failure: boolean = input.type === "" || input.name === "";       // all inputs empty
-        console.log(input);
+        // console.log(input);
 
         if (failure) {
             setToast({

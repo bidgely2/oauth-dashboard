@@ -4,11 +4,13 @@ import {
     DeleteOutlined as Delete,
 } from "@mui/icons-material";
 import { EditBox } from "../../templates/EditBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ToastMessage from "../../templates/ToastMessage";
 import PopupWarning from "../../templates/PopupWarning";
 import { useGlobalContext } from "../../../context/GlobalContext";
 import { Title } from "./title/title";
+import { APIURLS, OauthAPIs, client_id } from "../../../apis/OauthAPI";
+import { AxiosRequestConfig } from "axios";
 
 interface AppDomainProps {
     AppDomain: string[];
@@ -21,16 +23,22 @@ interface ToastMsg {
     time: number;
 }
 
-interface domainProps{
+interface domainComponentProps{
     Domain: string,
-    id: number
+    domainId: number,
+    arrayId:number
 }
 
+interface domainAPIProps{
+    id:number,
+    clientId:string,
+    requestOrigin:string
+}
 
 const AppDomains = ({ AppDomain }: AppDomainProps) => {
 
     
-    const AppDomainComponent = ({Domain,id}: domainProps) => {
+    const AppDomainComponent = ({Domain,domainId,arrayId}: domainComponentProps) => {
         return (
             <Box
                 sx={{
@@ -39,6 +47,7 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
                     alignItems: "center",
                     gap: "10px",
                     mb: "20px",
+                    width:"fit-content"
                 }}>
                 <Box
                     sx={{
@@ -63,7 +72,7 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
                 <Copy
                     fontSize="small"
                     color="primary"
-                    onClick={CopyClick}
+                    onClick={(e)=>CopyClick(e,arrayId)}
                     sx={{
                         opacity: "60%",
                         ":hover": { opacity: "100%" },
@@ -71,10 +80,9 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
                     }}
                     />
                 <Delete
-                    key={id}
                     fontSize="small"
                     color="primary"
-                    onClick={(e)=>DelClick(e,id)}
+                    onClick={(e)=>DelClick(e,domainId,arrayId)}
                     sx={{
                         opacity: "60%",
                         ":hover": { opacity: "100%" },
@@ -87,15 +95,52 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
     
     const { rc } = useGlobalContext();
     
-    const [redirectURI, setURI] = useState("");
-    const [currentId,setCurrentId] = useState(0);
+    const [requestOrigin, setOrigin] = useState("");
+    const [currentId,setCurrentId] = useState({domainId:0,arrayId:0});
     const [del, setDel] = useState({ open: false, clickedYes: false });
+    const [addDomain,setDomain] = useState(false)
     const [Toast, setToast] = useState<ToastMsg>({
         open: false,
         msgType: "success",
         content: "",
         time: 0,
     });
+    const [appDomain,setAppDomain] = useState<domainAPIProps[]>([{id:0,clientId:"",requestOrigin:""}]);
+
+    useEffect(()=>{
+        const getData = async() => {
+            if(addDomain){
+                const res = await OauthAPIs.postData(rc,APIURLS.APPDOMAINS,{clientId:client_id,requestOrigin:requestOrigin})
+                    .then((response)=>console.log(response.data))
+                setDomain(false);
+                setOrigin("");
+            }
+            else if(!del.clickedYes){
+                const res = await OauthAPIs.getData(rc,APIURLS.APPDOMAINS)
+                .then((response)=>setAppDomain(response.data as domainAPIProps[]))
+            }
+            else{
+                setOrigin("");
+                setToast({
+                    open: true,
+                    msgType: "success",
+                    content: "Domain deleted successfully",
+                    time: 3000,
+                });
+                
+                const config:AxiosRequestConfig = {
+                        data: {
+                            "clientId":client_id,
+                            "requestOrigin":appDomain[currentId.arrayId].requestOrigin
+                        }
+                }
+                const res = await OauthAPIs.deleteData(rc,APIURLS.APPDOMAINS,config,currentId.domainId)
+                .then((response)=>console.log(response.data));
+                setDel({ open: false, clickedYes: false });
+            }
+        }
+        getData();
+    },[del.clickedYes,addDomain])
     
     const isValidUrl = (urlString: string) => {
         var inputElement = document.createElement("input");
@@ -108,43 +153,23 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
             return true;
         }
     };
-    const CopyClick = (e: any) => {
-        navigator.clipboard.writeText(redirectURI);
+    const CopyClick = (e: any,arraydId:number) => {
+        navigator.clipboard.writeText(appDomain[arraydId].requestOrigin);
         setToast({
             open: true,
             msgType: "success",
-            content: "Successfullt copied the domain",
+            content: "Successfully copied the domain",
             time: 3000,
         });
     };
 
-    const DelClick = (e:any,id:number) => {
-        console.log(id);
-        setCurrentId(id);
+    const DelClick = (e:any,domainId:number,arrayId:number) => {
+        setCurrentId({domainId:domainId,arrayId:arrayId});
         setDel({ open: true, clickedYes: false });
     };
 
-    if (del.clickedYes) {
-        setURI("");
-        setToast({
-            open: true,
-            msgType: "success",
-            content: "Domain deleted successfully",
-            time: 3000,
-        });
-        setDel({ open: false, clickedYes: false });
-        rc.apiClient
-            .delete("/api/v2.0/whitelist-origin/delete", {
-                params: { requestId: 123 },
-            })
-            .then((res) => {
-                console.log(res.data);
-            });
-        AppDomain.splice(currentId,1);
-    }
-
     const SetInput = (e: any) => {
-        setURI(e.target.value);
+        setOrigin(e.target.value);
     };
 
     const CloseToast = () => {
@@ -152,14 +177,9 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
     };
 
     const SaveURI = () => {
-        // console.log(AppDomain.AppDomain);
-        if (isValidUrl(redirectURI) && redirectURI.length !== 0) {
-            AppDomain.push(redirectURI);
-            rc.apiClient
-                .post("/api/v2.0/whitelist-origin/post", { requestId: 123 })
-                .then((res) => {
-                    console.log(res.data);
-                });
+
+        if (isValidUrl(requestOrigin) && requestOrigin.length !== 0) {
+            setDomain(true);
         } else {
             setToast({
                 open: true,
@@ -167,23 +187,25 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
                 content: "Invalid URI input",
                 time: 5000,
             });
+            setOrigin("");
         }
-        setURI("");
     };
 
-    const Domains = AppDomain.map((domain, index) => { return <AppDomainComponent Domain={domain} id={index}/> })
+    const Domains = appDomain.map((domain, index) => { return <AppDomainComponent Domain={domain.requestOrigin} domainId={domain.id} arrayId={index}/> })
 
     return (
         <EditBox>
             <Title> Your App Domains</Title>
-            <Box sx={{ disply: "flex", flexDirection:"column", mt:"15px" }}>
-                {Domains}
+            <Box sx={{ disply: "flex", flexDirection:"column", mt:"15px"}}>
+                <Box sx={{maxHeight:"400px",overflow:"auto",mb:"10px"}}>
+                    {Domains}
+                </Box>
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
                     <TextField
                         placeholder="Add an app domain"
                         onChange={SetInput}
-                        name="redirectURI"
-                        value={redirectURI}
+                        name="requestOrigin"
+                        value={requestOrigin}
                         size="small"
                         InputProps={{ style: { fontSize: "17px", borderRadius:"2px 0 0 2px", width:"240px" } }}
                         autoComplete="off"
