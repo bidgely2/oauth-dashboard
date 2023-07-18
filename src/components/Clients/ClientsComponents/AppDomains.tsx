@@ -9,7 +9,7 @@ import ToastMessage from "../../templates/ToastMessage";
 import PopupWarning from "../../templates/PopupWarning";
 import { useGlobalContext } from "../../../context/GlobalContext";
 import { Title } from "./title/title";
-import { APIURLS, OauthAPIs } from "../../../apis/OauthAPI";
+import { APIURLS, OauthAPIs, client_id } from "../../../apis/OauthAPI";
 import { AxiosRequestConfig } from "axios";
 
 interface AppDomainProps {
@@ -35,7 +35,6 @@ interface domainAPIProps{
     requestOrigin:string
 }
 
-
 const AppDomains = ({ AppDomain }: AppDomainProps) => {
 
     
@@ -48,6 +47,7 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
                     alignItems: "center",
                     gap: "10px",
                     mb: "20px",
+                    width:"fit-content"
                 }}>
                 <Box
                     sx={{
@@ -95,9 +95,10 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
     
     const { rc } = useGlobalContext();
     
-    const [redirectURI, setURI] = useState("");
+    const [requestOrigin, setOrigin] = useState("");
     const [currentId,setCurrentId] = useState({domainId:0,arrayId:0});
     const [del, setDel] = useState({ open: false, clickedYes: false });
+    const [addDomain,setDomain] = useState(false)
     const [Toast, setToast] = useState<ToastMsg>({
         open: false,
         msgType: "success",
@@ -108,38 +109,38 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
 
     useEffect(()=>{
         const getData = async() => {
-            if(!del.clickedYes){
+            if(addDomain){
+                const res = await OauthAPIs.postData(rc,APIURLS.APPDOMAINS,{clientId:client_id,requestOrigin:requestOrigin})
+                    .then((response)=>console.log(response.data))
+                setDomain(false);
+                setOrigin("");
+            }
+            else if(!del.clickedYes){
                 const res = await OauthAPIs.getData(rc,APIURLS.APPDOMAINS)
                 .then((response)=>setAppDomain(response.data as domainAPIProps[]))
             }
             else{
-                setURI("");
+                setOrigin("");
                 setToast({
                     open: true,
                     msgType: "success",
                     content: "Domain deleted successfully",
                     time: 3000,
                 });
-                setDel({ open: false, clickedYes: false });
                 
                 const config:AxiosRequestConfig = {
-                    headers: {
-                        "Authorization": "Bearer d9ae051d-f4ed-4701-a8bf-ba4f7cbb5a7c"
-                    },
-                    data: {
-                        "clientId":"ameren-dashboard",
-                        "requestOrigin":appDomain[currentId.arrayId].requestOrigin
-                    }
+                        data: {
+                            "clientId":client_id,
+                            "requestOrigin":appDomain[currentId.arrayId].requestOrigin
+                        }
                 }
                 const res = await OauthAPIs.deleteData(rc,APIURLS.APPDOMAINS,config,currentId.domainId)
                 .then((response)=>console.log(response.data));
+                setDel({ open: false, clickedYes: false });
             }
         }
         getData();
-        // console.log(appDomain);
-    },[del.clickedYes])
-
-    // console.log(appDomain);
+    },[del.clickedYes,addDomain])
     
     const isValidUrl = (urlString: string) => {
         var inputElement = document.createElement("input");
@@ -163,13 +164,12 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
     };
 
     const DelClick = (e:any,domainId:number,arrayId:number) => {
-        // console.log(id);
         setCurrentId({domainId:domainId,arrayId:arrayId});
         setDel({ open: true, clickedYes: false });
     };
 
     const SetInput = (e: any) => {
-        setURI(e.target.value);
+        setOrigin(e.target.value);
     };
 
     const CloseToast = () => {
@@ -177,14 +177,9 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
     };
 
     const SaveURI = () => {
-        // console.log(AppDomain.AppDomain);
-        if (isValidUrl(redirectURI) && redirectURI.length !== 0) {
-            AppDomain.push(redirectURI);
-            rc.apiClient
-                .post("/api/v2.0/whitelist-origin/post", { requestId: 123 })
-                .then((res) => {
-                    console.log(res.data);
-                });
+
+        if (isValidUrl(requestOrigin) && requestOrigin.length !== 0) {
+            setDomain(true);
         } else {
             setToast({
                 open: true,
@@ -192,8 +187,8 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
                 content: "Invalid URI input",
                 time: 5000,
             });
+            setOrigin("");
         }
-        setURI("");
     };
 
     const Domains = appDomain.map((domain, index) => { return <AppDomainComponent Domain={domain.requestOrigin} domainId={domain.id} arrayId={index}/> })
@@ -201,14 +196,16 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
     return (
         <EditBox>
             <Title> Your App Domains</Title>
-            <Box sx={{ disply: "flex", flexDirection:"column", mt:"15px",maxHeight:"400px",overflow:"auto" }}>
-                {Domains}
+            <Box sx={{ disply: "flex", flexDirection:"column", mt:"15px"}}>
+                <Box sx={{maxHeight:"400px",overflow:"auto",mb:"10px"}}>
+                    {Domains}
+                </Box>
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
                     <TextField
                         placeholder="Add an app domain"
                         onChange={SetInput}
-                        name="redirectURI"
-                        value={redirectURI}
+                        name="requestOrigin"
+                        value={requestOrigin}
                         size="small"
                         InputProps={{ style: { fontSize: "17px", borderRadius:"2px 0 0 2px", width:"240px" } }}
                         autoComplete="off"

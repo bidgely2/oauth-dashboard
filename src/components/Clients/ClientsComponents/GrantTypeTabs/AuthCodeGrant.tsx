@@ -36,6 +36,7 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                     alignItems: "center",
                     gap: "10px",
                     mb: "20px",
+                    width:"fit-content",
                 }}>
                 <Box
                     sx={{
@@ -49,7 +50,7 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                         userSelect:"none",
                         p:"5px 15px",
                         mr:"10px",
-                        minWidth:"350px",
+                        minWidth:"400px",
                         border:"1px #D8D8D8 solid",
                         typography:"body4",
                         fontWeight:"400",
@@ -115,7 +116,6 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
       }
 
     const SaveURI =()=>{
-        // console.log(AppDomain);
         if(isValidUrl(redirectURI) && redirectURI.length!==0){
             AppDomain.push(redirectURI);
         }
@@ -136,13 +136,17 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
             sx={{
                 p:"20px",
                 maxWidth:"540px",
+                overflowX:"auto",
                 height:"250px",
                 border:"1px lightgray solid",
-                borderRadius:"5px"}}>
+                borderRadius:"5px",
+                overflow:"hidden"}}>
             <Typography  sx={{ml:"20px",mb:"10px", fontFamily:"Noto Sans SC", typography:"subtitle5"}}>Redirect URI Management</Typography>
-            <Typography variant="body2" sx={{ml:"20px", mb:"30px"}}>Enable Auth Code by specifying atleast one uri</Typography>
-            <Box sx={{ disply: "flex", flexDirection:"column", ml: "20px",maxHeight:"150px",overflow:"auto" }}>
-                {URIs}
+            <Typography variant="body2" sx={{ml:"20px", mb:"20px"}}>Enable Auth Code by specifying atleast one uri</Typography>
+            <Box sx={{ disply: "flex", flexDirection:"column", ml: "20px"}}>
+                <Box sx={{maxHeight:"115px",overflow:"auto",mb:"10px"}}>
+                    {URIs}
+                </Box>
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
                     <TextField
                         placeholder="Add a redirect URI"

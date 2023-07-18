@@ -6,7 +6,7 @@ import PopupWarning from "../../templates/PopupWarning";
 import ToastMessage from "../../templates/ToastMessage";
 import { useGlobalContext } from "../../../context/GlobalContext";
 import {Title} from "./title/title"
-import { APIURLS, OauthAPIs } from "../../../apis/OauthAPI";
+import { APIURLS, OauthAPIs, client_id } from "../../../apis/OauthAPI";
 import { InputBox } from "../../../components/templates/InputBox";
 
 interface EncryptDetailProps{
@@ -32,12 +32,11 @@ const EncryptionDetails = ({EncryptDetail}:EncryptDetailProps) => {
         const getData = async() => {
             if(!Regenerate.clickedYes){
                 const res = await OauthAPIs.getData(rc,APIURLS.ENCRYPTIONKEYS)
-                .then((response)=>setEncryptionKeys(response.data as encryptionKeysInterface));
+                    .then((response)=>setEncryptionKeys(response.data as encryptionKeysInterface));
             }
             else{
-                console.log("helo")
-                const res = await OauthAPIs.postData(rc,APIURLS.ENCRYPTIONKEYS,{clientId:"ameren-dashboard"})
-                .then((response)=>setEncryptionKeys(response.data as encryptionKeysInterface));
+                const res = await OauthAPIs.postData(rc,APIURLS.ENCRYPTIONKEYS,{clientId:client_id})
+                    .then((response)=>setEncryptionKeys(response.data as encryptionKeysInterface));
                 setToast(true);
                 setRegenerate({open:false,clickedYes:false});
             }
