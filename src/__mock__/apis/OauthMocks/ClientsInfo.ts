@@ -33,7 +33,7 @@ export const CLIENTDATA =
                 ClientDetail: {
                     ClientId:"ameren-dashboard",
                     ClientSecret:"hcb7e3xv",
-                    APIEndpoint:"https://btocdevapi.bidgely.com"
+                    APIEndpoint:"https://avangriddevapi.bidgely.com"
                 },
                 KeyManagement: {
                     AccessToken:"d9ae051d-f4ed-4701-a8bf-ba4f7cbb5a7c",
@@ -59,7 +59,7 @@ export const CLIENTDATA =
                 ClientDetail: {
                     ClientId:"Ameren-Missouri",
                     ClientSecret:"askdbhf",
-                    APIEndpoint:"https://btocdevapi.bidgely.com"
+                    APIEndpoint:"https://avangriddevapi.bidgely.com"
                 },
                 KeyManagement: {
                     AccessToken:"aiwbf",

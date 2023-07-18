@@ -21,6 +21,7 @@ const Clients = () => {
     }
     
     const clientData: ClientsInterface = useSelector((state:any)=>state.clients)[id];
+    console.log(clientData);
 
     return (
         <Box sx={{minWidth:"fit-content",p: "70px 0px 80px 0px", mt:"20px", bgcolor: "#edede8",}}>

@@ -197,7 +197,7 @@ const AppDomains = ({ AppDomain }: AppDomainProps) => {
         <EditBox>
             <Title> Your App Domains</Title>
             <Box sx={{ disply: "flex", flexDirection:"column", mt:"15px"}}>
-                <Box sx={{maxHeight:"400px",overflow:"auto",mb:"10px"}}>
+                <Box sx={{maxHeight:"400px",overflow:"auto",mb:"20px"}}>
                     {Domains}
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "row", alignItems:"center" }}>
