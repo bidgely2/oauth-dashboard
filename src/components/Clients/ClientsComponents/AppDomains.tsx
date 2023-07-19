@@ -13,7 +13,7 @@ import { APIURLS, OauthAPIs, client_id } from "../../../apis/OauthAPI";
 import { AxiosRequestConfig } from "axios";
 
 interface AppDomainProps {
-    AppDomain: string[];
+    AppDomain: domainAPIProps[]
 }
 
 interface ToastMsg {

@@ -1,5 +1,5 @@
 import { CLIENTDATA, ClientsInterface } from "../../__mock__/apis/OauthMocks/ClientsInfo";
-import { ActionInterface } from ".";
+import { ActionInterface } from "../Store";
 import { CLIENT_TYPES } from "../actions/ClientActions";
 
 export const ClientReducer = (state: ClientsInterface[] = CLIENTDATA.payload, action: ActionInterface) =>{

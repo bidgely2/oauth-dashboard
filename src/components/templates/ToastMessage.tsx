@@ -1,5 +1,5 @@
 import MuiAlert, { AlertColor } from "@mui/material/Alert"
-import {Snackbar, AlertProps, SnackbarOrigin} from "@mui/material"
+import {Snackbar, AlertProps} from "@mui/material"
 import React from "react";
 
 interface ToastProps{

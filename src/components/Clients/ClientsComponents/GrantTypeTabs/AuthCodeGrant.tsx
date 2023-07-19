@@ -143,7 +143,7 @@ const AuthCodeGrant = ({AppDomain}:AuthGrantProps) =>{
                 overflow:"hidden"}}>
             <Typography  sx={{ml:"20px",mb:"10px", fontFamily:"Noto Sans SC", typography:"subtitle5"}}>Redirect URI Management</Typography>
             <Typography variant="body2" sx={{ml:"20px", mb:"20px"}}>Enable Auth Code by specifying atleast one uri</Typography>
-            <Box sx={{ disply: "flex", flexDirection:"column", ml: "20px"}}>
+            <Box sx={{ml:"20px"}}>
                 <Box sx={{maxHeight:"115px",overflow:"auto",mb:"10px"}}>
                     {URIs}
                 </Box>
