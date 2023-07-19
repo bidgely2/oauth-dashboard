@@ -4,10 +4,8 @@ import { Provider } from "react-redux";
 import { RunContextApp } from "./framework/RCApp";
 import AppRoutes from "./routes/AppRoutes";
 import GlobalContextProvider from './context/GlobalContext';
-import { reducers } from "./store/reducers";
 import {store,persistor }from "./store/Store"
 import { PersistGate } from 'redux-persist/integration/react'
-
 
 interface AppProps {
   rc: RunContextApp;

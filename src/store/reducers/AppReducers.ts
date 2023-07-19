@@ -1,6 +1,6 @@
 import { APPDATA, AppsInterface } from "../../__mock__/apis/OauthMocks/AppInfo";
 import { APP_TYPES} from "../actions/AppActions";
-import { ActionInterface } from ".";
+import { ActionInterface } from "../Store";
 
 export const AppReducer = (state:AppsInterface[] = APPDATA.payload, action: ActionInterface)=>{
     switch(action.type) {

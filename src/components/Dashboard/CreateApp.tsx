@@ -54,7 +54,6 @@ const CreateApp = (props: PopupProps) => {
         });
 
         let failure: boolean = input.type === "" || input.name === "";       // all inputs empty
-        // console.log(input);
 
         if (failure) {
             setToast({

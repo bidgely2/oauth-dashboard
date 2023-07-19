@@ -1,5 +1,5 @@
 export const SESSION_TYPES = {
-    SET_LOGGED_IN: "LOGGED_IN"
+    SET_LOGGED_IN: "SET_LOGGED_IN"
 }
 
 export const SESSION_ACTIONS = {
